@@ -1,0 +1,10 @@
+---
+:orm: activerecord
+:test: none
+:mock: none
+:script: jquery
+:renderer: erb
+:stylesheet: scss
+:namespace: Chleehof
+:migration_format: number
+:admin_renderer: erb
