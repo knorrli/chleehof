@@ -35,6 +35,7 @@ module Chleehof
     end
 
     access_control.roles_for :admin do |role|
+      role.project_module :orders, '/orders'
       role.project_module :products, '/products'
       role.project_module :accounts, '/accounts'
     end

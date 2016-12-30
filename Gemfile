@@ -25,6 +25,7 @@ gem 'activerecord', '>= 3.1', :require => 'active_record'
 gem 'pg'
 gem 'paperclip'
 gem 'paperclip-rack', :require => 'paperclip/rack'
+gem 'prawn'
 
 group :development do
   gem 'sqlite3'
