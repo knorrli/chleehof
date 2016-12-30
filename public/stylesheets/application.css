@@ -5809,7 +5809,13 @@ button.close {
 .product .product-form input.amount {
   width: 30%; }
 
+#order-form .quantity {
+  width: 10%; }
+
 body {
   margin-top: 50px; }
+
+.footer {
+  height: 30px; }
 
 /*# sourceMappingURL=application.css.map */

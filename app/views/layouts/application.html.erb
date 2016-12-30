@@ -45,11 +45,6 @@
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <% if current_order.persisted? %>
-                <li>
-                  <%= link_to "Bestellung (#{current_order.order_items.count})", url(:orders, :show, id: current_order.id) %>
-                </li>
-              <% end %>
               <li>
                 <%= link_to "Admin", Chleehof::Admin.url(:products, :index) %>
               </li>
@@ -58,11 +53,16 @@
         </div><!--/.container-fluid -->
       </nav>
 
+
+
       <div class="content">
         <div class="container-fluid">
           <%= yield %>
         </div>
       </div>
+    </div>
+
+    <div class="footer">
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

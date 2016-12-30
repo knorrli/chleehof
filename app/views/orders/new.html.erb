@@ -1,10 +1,56 @@
 <div class="row">
-  <div class="col-md-6 col-xs-12">
-    <h2>Neue Bestellung</h2>
+  <div class="page-header">
+    <h1>Neue Bestellung</h1>
   </div>
 </div>
 <div class="row">
-  <% form_for @order, url(:orders, :create), method: :post, id: 'order-form' do |f| %>
+  <% form_for @order, url(:orders, :create), method: :post, id: 'order-form', class: 'form-horizontal' do |f| %>
+    <div class="col-md-4 col-xs-12">
+      <div class="row">
+        <div class="form-group <%= "has-error" if @order.errors[:name].present? %>">
+          <div class="col-md-3">
+            <%= f.label "Name", for: :name, class: 'control-label', required: true %>
+          </div>
+          <div class="col-md-8">
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+        </div>
+        <% email_or_phone_error = @order.errors[:email_or_phone] %>
+        <div class="form-group <%= "has-error" if email_or_phone_error.present? %>">
+          <div class="col-md-3">
+            <%= f.label "Email", for: :email, class: 'control-label', required: true %>
+          </div>
+          <div class="col-md-8">
+            <%= f.text_field :email, class: "form-control" %>
+          </div>
+        </div>
+        <div class="form-group <%= "has-error" if email_or_phone_error.present? %>">
+          <div class="col-md-3">
+            <%= f.label "Telefon", for: :phone, class: 'control-label', required: true %>
+          </div>
+          <div class="col-md-8">
+            <%= f.text_field :phone, class: "form-control" %>
+          </div>
+          <% if email_or_phone_error.present? %>
+            <div class="help-block col-md-10">
+              <%= email_or_phone_error.join(' ') %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 col-xs-12">
+      <div class="row">
+        <div class="form-group">
+          <div class="col-md-2">
+            <%= f.label "Kommentar", for: :comment %>
+          </div>
+          <div class="col-md-6">
+            <%= f.text_area :comment, class: 'form-control', rows: 4 %>
+          </div>
+        </div>
+      </div>
+    </div>
     <table class="table">
       <thead>
         <tr>
@@ -17,14 +63,16 @@
         </tr>
       </thead>
       <tbody class="products">
-        <% @products.each do |product| %>
-          <% order_item = @order.order_items.build(product: product) %>
-          <% f.fields_for :order_items, order_item do |ff| %>
+        <% @products.each_with_index do |product, index| %>
+          <% item = @order.order_items.build(product: product) %>
+          <% f.fields_for :order_items, item, index: index do |ff| %>
+            <%= ff.hidden_field :id, value: item.id %>
             <%= ff.hidden_field :product_id, value: product.id %>
+            <%= ff.hidden_field :price, value: product.price %>
             <tr class="product">
               <td class="photo"><%= image_tag(product.photo.url(:small)) %></td>
               <td class="name"><%= product.to_s %></td>
-              <td class="quantity"><%= ff.number_field :amount %></td>
+              <td class="quantity"><%= ff.number_field :quantity, class: 'form-control' %></td>
               <td class="multiplier">x</td>
               <td class="price"><%= product.price %></td>
               <td class="total-price"></td>

@@ -7,12 +7,13 @@ Chleehof::App.controllers :orders do
   end
 
   post :create do
-    puts params[:order].inspect
     @order = Order.new params[:order]
     if @order.save
       redirect_to url(:orders, :show, id: @order.id)
     else
-      raise "DANI"
+      puts @order.errors.inspect
+      @products = Product.ordered
+      render 'new'
     end
   end
 

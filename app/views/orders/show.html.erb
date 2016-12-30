@@ -1,11 +1,13 @@
 <div class="header row" id="order">
+  <div class="page-header">
+    <h1><%= @order.to_s %> <small><%= "für #{@order.name}" %></small></h1>
+  </div>
   <div class="header">
-    <h2><%= @order %></h2>
     <div class="total-item-count">
-      <%= "Bestellung: #{@order.total_item_count} Stück" %>
+      <%= "Menge: #{@order.total_item_count} Stück" %>
     </div>
     <div class="total-item-price">
-      <%= "Total: #{@order.total_item_price} #{@order.currency}" %>
+      <%= "Total Preis: #{@order.total_item_price} #{@order.currency}" %>
     </div>
   </div>
 </div>
@@ -15,7 +17,7 @@
     <thead>
       <th class="image"></th>
       <th class="product-name">Produkt</th>
-      <th class="item-amount">Anzahl</th>
+      <th class="item-quantity">Anzahl</th>
       <th class="multiplier"></th>
       <th class="item-price">Preis</th>
       <th class="item-total-price">Total</th>
@@ -26,7 +28,7 @@
         <tr>
           <td class="image"><%= image_tag product.photo.picture.url(:small) %></td>
           <td class="product-name"><%= product.name %></td>
-          <td class="item-amount"><%= item.amount %></td>
+          <td class="item-quantity"><%= item.quantity %></td>
           <td class="multiplier">x</td>
           <td class="item-price"><%= "#{item.price} #{item.currency}" %></td>
           <td class="item-total-price"><%= "#{item.total_price} #{item.currency}" %></td>

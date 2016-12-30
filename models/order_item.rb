@@ -5,11 +5,12 @@ class OrderItem < ActiveRecord::Base
   delegate :price, to: :product
   delegate :currency, to: :order
 
-  validates_presence_of :amount
+  validates_presence_of :quantity
+  validates_presence_of :product
 
   validates_uniqueness_of :product_id, scope: :order
 
   def total_price
-    amount * price
+    quantity * price
   end
 end
