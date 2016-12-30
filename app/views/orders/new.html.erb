@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-md-6 col-xs-12">
+    <h2>Neue Bestellung</h2>
+  </div>
+</div>
+<div class="row">
+  <% form_for @order, url(:orders, :create), method: :post, id: 'order-form' do |f| %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="photo"></th>
+          <th class="name">Name</th>
+          <th class="quantity">Anzahl</th>
+          <th class="multiplier"></th>
+          <th class="price"><%= "Preis #{@order.currency}" %></th>
+          <th class="total-price"><%= "Total #{@order.currency}" %></th>
+        </tr>
+      </thead>
+      <tbody class="products">
+        <% @products.each do |product| %>
+          <% order_item = @order.order_items.build(product: product) %>
+          <% f.fields_for :order_items, order_item do |ff| %>
+            <%= ff.hidden_field :product_id, value: product.id %>
+            <tr class="product">
+              <td class="photo"><%= image_tag(product.photo.url(:small)) %></td>
+              <td class="name"><%= product.to_s %></td>
+              <td class="quantity"><%= ff.number_field :amount %></td>
+              <td class="multiplier">x</td>
+              <td class="price"><%= product.price %></td>
+              <td class="total-price"></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+
+      <tfoot>
+        <tr class="total-row">
+          <th class="photo"></td>
+          <th class="name">TOTAL</td>
+          <th class="quantity"></td>
+          <th class="multiplier"></td>
+          <th class="price"></td>
+          <th class="total-price"></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div class="col-md-3 col-xs-12">
+      <%= f.submit "Bestellung abschliessen", class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>

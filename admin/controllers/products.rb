@@ -12,6 +12,7 @@ Chleehof::Admin.controllers :products do
   end
 
   post :create do
+    puts params.inspect
     @product = Product.new(params[:product])
     if @product.save
       @title = pat(:create_title, :model => "product #{@product.id}")
@@ -68,21 +69,5 @@ Chleehof::Admin.controllers :products do
       flash[:warning] = pat(:delete_warning, :model => 'product', :id => "#{params[:id]}")
       halt 404
     end
-  end
-
-  delete :destroy_many do
-    @title = "Products"
-    unless params[:product_ids]
-      flash[:error] = pat(:destroy_many_error, :model => 'product')
-      redirect(url(:products, :index))
-    end
-    ids = params[:product_ids].split(',').map(&:strip)
-    products = Product.find(ids)
-    
-    if Product.destroy products
-    
-      flash[:success] = pat(:destroy_many_success, :model => 'Products', :ids => "#{ids.join(', ')}")
-    end
-    redirect url(:products, :index)
   end
 end

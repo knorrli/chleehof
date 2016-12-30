@@ -5,7 +5,7 @@ Chleehof::App.controllers :products do
     render :index
   end
 
-  get :show, with: :id, map: '/verpackungsmaterial' do
+  get :show, with: :id do
     @product = Product.find params[:id]
     render :show
   end

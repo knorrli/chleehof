@@ -71,6 +71,8 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (= 0.3.0)
+    paperclip-rack (0.0.2)
+      paperclip (>= 3.0)
     pg (0.19.0)
     rack (1.6.5)
     rack-protection (1.5.3)
@@ -98,6 +100,7 @@ DEPENDENCIES
   erubis (~> 2.7.0)
   padrino (= 0.13.3.3)
   paperclip
+  paperclip-rack
   pg
   rake
   sass

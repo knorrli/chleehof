@@ -3,9 +3,9 @@
 module Chleehof
   class App
     module ProductsHelper
-      # def simple_helper_method
-      # ...
-      # end
+      def image(product)
+        image_tag product.photo.picture.url(:medium), class: 'img-responsive center-block'
+      end
     end
 
     helpers ProductsHelper

@@ -34,7 +34,7 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active">
+              <li>
                 <%= link_to "Über Uns", url(:pages, :about) %>
               </li>
               <li>
@@ -45,6 +45,11 @@
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+              <% if current_order.persisted? %>
+                <li>
+                  <%= link_to "Bestellung (#{current_order.order_items.count})", url(:orders, :show, id: current_order.id) %>
+                </li>
+              <% end %>
               <li>
                 <%= link_to "Admin", Chleehof::Admin.url(:products, :index) %>
               </li>
@@ -53,12 +58,18 @@
         </div><!--/.container-fluid -->
       </nav>
 
-      <%= yield %>
+      <div class="content">
+        <div class="container-fluid">
+          <%= yield %>
+        </div>
+      </div>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="javascripts/jquery.js"></script>
+    <script src="/javascripts/jquery-3.1.1.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/orders.js"></script>
+
   </body>
 </html>

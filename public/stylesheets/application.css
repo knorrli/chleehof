@@ -5806,6 +5806,9 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important; } }
+.product .product-form input.amount {
+  width: 30%; }
+
 body {
   margin-top: 50px; }
 

@@ -15,6 +15,17 @@
   </div>
 </fieldset>
 
+<% photo = @product.photo || @product.build_photo %>
+<% f.fields_for :photo, photo do |ff| %>
+  <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+    <%= ff.label :photo, :class => 'control-label' %>
+    <div class='controls'>
+      <%= ff.file_field :picture, :class => 'form-control input-xlarge input-with-feedback' %>
+      <span class='help-inline'><%= error ? f.error_message_on(:photo) : "Ex: a simple text" %></span>
+    </div>
+  </fieldset>
+<% end %>
+
 
 <div class="form-actions">
   <%= f.submit pat(:save), :class => 'btn btn-primary' %>
