@@ -1,6 +1,13 @@
 <div class="header row" id="order">
   <div class="page-header">
-    <h1><%= @order.to_s %> <small><%= "für #{@order.name}" %></small></h1>
+    <h1>
+      <%= @order.to_s %> <small><%= "für #{@order.name}" %></small>
+      <div class="pull-right">
+        <%= link_to "Bestellung ausdrucken", url(:orders, :show, id: @order.id, format: :pdf), class: 'btn btn-primary' %>
+      </div>
+      <div class="clearfix">
+      </div>
+    </h1>
   </div>
   <div class="header">
     <div class="total-item-count">

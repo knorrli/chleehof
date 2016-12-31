@@ -26,9 +26,11 @@ gem 'pg'
 gem 'paperclip'
 gem 'paperclip-rack', :require => 'paperclip/rack'
 gem 'prawn'
+gem 'prawn-table'
 
 group :development do
   gem 'sqlite3'
+  gem 'pry'
 end
 
 # Test requirements

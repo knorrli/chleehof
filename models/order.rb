@@ -15,6 +15,10 @@ class Order < ActiveRecord::Base
     order_items.count
   end
 
+  def total_item_quantity
+    order_items.sum &:quantity
+  end
+
   def total_item_price
     order_items.sum &:price
   end

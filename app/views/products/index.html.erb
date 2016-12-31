@@ -1,18 +1,15 @@
-<div class="row" id="products">
-  <div class="col-md-6">
-    <div class="page-header">
-      <h1>Verpackungsmaterial</h1>
-    </div>
+<div class="row">
+  <div class="page-header">
+    <h1>
+      Verpackungsmaterial
+      <div class="pull-right">
+        <%= link_to "Bestellformular drucken", url(:orders, :print_form, format: :pdf), class: 'btn btn-primary' %>
+        <%= link_to "Online bestellen", url(:orders, :new), class: 'btn btn-primary' %>
+      </div>
+      <div class="clearfix">
+      </div>
+    </h1>
   </div>
-  <div class="col-md-6">
-    <div class="pull-right">
-      <%= link_to "Bestellformular drucken", url(:orders, :print_form, format: :pdf), class: 'btn btn-primary' %>
-      <%= link_to "Online bestellen", url(:orders, :new), class: 'btn btn-primary' %>
-    </div>
-    <div class="clearfix">
-    </div>
-  </div>
-</div>
 </div>
 <div class="row">
   <% @products.each do |product| %>

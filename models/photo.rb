@@ -5,7 +5,7 @@ class Photo < ActiveRecord::Base
 
   has_attached_file :picture
 
-  delegate :url, to: :picture
+  delegate :url, :path, to: :picture
 
 
   has_attached_file(

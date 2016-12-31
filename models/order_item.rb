@@ -10,6 +10,10 @@ class OrderItem < ActiveRecord::Base
 
   validates_uniqueness_of :product_id, scope: :order
 
+  def to_s
+    product.to_s
+  end
+
   def total_price
     quantity * price
   end
