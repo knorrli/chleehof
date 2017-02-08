@@ -5,7 +5,7 @@ class Product < ActiveRecord::Base
   has_one :photo
   accepts_nested_attributes_for :photo
 
-  validates_presence_of :name, :price
+  validates_presence_of :name, :price, :photo
 
   def self.ordered
     order(:created_at)

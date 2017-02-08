@@ -21,8 +21,8 @@
         <td class=list-column><%= link_to image_tag(product.photo.url(:small)), url(:products, :edit, id: product.id) %></td>
         <td class=list-column> <%= product.name %> </td>
         <td class=list-column> <%= product.price %> </td>
-        <td class=list-column> <%= time_ago_in_words product.created_at %></td>
-        <td class=list-column> <%= time_ago_in_words product.updated_at %></td>
+        <td class=list-column> <%= product.created_at.strftime('%d.%m.%Y %H:%M') %></td>
+        <td class=list-column> <%= product.updated_at.strftime('%d.%m.%Y %H:%M') %></td>
         <td class=list-column>
           <% form_tag url(:products, :destroy, id: product.id), method: :delete, class: 'destroy-product' do %>
             <%= submit_tag pat(:delete), class: 'btn btn-danger pull-right' %>
