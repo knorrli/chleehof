@@ -34,6 +34,10 @@ module Chleehof
       role.allow   '/sessions'
     end
 
+    get '/' do
+      redirect_to url(:products, :index)
+    end
+
     access_control.roles_for :admin do |role|
       role.project_module :orders, '/orders'
       role.project_module :products, '/products'

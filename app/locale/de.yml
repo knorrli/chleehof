@@ -1,0 +1,8 @@
+de:
+  activerecord:
+    errors:
+      models:
+        order:
+          attributes:
+            name:
+              blank: Name muss ausgefüllt werden

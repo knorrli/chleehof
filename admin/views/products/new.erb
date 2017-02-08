@@ -1,7 +1,4 @@
-<ul class="nav nav-tabs">
-  <li> <%= link_to tag_icon(:list, pat(:list)), url(:products, :index) %></li>
-  <li class="active"> <%= link_to tag_icon(:plus, pat(:new)), url(:products, :new) %></li>
-</ul>
+<h1>Neues Produkt erfassen</h1>
 <div class="tabs-content">
   <% form_for :product, url(:products, :create), multipart: true, class: 'form-horizontal' do |f| %>
     <%= partial 'products/form', :locals => { :f => f } %>

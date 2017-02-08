@@ -16,24 +16,23 @@
     <div class="navbar navbar-fixed-top">
       <div class=navbar-inner>
         <div class=container>
-          <%= link_to 'Padrino', url(:base, :index), :class => 'navbar-brand', :title => 'Padrino Admin' %>
+          <%= link_to 'Admin', url(:base, :index), :class => 'navbar-brand', :title => 'Padrino Admin' %>
           <ul class="nav navbar-nav pull-right">
-            <li class=navbar-edit-account><%= link_to tag_icon(:user), url(:accounts, :edit, :id => current_account.id), :title => pat(:profile), :class => 'navbar-nav-link' %></li>
-            <li class=navbar-logout>
-              <%= button_to(:logout, url(:sessions, :destroy), :method => :delete, :class => 'navbar-nav-form', :submit_options => { :type => :submit, :title => pat(:logout), :class => 'navbar-nav-form-link' }) { tag_icon(:'power-off') } %>
+            <li>
+              <%= link_to "Zur Hauptseite", '/' %>
+            </li>
+            <li>
+              <%= button_to(pat(:logout), url(:sessions, :destroy), :method => :delete, :class => 'navbar-nav-form', :submit_options => { :type => :submit, :title => pat(:logout), :class => 'navbar-nav-form-link' })  %>
             </li>
           </ul>
 
           <ul class="nav navbar-nav pull-left">
-            <% project_modules.each do |project_module| %>
-              <% if request.path_info =~ /^#{project_module.path}/ %>
-                <li class="navbar-module active">
-              <% else %>
-                <li class=navbar-module>
-              <% end %>
-                <%= link_to project_module.human_name, url(project_module.path) %>
-                </li>
-            <% end %>
+            <li class="navbar-module">
+              <%= link_to "Produkte", url(:products, :index) %>
+            </li>
+            <li class="navbar-module">
+              <%= link_to "Bestellungen", url(:orders, :index) %>
+            </li>
           </ul>
         </div>
       </div>
@@ -47,18 +46,6 @@
       </div>
     </div>
 
-    <footer>
-      <div class='footer-wrapper container'>
-        <p class='pull-left'>Copyright &copy; 2016 Your Site - Powered by Padrino v.0.13.3.3</p>
-        <ul class='pull-right footer-links'>
-          <li><%= link_to tag_icon(:home, 'web'), 'http://www.padrinorb.com', :target => :_blank, :class => 'footer-links-link' %></li>
-          <li><%= link_to tag_icon(:heart, 'blog'), 'http://www.padrinorb.com/blog', :target => :_blank, :class => 'footer-links-link' %></li>
-          <li><%= link_to tag_icon(:github, 'code'), 'https://github.com/padrino/padrino-framework', :target => :_blank, :class => 'footer-links-link' %></li>
-          <li><%= link_to tag_icon(:twitter, 'twitter'), 'http://twitter.com/padrinorb', :target => :_blank, :class => 'footer-links-link' %></li>
-        </ul>
-      </div>
-    </footer>
-
-    <%= javascript_include_tag 'jquery-1.11.0.min', (Padrino.env == :production ? 'bootstrap/bootstrap.min' : %w[bootstrap/affix bootstrap/alert bootstrap/button bootstrap/carousel bootstrap/collapse bootstrap/dropdown  bootstrap/tooltip bootstrap/transition  bootstrap/modal bootstrap/popover bootstrap/scrollspy bootstrap/tab]), :application %>
+    <%= javascript_include_tag 'jquery-1.11.0.min', 'bootstrap/bootstrap.min', :application, :products %>
   </body>
 </html>

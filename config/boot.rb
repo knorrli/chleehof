@@ -22,8 +22,8 @@ Bundler.require(:default, RACK_ENV)
 #
 # ## Configure your I18n
 #
-# I18n.default_locale = :en
-# I18n.enforce_available_locales = false
+I18n.default_locale = :de
+I18n.enforce_available_locales = false
 #
 # ## Configure your HTML5 data helpers
 #
@@ -49,6 +49,7 @@ Padrino.dependency_paths.unshift Padrino.root('config/initializers/*.rb')
 # These hooks are run before any dependencies are required.
 #
 Padrino.before_load do
+  I18n.locale = :de
   Paperclip.options[:logger] = Padrino.logger
 end
 

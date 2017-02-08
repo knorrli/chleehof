@@ -1,0 +1,12 @@
+de:
+  models:
+    order:
+      name: Order
+      attributes:
+        id: ID
+        name: Name
+        phone: Telefon
+        email: Email
+        comment: Kommentar
+        created_at: Erstellt Am
+        updated_at: Angepasst Am

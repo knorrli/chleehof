@@ -7,12 +7,16 @@
   <% form_for @order, url(:orders, :create), method: :post, id: 'order-form', class: 'form-horizontal' do |f| %>
     <div class="col-md-4 col-xs-12">
       <div class="row">
-        <div class="form-group <%= "has-error" if @order.errors[:name].present? %>">
+        <% name_error = @order.errors[:name] %>
+        <div class="form-group <%= "has-error" if name_error.present? %>">
           <div class="col-md-3">
             <%= f.label "Name", for: :name, class: 'control-label', required: true %>
           </div>
           <div class="col-md-8">
             <%= f.text_field :name, class: "form-control" %>
+          </div>
+          <div class="help-block col-md-10">
+            <%= name_error.join(' ') %>
           </div>
         </div>
         <% email_or_phone_error = @order.errors[:email_or_phone] %>
@@ -72,7 +76,8 @@
             <tr class="product">
               <td class="photo"><%= image_tag(product.photo.url(:small)) %></td>
               <td class="name"><%= product.to_s %></td>
-              <td class="quantity"><%= ff.number_field :quantity, class: 'form-control' %></td>
+              <% prev_param_quantity = params.try(:[], 'order').try(:[], 'order_items_attributes').try(:[], index.to_s).try(:[], 'quantity') %>
+              <td class="quantity"><%= ff.number_field :quantity, class: 'form-control', value: prev_param_quantity %></td>
               <td class="multiplier">x</td>
               <td class="price"><%= product.price %></td>
               <td class="total-price"></td>

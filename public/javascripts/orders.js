@@ -15,7 +15,7 @@
     $productTotalInput.html(productTotal)
   }
 
-  var calculateTotalOrderPrice = function($container) {
+  var calculateTotalOrderPrice = function() {
     var totalQuantity = 0;
     var totalPrice = 0;
     $('#order-form .products').find('.product').each(function(index) {
@@ -29,8 +29,17 @@
     $('#order-form').find('.total-row .total-price').html(totalPrice);
   }
 
+  var calculateAllTotals = function() {
+    $('#order-form td input').each(function(a) {
+      calculateTotalProductPrice($(this));
+    });
+    calculateTotalOrderPrice();
+  }
+
   $(document).ready(function() {
     $('#order-form').off('change', updateTotals);
     $('#order-form').on('change', 'td input', updateTotals);
+
+    calculateAllTotals();
   });
 })();

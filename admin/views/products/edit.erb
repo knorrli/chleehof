@@ -1,8 +1,4 @@
-<ul class="nav nav-tabs">
-  <li> <%= link_to tag_icon(:list, pat(:list)), url(:products, :index) %></li>
-  <li> <%= link_to tag_icon(:plus, pat(:new)), url(:products, :new) %></li>
-  <li class="active"> <%= link_to tag_icon(:edit, pat(:edit)), url(:products, :edit, :id => @product.id) %></li>
-</ul>
+<h1><%= "Produkt Anpassen: #{@product}" %></h1>
 <div class="tabs-content">
   <% form_for :product, url(:products, :update, :id => @product.id), method: :put, multipart: true, class: 'form-horizontal' do |f| %>
     <%= partial 'products/form', :locals => { :f => f } %>
