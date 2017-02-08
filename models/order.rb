@@ -11,6 +11,10 @@ class Order < ActiveRecord::Base
     "Bestellung #{id}"
   end
 
+  def contact_info
+    [name, phone, email].compact.join(', ')
+  end
+
   def total_item_count
     order_items.count
   end
@@ -30,7 +34,9 @@ class Order < ActiveRecord::Base
   private
 
   def has_email_or_phone
-    return true if email.present? || phone.present?
+    self.email = nil if email.blank?
+    self.phone = nil if phone.blank?
+    return true if email || phone
     errors[:email_or_phone] = "Email oder Telefon muss angegeben werden"
     return false
   end

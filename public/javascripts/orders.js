@@ -9,9 +9,9 @@
   var calculateTotalProductPrice = function($quantityInput) {
     var quantity = $quantityInput.val();
     var $productRow = $quantityInput.parents('.product');
-    var price = $productRow.find('.price').html();
+    var price = $productRow.find('.price .price_value').html();
     var productTotal = quantity * price;
-    var $productTotalInput = $productRow.find('.total-price');
+    var $productTotalInput = $productRow.find('.total-price .price_value');
     $productTotalInput.html(productTotal)
   }
 
@@ -21,12 +21,12 @@
     $('#order-form .products').find('.product').each(function(index) {
       $productRow = $(this);
       var totalProductQuantity = $productRow.find('.quantity input').val();
-      var totalProductPrice = $productRow.find('.total-price').html();
+      var totalProductPrice = $productRow.find('.total-price .price_value').html();
       totalQuantity += parseInt(totalProductQuantity) || 0;
       totalPrice += parseInt(totalProductPrice) || 0;
     });
     $('#order-form').find('.total-row .quantity').html(totalQuantity);
-    $('#order-form').find('.total-row .total-price').html(totalPrice);
+    $('#order-form').find('.total-row .total-price .price_value').html(totalPrice);
   }
 
   var calculateAllTotals = function() {
