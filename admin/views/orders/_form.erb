@@ -1,37 +1,98 @@
-<% error = @order.errors.include?(:name) %>
-<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
-  <%= f.label :name, :class => 'control-label' %>
-  <div class='controls'>
-    <%= f.text_field :name, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true %>
+<div class="row">
+  <div class="col-md-4">
+    <div class="row">
+      <div class="col-md-12">
+        <% error = @order.errors.include?(:name) %>
+        <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+          <%= f.label :name, :class => 'control-label' %>
+          <div class='controls'>
+            <%= f.text_field :name, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true %>
+          </div>
+        </fieldset>
+        <% error = @order.errors.include?(:phone) %>
+        <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+          <%= f.label :phone, :class => 'control-label' %>
+          <div class='controls'>
+            <%= f.text_field :phone, :class => 'form-control input-xlarge input-with-feedback' %>
+          </div>
+        </fieldset>
+        <% error = @order.errors.include?(:email) %>
+        <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+          <%= f.label :email, :class => 'control-label' %>
+          <div class='controls'>
+            <%= f.text_field :email, :class => 'form-control input-xlarge input-with-feedback' %>
+          </div>
+        </fieldset>
+        <% error = @order.errors.include?(:comment) %>
+        <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+          <%= f.label :comment, :class => 'control-label' %>
+          <div class='controls'>
+            <%= f.text_area :comment, :class => 'form-control input-xlarge input-with-feedback' %>
+          </div>
+        </fieldset>
+      </div>
+      <div class="col-md-6 top-buffer">
+        <%= f.submit pat(:save), :class => 'btn btn-primary' %>
+      </div>
+      <div class="col-md-6 top-buffer">
+        <%= link_to pat(:cancel), url(:orders, :index), :class => 'btn btn-danger pull-right' %>
+      </div>
+    </div>
   </div>
-</fieldset>
-<% error = @order.errors.include?(:phone) %>
-<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
-  <%= f.label :phone, :class => 'control-label' %>
-  <div class='controls'>
-    <%= f.text_field :phone, :class => 'form-control input-xlarge input-with-feedback' %>
-  </div>
-</fieldset>
-<% error = @order.errors.include?(:email) %>
-<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
-  <%= f.label :email, :class => 'control-label' %>
-  <div class='controls'>
-    <%= f.text_field :email, :class => 'form-control input-xlarge input-with-feedback' %>
-  </div>
-</fieldset>
-<% error = @order.errors.include?(:comment) %>
-<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
-  <%= f.label :comment, :class => 'control-label' %>
-  <div class='controls'>
-    <%= f.text_area :comment, :class => 'form-control input-xlarge input-with-feedback' %>
-  </div>
-</fieldset>
+  <div class="col-md-8">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="photo"></th>
+            <th class="name">Name</th>
+            <th class="quantity text-right">Anzahl</th>
+            <th class="multiplier text-center"></th>
+            <th class="price text-right"><%= "Preis" %></th>
+            <th class="total-price text-right"><%= "Total" %></th>
+          </tr>
+        </thead>
+        <tbody class="products">
+          <% Product.all.each_with_index do |product, index| %>
+            <% item = @order.order_items.build(product: product) %>
+            <% f.fields_for :order_items, item, index: index do |ff| %>
+              <%= ff.hidden_field :id, value: item.id %>
+              <%= ff.hidden_field :product_id, value: product.id %>
+              <%= ff.hidden_field :price, value: product.price %>
+              <tr class="product">
+                <td class="photo col-xs-2"><%= image_tag(product.photo.url(:small)) %></td>
+                <td class="name col-xs-2"><%= product.to_s %></td>
+                <% prev_param_quantity = params.try(:[], 'order').try(:[], 'order_items_attributes').try(:[], index.to_s).try(:[], 'quantity') %>
+                <td class="quantity col-xs-1"><%= ff.number_field :quantity, class: 'form-control', value: prev_param_quantity %></td>
+                <td class="multiplier col-xs-1">x</td>
+                <td class="price col-xs-1 text-right">
+                  <span class="price_value"><%= product.price %></span>
+                  <span class="price_currency">CHF</span>
+                </td>
+                <td class="total-price col-xs-1 text-right">
+                  <span class="price_value"></span>
+                  <span class="price_currency">CHF</span>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
 
-
-<div class="form-actions">
-  <%= f.submit pat(:save), :class => 'btn btn-primary' %>
-  &nbsp;
-  <%= f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue' %>
-  &nbsp;
-  <%= link_to pat(:cancel), url(:orders, :index), :class => 'btn btn-default' %>
+        <tfoot>
+          <tr class="total-row">
+            <th class="photo"></td>
+            <th class="name">TOTAL</td>
+            <th class="quantity"></td>
+            <th class="multiplier"></td>
+            <th class="price text-right">
+              <span class="price_value"></span>
+              <span class="price_currency">CHF</span>
+            </td>
+            <th class="total-price text-right">
+              <span class="price_value"></span>
+              <span class="price_currency">CHF</span>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+  </div>
 </div>

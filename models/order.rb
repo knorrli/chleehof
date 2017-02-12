@@ -24,7 +24,7 @@ class Order < ActiveRecord::Base
   end
 
   def total_item_price
-    order_items.sum &:price
+    order_items.sum &:total_price
   end
 
   def currency

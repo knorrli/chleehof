@@ -12,16 +12,6 @@
     <%= stylesheet_link_tag "bootstrap", "application" %>
   </head>
   <body>
-    <div class="container">
-      <!-- Static navbar -->
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-brand">
-            Admin
-          </div>
-        </div><!--/.container-fluid -->
-      </nav>
-    </div>
     <% form_tag url(:sessions, :create), :class=>"login form-horizontal" do %>
       <div class="login-body modal-body">
 
@@ -36,6 +26,8 @@
           <label for="password" class="col-lg-2 control-label"><%= pat('login.password') %></label>
           <div class="col-lg-10"><%= password_field_tag :password, :id => :password, :class => 'form-control' %></div>
         </div>
+
+        <%= link_to pat('cancel'), '/', class: 'btn btn-danger' %>
 
         <%= submit_tag(pat('login.sign_in'), :class => "btn btn-primary pull-right") %>
       </div>

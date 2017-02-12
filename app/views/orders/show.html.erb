@@ -10,37 +10,75 @@
     </h1>
   </div>
   <div class="header">
-    <div class="total-item-count">
-      <%= "Menge: #{@order.total_item_count} Stück" %>
+    <div class="col-md-4 col-md-offset-2">
+      <table class="table">
+        <thead>
+          <tr>
+            <td>Name:</td>
+            <td><%= @order.name %></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Email:</td>
+            <td><%= @order.email %></td>
+          </tr>
+          <tr>
+            <td>Telefon:</td>
+            <td><%= @order.phone %></td>
+          </tr>
+          <tr>
+            <td>Total Menge:</td>
+            <td><%= @order.total_item_count %></td>
+          </tr>
+          <tr>
+            <td>Total Preis</td>
+            <td><%= @order.total_item_price %></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="total-item-price">
-      <%= "Total Preis: #{@order.total_item_price} #{@order.currency}" %>
+    <div class="col-md-6">
+      <div>
+        Kommentar:
+      </div>
+      <div>
+        <%= @order.comment %>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="order_items row">
-  <table class="table">
-    <thead>
-      <th class="image"></th>
-      <th class="product-name">Produkt</th>
-      <th class="item-quantity">Anzahl</th>
-      <th class="multiplier"></th>
-      <th class="item-price">Preis</th>
-      <th class="item-total-price">Total</th>
-    </thead>
-    <tbody>
-      <% @order.order_items.each do |item| %>
-        <% product = item.product %>
-        <tr>
-          <td class="image"><%= image_tag product.photo.picture.url(:small) %></td>
-          <td class="product-name"><%= product.name %></td>
-          <td class="item-quantity"><%= item.quantity %></td>
-          <td class="multiplier">x</td>
-          <td class="item-price"><%= "#{item.price} #{item.currency}" %></td>
-          <td class="item-total-price"><%= "#{item.total_price} #{item.currency}" %></td>
-        </tr>
-      <% end %>
-    </tbody>
+  <div class="col-md-8 col-md-offset-2">
+    <table class="table">
+      <thead>
+        <th class="image"></th>
+        <th class="product-name">Produkt</th>
+        <th class="item-quantity text-right">Anzahl</th>
+        <th class="multiplier"></th>
+        <th class="item-price text-right">Preis</th>
+        <th class="item-total-price text-right">Total</th>
+      </thead>
+      <tbody>
+        <% @order.order_items.each do |item| %>
+          <% product = item.product %>
+          <tr>
+            <td class="image"><%= image_tag product.photo.picture.url(:small) %></td>
+            <td class="product-name"><%= product.name %></td>
+            <td class="item-quantity text-right"><%= item.quantity %></td>
+            <td class="multiplier">x</td>
+            <td class="item-price text-right">
+              <span><%= item.price %></span>
+              <span>CHF</span>
+            </td>
+            <td class="item-total-price text-right">
+              <span><%= item.total_price %></span>
+              <span>CHF</span>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>

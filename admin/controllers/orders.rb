@@ -69,20 +69,4 @@ Chleehof::Admin.controllers :orders do
       halt 404
     end
   end
-
-  delete :destroy_many do
-    @title = "Orders"
-    unless params[:order_ids]
-      flash[:error] = pat(:destroy_many_error, :model => 'order')
-      redirect(url(:orders, :index))
-    end
-    ids = params[:order_ids].split(',').map(&:strip)
-    orders = Order.find(ids)
-    
-    if Order.destroy orders
-    
-      flash[:success] = pat(:destroy_many_success, :model => 'Orders', :ids => "#{ids.join(', ')}")
-    end
-    redirect url(:orders, :index)
-  end
 end

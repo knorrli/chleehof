@@ -4,7 +4,7 @@
   }
 
   $(document).ready(function() {
-    $('.destroy-product').off('submit', confirmDestroy);
-    $('.destroy-product').on('submit', confirmDestroy);
+    $('.destroy-order').off('submit', confirmDestroy);
+    $('.destroy-order').on('submit', confirmDestroy);
   });
 })();
