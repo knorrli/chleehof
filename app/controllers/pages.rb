@@ -1,5 +1,9 @@
 Chleehof::App.controllers :pages do
 
+  get :home, map: '/home' do
+    render 'home'
+  end
+
   get :about, map: '/about' do
     render 'about'
   end
@@ -7,24 +11,12 @@ Chleehof::App.controllers :pages do
   get :lehrstelle, map: '/lehrstelle' do
     render 'lehrstelle'
   end
-  # get :index, :map => '/foo/bar' do
-  #   session[:foo] = 'bar'
-  #   render 'index'
-  # end
 
-  # get :sample, :map => '/sample/url', :provides => [:any, :js] do
-  #   case content_type
-  #     when :js then ...
-  #     else ...
-  # end
+  get :lohnarbeiten, map: '/lohnarbeiten' do
+    render 'lohnarbeiten'
+  end
 
-  # get :foo, :with => :id do
-  #   "Maps to url '/foo/#{params[:id]}'"
-  # end
-
-  # get '/example' do
-  #   'Hello world!'
-  # end
-  
-
+  get :schule, map: '/schule' do
+    render 'schule'
+  end
 end

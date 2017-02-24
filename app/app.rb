@@ -8,7 +8,7 @@ module Chleehof
     layout :application
 
     get '/' do
-      redirect_to :about
+      redirect_to :home
     end
 
     ##

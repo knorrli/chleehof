@@ -2,6 +2,7 @@
   <div class="col-md-4">
     <div class="row">
       <div class="col-md-12">
+        <h3>Besteller</h3>
         <% error = @order.errors.include?(:name) %>
         <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
           <%= f.label :name, :class => 'control-label' %>
@@ -27,7 +28,7 @@
         <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
           <%= f.label :comment, :class => 'control-label' %>
           <div class='controls'>
-            <%= f.text_area :comment, :class => 'form-control input-xlarge input-with-feedback' %>
+            <%= f.text_area :comment, rows: 6, :class => 'form-control input-xlarge input-with-feedback' %>
           </div>
         </fieldset>
       </div>
@@ -40,6 +41,7 @@
     </div>
   </div>
   <div class="col-md-8">
+    <h3>Produkte</h3>
       <table class="table">
         <thead>
           <tr>
@@ -53,7 +55,7 @@
         </thead>
         <tbody class="products">
           <% Product.all.each_with_index do |product, index| %>
-            <% item = @order.order_items.build(product: product) %>
+            <% item = @order.order_items.find_by(product_id: product.id) || @order.order_items.build(product: product) %>
             <% f.fields_for :order_items, item, index: index do |ff| %>
               <%= ff.hidden_field :id, value: item.id %>
               <%= ff.hidden_field :product_id, value: product.id %>
@@ -61,8 +63,7 @@
               <tr class="product">
                 <td class="photo col-xs-2"><%= image_tag(product.photo.url(:small)) %></td>
                 <td class="name col-xs-2"><%= product.to_s %></td>
-                <% prev_param_quantity = params.try(:[], 'order').try(:[], 'order_items_attributes').try(:[], index.to_s).try(:[], 'quantity') %>
-                <td class="quantity col-xs-1"><%= ff.number_field :quantity, class: 'form-control', value: prev_param_quantity %></td>
+                <td class="quantity col-xs-1"><%= ff.number_field :quantity, class: 'form-control', value: item.quantity %></td>
                 <td class="multiplier col-xs-1">x</td>
                 <td class="price col-xs-1 text-right">
                   <span class="price_value"><%= product.price %></span>

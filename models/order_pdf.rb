@@ -30,11 +30,11 @@ class OrderPdf
     move_down spacing
 
     text_box "Email:", width: 150, at: [bounds.left, cursor]
-    text_box order.email, style: :bold, at: [bounds.left + 100, cursor]
+    text_box order.email.to_s, style: :bold, at: [bounds.left + 100, cursor]
     move_down spacing
 
     text_box "Telefon:", width: 150, at: [bounds.left, cursor]
-    text_box order.phone, style: :bold, at: [bounds.left + 100, cursor]
+    text_box order.phone.to_s, style: :bold, at: [bounds.left + 100, cursor]
     move_down spacing
 
     text_box "Total Menge:", width: 150, at: [bounds.left, cursor]
@@ -56,6 +56,7 @@ class OrderPdf
     item_array.append(order_total_row)
     item_table = make_table item_array, width: bounds.width, cell_style: { borders: [:bottom], border_width: 0 }
     item_table.rows(0).style(border_width: 1, font_style: :bold)
+    item_table.columns(0).style(align: :right)
     item_table.columns(2).style(align: :right)
     item_table.columns(3).style(align: :right)
     item_table.columns(-2).style(align: :right)
@@ -75,7 +76,7 @@ class OrderPdf
 
   def item_table_attributes
     @item_table_attributes ||= {
-      "" => ->(item) { { image: item.product.photo.path(:medium), fit: [80, 80] } },
+      "Art. Nr." => ->(item) { item.product.id.to_s },
       "Artikel" => ->(item) { item.to_s },
       "Anzahl" => ->(item) { "#{item.quantity} Stk." },
       " " => ->(item) { "x" },
