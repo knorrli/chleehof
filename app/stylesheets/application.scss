@@ -28,6 +28,20 @@ body {
   background: transparent;
 }
 
+.navbar {
+  border-bottom: 3px solid $brand-primary;
+
+  .navbar-logo {
+    padding: 5px 15px;
+  }
+}
+
+.navbar-brand > img {
+  height: 100%;
+  padding: 0;
+  width: auto;
+}
+
 .content {
   height: 100%;
 }
