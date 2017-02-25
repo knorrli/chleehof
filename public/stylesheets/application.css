@@ -6038,29 +6038,42 @@ button.close {
 
 html {
   height: 100%;
-  min-height: 100%;
-  background-size: 100%; }
+  min-height: 100%; }
 
 body {
-  margin-top: 50px;
-  height: calc(100% - (50px + 30px));
-  min-height: calc(100% - (50px + 30px));
+  margin-top: 0;
+  height: calc(100% - (0 + 30px));
+  min-height: calc(100% - (0 + 30px));
   background: transparent; }
 
 .navbar {
   border-bottom: 3px solid #427340; }
-  .navbar .navbar-logo {
-    padding: 5px 15px; }
-
-.navbar-brand > img {
-  height: 100%;
-  padding: 0;
-  width: auto; }
+  .navbar .container-fluid > .navbar-brand {
+    margin-left: 0; }
+  .navbar .navbar-toggle.collapsed {
+    margin-top: 60px; }
 
 .content {
   height: 100%; }
 
 .footer {
   height: 30px; }
+
+@media (min-width: 992px) {
+  #banner {
+    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.3) 30%, white), url("/images/sky_banner.jpg");
+    background-size: 100%; }
+
+  .logo-container {
+    max-height: 60px;
+    height: 60px;
+    padding: 10px; }
+
+  .navbar-brand {
+    font-size: 22px;
+    padding-top: 94px; }
+
+  .navbar-nav {
+    padding-top: 80px; } }
 
 /*# sourceMappingURL=application.css.map */
