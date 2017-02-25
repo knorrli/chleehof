@@ -4,8 +4,8 @@ Chleehof::App.controllers :pages do
     render 'home'
   end
 
-  get :about, map: '/about' do
-    render 'about'
+  get :betrieb, map: '/betrieb' do
+    render 'betrieb'
   end
 
   get :lehrstelle, map: '/lehrstelle' do
@@ -14,6 +14,10 @@ Chleehof::App.controllers :pages do
 
   get :lohnarbeiten, map: '/lohnarbeiten' do
     render 'lohnarbeiten'
+  end
+
+  get :kulturen, map: '/kulturen' do
+    render 'kulturen'
   end
 
   get :schule, map: '/schule' do
