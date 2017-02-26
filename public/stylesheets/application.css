@@ -6050,6 +6050,8 @@ body {
   border-bottom: 3px solid #427340; }
   .navbar .container-fluid > .navbar-brand {
     margin-left: 0; }
+  .navbar #navbar li {
+    font-size: 16px; }
   .navbar .navbar-toggle.collapsed {
     margin-top: 60px; }
 

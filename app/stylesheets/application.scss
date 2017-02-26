@@ -28,11 +28,9 @@ body {
     margin-left: 0;
   }
 
-  // .logo-container {
-  //   max-height: $xs-logo-height;
-  //   height: $xs-logo-height;
-  //   width: 100%;
-  // }
+  #navbar li {
+    font-size: 16px;
+  }
 
   .navbar-toggle.collapsed {
     margin-top: $md-logo-height;
