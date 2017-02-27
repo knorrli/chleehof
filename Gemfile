@@ -38,6 +38,12 @@ end
 # Padrino Stable Gem
 gem 'padrino', '0.13.3.3'
 
+gem 'capistrano', '~> 3.4'
+
+gem 'capistrano-rvm', '~> 0.1.2'
+gem 'capistrano-bundler', '~> 1.1', '>= 1.1.4'
+gem 'capistrano-passenger', '~> 0.2.0'
+
 # Or Padrino Edge
 # gem 'padrino', :github => 'padrino/padrino-framework'
 
