@@ -3,28 +3,40 @@
     <h1>
       Verpackungsmaterial
       <div class="pull-right">
-        <%= link_to "Online bestellen", url(:orders, :new), class: 'btn btn-primary' %>
+        <%= link_to "Bestellformular herunterladen", url(:orders, :new), class: 'btn btn-primary' %>
       </div>
       <div class="clearfix">
       </div>
     </h1>
+    <h4><%= Product.categories.map { |_, c| link_to(c[:name], "##{c[:id]}") }.join(" | ").html_safe %></h4>
   </div>
 </div>
-<div class="row">
-  <% @products.each do |product| %>
-    <div class="product col-lg-3 col-sm-4 col-xs-12">
-      <div class="product-photo">
-        <%= link_to image(product), url(:products, :show, id: product.id), class: 'dani' %>
-      </div>
-      <div class="product-information">
-        <div class="product-name text-center">
-          <%= product.name %>
+
+<% @products.group_by(&:category).each do |category, products| %>
+  <% category = Product.categories[category] %>
+  <div class="row">
+    <h4 id="<%= category[:id] %>"><%= category[:name] %></h4>
+    <% products.each do |product| %>
+      <div class="product col-lg-3 col-sm-4 col-xs-12">
+        <div class="product-photo">
+          <%= image(product, data: { toggle: 'modal', target: '#lightbox'} ) %>
         </div>
-        <div class="product-price text-center">
-          <span><%= product.price %></span>
-          <span>CHF</span>
+        <div class="product-information">
+          <div class="product-name text-center">
+            <strong><%= product.name %></strong>
+          </div>
         </div>
       </div>
+    <% end %>
+  </div>
+  <hr>
+<% end %>
+
+<div class="modal" id="lightbox" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <img src="" id="image" class="img img-responsive center-block" />
     </div>
-  <% end %>
+  </div>
 </div>

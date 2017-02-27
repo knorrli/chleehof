@@ -46,15 +46,15 @@
               <li>
                 <%= link_to "Schule auf dem Bauernhof", url(:pages, :schule) %>
               </li>
-              <%# <li> %>
-              <%#   <%= link_to "Verpackungsmaterial", url(:products, :index) %1> %>
-              <%# </li> %>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
               <li>
-                <%= link_to "Admin", Chleehof::Admin.url(:products, :index) %>
+                <%= link_to "Verpackungsmaterial", url(:products, :index) %>
               </li>
             </ul>
+            <%# <ul class="nav navbar-nav navbar-right"> %>
+            <%#   <li> %>
+            <%#     <%= link_to "Admin", Chleehof::Admin.url(:products, :index) %1> %>
+            <%#   </li> %>
+            <%# </ul> %>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </nav>
@@ -73,7 +73,9 @@
     <script src="/javascripts/jquery-3.1.1.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/javascripts/bootstrap.min.js"></script>
-    <script src="/javascripts/orders.js"></script>
 
+    <script src="/javascripts/application.js"></script>
+    <script src="/javascripts/lightbox.js"></script>
+    <script src="/javascripts/orders.js"></script>
   </body>
 </html>

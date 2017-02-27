@@ -408,13 +408,15 @@
     "close.less",
     "component-animations.less",
     "dropdowns.less",
+    "modals.less",
     "carousel.less"
   ],
   "js": [
     "alert.js",
     "carousel.js",
-    "collapse.js",
+    "modal.js",
+    "affix.js",
     "transition.js"
   ],
-  "customizerUrl": "http://getbootstrap.com/customize/?id=709682308e05cf756ef2958f1c99dd33"
+  "customizerUrl": "http://getbootstrap.com/customize/?id=93fc216ba491e0672861417d6fa4b6a0"
 }

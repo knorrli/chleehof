@@ -45,6 +45,12 @@ body {
   height: 30px;
 }
 
+.modal {
+  .close {
+    padding: 5px;
+  }
+}
+
 @media (min-width: $screen-md-min) {
   #banner {
     background:
