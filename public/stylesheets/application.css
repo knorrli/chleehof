@@ -6155,8 +6155,10 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important; } }
-.product .product-form input.amount {
-  width: 30%; }
+.product {
+  margin: 15px 0; }
+  .product .product-form input.amount {
+    width: 30%; }
 
 #order-form .quantity {
   width: 10%; }
@@ -6189,11 +6191,15 @@ body {
 .modal .close {
   padding: 5px; }
 
-@media (min-width: 992px) {
-  #banner {
-    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.3) 30%, white), url("/images/sky_banner.jpg");
-    background-size: 100%; }
+img[data-toggle='modal'] {
+  cursor: pointer; }
 
+#banner {
+  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.3) 30%, white), url("/images/sky_banner.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat; }
+
+@media (min-width: 992px) {
   .logo-container {
     max-height: 60px;
     height: 60px;

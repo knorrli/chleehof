@@ -1,4 +1,6 @@
-.product .product-form input.amount {
-  width: 30%; }
+.product {
+  margin: 15px 0; }
+  .product .product-form input.amount {
+    width: 30%; }
 
 /*# sourceMappingURL=products.css.map */

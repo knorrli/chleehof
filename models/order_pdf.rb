@@ -1,98 +1,45 @@
 class OrderPdf
   include Prawn::View
 
-  attr_reader :order
-
-  def initialize(order)
-    @order = order
-  end
-
   def render
     header
-    order_items
+    products
+
+    number_pages "<page>/<total>", align: :center, style: :bold, at: [bounds.left, 0]
 
     super
   end
 
   def header
-    font_size 20
-    text_box "Bestellung Verpackungsmaterial", at: [bounds.left, cursor]
-
-    font_size 14
-    text_box order.created_at.strftime('%d.%m.%Y %H:%M'), at: [bounds.right - 110, cursor]
-
-    spacing = 20
-    move_down spacing * 2
-
-    font_size 12
-    text_box "Name:", width: 150, at: [bounds.left, cursor]
-    text_box order.name, style: :bold, at: [bounds.left + 100, cursor]
-    move_down spacing
-
-    text_box "Email:", width: 150, at: [bounds.left, cursor]
-    text_box order.email.to_s, style: :bold, at: [bounds.left + 100, cursor]
-    move_down spacing
-
-    text_box "Telefon:", width: 150, at: [bounds.left, cursor]
-    text_box order.phone.to_s, style: :bold, at: [bounds.left + 100, cursor]
-    move_down spacing
-
-    text_box "Total Menge:", width: 150, at: [bounds.left, cursor]
-    text_box "#{order.total_item_quantity} Stück", style: :bold, at: [bounds.left + 100, cursor]
-    move_down spacing
-
-    text_box "Total Preis:", width: 150, at: [bounds.left, cursor]
-    text_box "#{order.total_item_price} #{order.currency}", style: :bold, at: [bounds.left + 100, cursor]
-    move_down spacing * 2
+    font_size 15
+    text "Bestellung Verpackungsmaterial", align: :center
+    font_size 10
+    text "Familie Lüthi, Chleehof 8, 3422 Kirchberg", align: :center
+    text "034 445 53 89, fam_luethi@hotmail.com", align: :center
   end
 
-  def order_items
-    item_array = order.order_items.map do |item|
-      item_table_body_procs.map do |p|
-        p.call(item)
+  def products
+    Product.products.each do |product|
+
+      table = []
+      header = ["Anz.", "Artikelbezeichnung", "CHF/Stk.", "Total"]
+      table << header
+      product.variants.each do |variant, price|
+        table << ["", variant.to_s, "#{'%.02f' % price}", ""]
       end
+      table = make_table table, column_widths: { 0 => 60, 1 => (bounds.width - 180), 2 => 60, 3 => 60 }, cell_style: { padding: [1, 5, 2, 5] }
+      table.row(0).style font_style: :bold
+      table.column(2).style align: :right
+
+      if cursor < (table.height + 10)
+        start_new_page
+      end
+      font_size 12
+      text product.name, style: :bold
+      font_size 10
+      table.draw
+
+      move_down 10
     end
-    item_array.prepend(item_header)
-    item_array.append(order_total_row)
-    item_table = make_table item_array, width: bounds.width, cell_style: { borders: [:bottom], border_width: 0 }
-    item_table.rows(0).style(border_width: 1, font_style: :bold)
-    item_table.columns(0).style(align: :right)
-    item_table.columns(2).style(align: :right)
-    item_table.columns(3).style(align: :right)
-    item_table.columns(-2).style(align: :right)
-    item_table.columns(-1).style(align: :right)
-    item_table.rows(-1).style(borders: [:top, :bottom], border_width: 1, font_style: :bold)
-    item_table.rows(-1).columns(0).style(borders: [:top], border_width: 1)
-    item_table.draw
-  end
-
-  def item_header
-    item_table_attributes.keys
-  end
-
-  def item_table_body_procs
-    item_table_attributes.values
-  end
-
-  def item_table_attributes
-    @item_table_attributes ||= {
-      "Art. Nr." => ->(item) { item.product.id.to_s },
-      "Artikel" => ->(item) { item.to_s },
-      "Anzahl" => ->(item) { "#{item.quantity} Stk." },
-      " " => ->(item) { "x" },
-      "Preis" => ->(item) { "#{item.price} CHF" },
-      "Total" => ->(item) { "#{item.total_price} CHF" }
-    }
-  end
-
-  def order_total_row
-    [
-      "",
-      "TOTAL",
-      "#{order.total_item_quantity} Stk.",
-      "",
-      "",
-      "#{order.total_item_price} CHF"
-    ]
   end
 end

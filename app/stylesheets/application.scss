@@ -51,15 +51,20 @@ body {
   }
 }
 
-@media (min-width: $screen-md-min) {
-  #banner {
-    background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.3) 30%, rgba(255, 255, 255, 1)),
-      /* bottom, image */
-      url('/images/sky_banner.jpg');
-    background-size: 100%;
-  }
+img[data-toggle='modal'] {
+  cursor: pointer;
+}
 
+#banner {
+  background:
+  linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.3) 30%, rgba(255, 255, 255, 1)),
+  /* bottom, image */
+  url('/images/sky_banner.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: $screen-md-min) {
   .logo-container {
     max-height: $md-logo-height;
     height: $md-logo-height;
@@ -74,5 +79,4 @@ body {
   .navbar-nav {
     padding-top: 80px;
   }
-
 }

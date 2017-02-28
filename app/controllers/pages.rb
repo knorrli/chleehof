@@ -23,4 +23,8 @@ Chleehof::App.controllers :pages do
   get :schule, map: '/schule' do
     render 'schule'
   end
+
+  get :formular, map: '/formular', provides: :pdf do
+    OrderPdf.new.render
+  end
 end

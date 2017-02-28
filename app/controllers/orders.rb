@@ -25,8 +25,4 @@ Chleehof::App.controllers :orders do
       render 'show'
     end
   end
-
-  get :print_form, provides: :pdf do
-    OrderPdf.new(Order.new).render
-  end
 end

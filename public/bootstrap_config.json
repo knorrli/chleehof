@@ -416,7 +416,8 @@
     "carousel.js",
     "modal.js",
     "affix.js",
+    "collapse.js",
     "transition.js"
   ],
-  "customizerUrl": "http://getbootstrap.com/customize/?id=93fc216ba491e0672861417d6fa4b6a0"
+  "customizerUrl": "http://getbootstrap.com/customize/?id=f19da2b418dd0bc2b0a0c2a8f97ecbbf"
 }
