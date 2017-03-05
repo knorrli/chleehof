@@ -8,6 +8,10 @@ Chleehof::App.controllers :pages do
     render 'betrieb'
   end
 
+  get :kontakt, map: '/kontakt' do
+    render 'kontakt'
+  end
+
   get :lehrstelle, map: '/lehrstelle' do
     render 'lehrstelle'
   end

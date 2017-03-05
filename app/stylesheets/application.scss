@@ -30,6 +30,11 @@ body {
 
   #navbar li {
     font-size: 16px;
+
+    a {
+      padding-left: 11px;
+      padding-right: 11px;
+    }
   }
 
   .navbar-toggle.collapsed {

@@ -6179,6 +6179,9 @@ body {
     margin-left: 0; }
   .navbar #navbar li {
     font-size: 16px; }
+    .navbar #navbar li a {
+      padding-left: 11px;
+      padding-right: 11px; }
   .navbar .navbar-toggle.collapsed {
     margin-top: 60px; }
 
