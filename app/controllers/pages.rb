@@ -29,6 +29,6 @@ Chleehof::App.controllers :pages do
   end
 
   get :formular, map: '/formular', provides: :pdf do
-    OrderPdf.new.render
+    send_file File.expand_path('formular.pdf', settings.public_folder)
   end
 end
