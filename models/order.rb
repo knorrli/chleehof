@@ -4,15 +4,14 @@ class Order < ActiveRecord::Base
 
   accepts_nested_attributes_for :order_items, reject_if: proc { |attr| attr[:quantity].blank? }
 
-  validates_presence_of :name
-  validate :has_email_or_phone
+  validates_presence_of :first_name, :last_name, :address_1, :zip_code, :city
 
   def to_s
     "Bestellung #{id}"
   end
 
   def contact_info
-    [name, phone, email].compact.join(', ')
+    [first_name, last_name, phone, email].compact.join(', ')
   end
 
   def total_item_count
@@ -29,15 +28,5 @@ class Order < ActiveRecord::Base
 
   def currency
     "CHF"
-  end
-
-  private
-
-  def has_email_or_phone
-    self.email = nil if email.blank?
-    self.phone = nil if phone.blank?
-    return true if email || phone
-    errors[:email_or_phone] = "Email oder Telefon muss angegeben werden"
-    return false
   end
 end

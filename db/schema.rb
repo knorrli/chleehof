@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 5) do
+ActiveRecord::Schema.define(version: 8) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -20,6 +20,21 @@ ActiveRecord::Schema.define(version: 5) do
     t.string   "role"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "address_1"
+    t.string   "address_2"
+    t.string   "zip_code"
+    t.string   "city"
+    t.string   "phone"
+    t.string   "email"
+    t.boolean  "pay_cash"
+    t.boolean  "pick_up"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -32,22 +47,16 @@ ActiveRecord::Schema.define(version: 5) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string   "name"
+    t.string   "first_name"
     t.string   "phone"
     t.string   "email"
-    t.text     "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "photos", force: :cascade do |t|
-    t.integer  "product_id"
-    t.string   "picture_file_name"
-    t.string   "picture_content_type"
-    t.integer  "picture_file_size"
-    t.datetime "picture_updated_at"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.string   "last_name"
+    t.string   "address_1"
+    t.string   "address_2"
+    t.string   "zip_code"
+    t.string   "city"
   end
 
   create_table "products", force: :cascade do |t|

@@ -15,23 +15,6 @@
         <%= f.number_field :price, :class => 'form-control input-xlarge input-with-feedback' %>
       </div>
     </fieldset>
-
-    <% photo = @product.photo || @product.build_photo %>
-    <% error = @product.errors.include?(:photo) %>
-    <% f.fields_for :photo, photo do |ff| %>
-      <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
-        <%= ff.label :photo, :class => 'control-label' %>
-        <div class='controls'>
-          <%= ff.file_field :picture, :class => 'form-control input-xlarge input-with-feedback' %>
-        </div>
-      </fieldset>
-    <% end %>
-  </div>
-
-  <div class="col-md-4">
-    <% if @product.photo.picture.exists? %>
-      <%= image_tag(@product.photo.url, class: 'img img-responsive') %>
-    <% end %>
   </div>
 </div>
 

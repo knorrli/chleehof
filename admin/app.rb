@@ -2,10 +2,14 @@ require 'active_support/core_ext/object/blank'
 
 module Chleehof
   class Admin < Padrino::Application
+    register ScssInitializer
     use ConnectionPoolManagement
     register Padrino::Mailer
     register Padrino::Helpers
     register Padrino::Admin::AccessControl
+    enable  :sessions
+    disable :store_location
+    layout :application
 
     ##
     # Application configuration options
@@ -26,16 +30,13 @@ module Chleehof
     set :admin_model, 'Account'
     set :login_page,  '/sessions/new'
 
-    enable  :sessions
-    disable :store_location
-
     access_control.roles_for :any do |role|
       role.protect '/'
       role.allow   '/sessions'
     end
 
     get '/' do
-      redirect_to url(:products, :index)
+      redirect_to url(:orders, :new)
     end
 
     access_control.roles_for :admin do |role|

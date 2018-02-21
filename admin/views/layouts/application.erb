@@ -7,20 +7,17 @@
     <![endif]-->
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
     <meta name=viewport content='width=device-width,initial-scale=1' />
-    <title><%= @title.present? ? "#{@title} | Padrino Admin" : "Padrino Admin" %></title>
+    <title><%= @title.present? ? "#{@title} | Chleehof vom Hof" : "Chleehof vom Hof" %></title>
     <%= favicon_tag "favicon.ico" %>
     <link href='http://fonts.googleapis.com/css?family=Varela' rel=stylesheet />
-    <%= stylesheet_link_tag 'bootstrap', 'application' %>
+    <%= stylesheet_link_tag 'bootstrap', 'application', 'orders' %>
   </head>
   <body>
     <div class="navbar navbar-fixed-top">
       <div class=navbar-inner>
         <div class=container>
-          <%= link_to 'Admin', url(:base, :index), :class => 'navbar-brand', :title => 'Padrino Admin' %>
+          <%= link_to 'Neue Bestellung', url(:orders, :new), :class => 'navbar-brand' %>
           <ul class="nav navbar-nav pull-right">
-            <li>
-              <%= link_to "Zur Hauptseite", '/' %>
-            </li>
             <li>
               <%= button_to(pat(:logout), url(:sessions, :destroy), :method => :delete, :class => 'navbar-nav-form', :submit_options => { :type => :submit, :title => pat(:logout), :class => 'navbar-nav-form-link' })  %>
             </li>
@@ -29,6 +26,9 @@
           <ul class="nav navbar-nav pull-left">
             <li class="navbar-module">
               <%= link_to "Produkte", url(:products, :index) %>
+            </li>
+            <li class="navbar-module">
+              <%= link_to "Kunden", url(:customers, :index) %>
             </li>
             <li class="navbar-module">
               <%= link_to "Bestellungen", url(:orders, :index) %>
@@ -46,6 +46,6 @@
       </div>
     </div>
 
-    <%= javascript_include_tag 'jquery-1.11.0.min', 'bootstrap/bootstrap.min', :application, :products, :orders %>
+    <%= javascript_include_tag 'jquery-1.11.0.min', 'bootstrap/bootstrap.min', :application, :products, :orders, :customers, :order_customer_search %>
   </body>
 </html>

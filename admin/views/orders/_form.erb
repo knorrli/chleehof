@@ -2,12 +2,52 @@
   <div class="col-md-4">
     <div class="row">
       <div class="col-md-12">
-        <h3>Besteller</h3>
+        <h3>Kunde</h3>
+        <div id="customer-search">
+          <%= text_field_tag :customer_search, id: 'customer-search', data: {url: url(:customers, :search, format: :json), }, placeholder: 'Suche', class: 'form-control input-xlarge' %>
+          <div id="customer-search-results" class="result-container">
+            <% Customer.first(3).each do |customer| %>
+              <div class="customer-result">
+                <%= "#{customer.name}, #{customer.address_1}" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
         <% error = @order.errors.include?(:name) %>
         <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
-          <%= f.label :name, :class => 'control-label' %>
+          <%= f.label :first_name, :class => 'control-label' %>
           <div class='controls'>
-            <%= f.text_field :name, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true %>
+            <%= f.text_field :first_name, :class => 'form-control input-xlarge input-with-feedback' %>
+          </div>
+        </fieldset>
+        <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+          <%= f.label :last_name, :class => 'control-label' %>
+          <div class='controls'>
+            <%= f.text_field :last_name, :class => 'form-control input-xlarge input-with-feedback' %>
+          </div>
+        </fieldset>
+        <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+          <%= f.label :address_1, :class => 'control-label' %>
+          <div class='controls'>
+            <%= f.text_field :address_1, :class => 'form-control input-xlarge input-with-feedback' %>
+          </div>
+        </fieldset>
+        <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+          <%= f.label :address_2, :class => 'control-label' %>
+          <div class='controls'>
+            <%= f.text_field :address_2, :class => 'form-control input-xlarge input-with-feedback' %>
+          </div>
+        </fieldset>
+        <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+          <%= f.label :zip_code, :class => 'control-label' %>
+          <div class='controls'>
+            <%= f.text_field :zip_code, :class => 'form-control input-xlarge input-with-feedback' %>
+          </div>
+        </fieldset>
+        <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+          <%= f.label :city, :class => 'control-label' %>
+          <div class='controls'>
+            <%= f.text_field :city, :class => 'form-control input-xlarge input-with-feedback' %>
           </div>
         </fieldset>
         <% error = @order.errors.include?(:phone) %>
@@ -24,13 +64,6 @@
             <%= f.text_field :email, :class => 'form-control input-xlarge input-with-feedback' %>
           </div>
         </fieldset>
-        <% error = @order.errors.include?(:comment) %>
-        <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
-          <%= f.label :comment, :class => 'control-label' %>
-          <div class='controls'>
-            <%= f.text_area :comment, rows: 6, :class => 'form-control input-xlarge input-with-feedback' %>
-          </div>
-        </fieldset>
       </div>
       <div class="col-md-6 top-buffer">
         <%= f.submit pat(:save), :class => 'btn btn-primary' %>
@@ -42,10 +75,10 @@
   </div>
   <div class="col-md-8">
     <h3>Produkte</h3>
+    <%= text_field_tag :product_search, id: 'product-search', placeholder: 'Suche', class: 'form-control input-xlarge' %>
       <table class="table">
         <thead>
           <tr>
-            <th class="photo"></th>
             <th class="name">Name</th>
             <th class="quantity text-right">Anzahl</th>
             <th class="multiplier text-center"></th>
@@ -53,34 +86,11 @@
             <th class="total-price text-right"><%= "Total" %></th>
           </tr>
         </thead>
-        <tbody class="products">
-          <% Product.all.each_with_index do |product, index| %>
-            <% item = @order.order_items.find_by(product_id: product.id) || @order.order_items.build(product: product) %>
-            <% f.fields_for :order_items, item, index: index do |ff| %>
-              <%= ff.hidden_field :id, value: item.id %>
-              <%= ff.hidden_field :product_id, value: product.id %>
-              <%= ff.hidden_field :price, value: product.price %>
-              <tr class="product">
-                <td class="photo col-xs-2"><%= image_tag(product.photo.url(:small)) %></td>
-                <td class="name col-xs-2"><%= product.to_s %></td>
-                <td class="quantity col-xs-1"><%= ff.number_field :quantity, class: 'form-control', value: item.quantity %></td>
-                <td class="multiplier col-xs-1">x</td>
-                <td class="price col-xs-1 text-right">
-                  <span class="price_value"><%= product.price %></span>
-                  <span class="price_currency">CHF</span>
-                </td>
-                <td class="total-price col-xs-1 text-right">
-                  <span class="price_value"></span>
-                  <span class="price_currency">CHF</span>
-                </td>
-              </tr>
-            <% end %>
-          <% end %>
+        <tbody class="order-items">
         </tbody>
 
         <tfoot>
           <tr class="total-row">
-            <th class="photo"></td>
             <th class="name">TOTAL</td>
             <th class="quantity"></td>
             <th class="multiplier"></td>

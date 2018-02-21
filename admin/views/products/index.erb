@@ -4,7 +4,6 @@
 <table id=list class="table table-hover">
   <thead>
     <tr>
-      <th class="header"></th>
       <th class=header> <%= mat(:product, :name) %></th>
       <th class=header> <%= mat(:product, :price) %></th>
       <th class=header> <%= mat(:product, :created_at) %></th>
@@ -18,7 +17,6 @@
   <tbody>
     <% @products.each do |product| %>
       <tr class=list-row>
-        <td class=list-column><%= link_to image_tag(product.photo.url(:small)), url(:products, :edit, id: product.id) %></td>
         <td class=list-column> <%= product.name %> </td>
         <td class=list-column> <%= product.price %> </td>
         <td class=list-column> <%= product.created_at.strftime('%d.%m.%Y %H:%M') %></td>

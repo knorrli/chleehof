@@ -1,0 +1,38 @@
+<h1 class="h1">
+  Kunden
+    <%= text_field_tag :customer_search, placeholder: 'Suche', class: 'inline', autofocus: true %>
+</h1>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th class=header> <%= mat(:customer, :name) %></th>
+      <th class=header> <%= mat(:customer, :address_1) %></th>
+      <th class=header> <%= mat(:customer, :zip_code) %></th>
+      <th class=header> <%= mat(:customer, :city) %></th>
+      <th class=header> <%= mat(:customer, :phone) %></th>
+      <th class=header> <%= mat(:customer, :email) %></th>
+      <th class="header list-row-action-header">
+        <%= link_to "Neuer Kunde erfassen", url(:customers, :new), class: 'btn btn-primary' %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customers.ordered.each do |customer| %>
+      <tr class=list-row>
+        <td class=list-column> <%= link_to customer.name, url_for(:customers, :edit, id: customer.id) %> </td>
+        <td class=list-column> <%= customer.address_1 %> </td>
+        <td class=list-column> <%= customer.zip_code %> </td>
+        <td class=list-column> <%= customer.city %> </td>
+        <td class=list-column> <%= customer.phone %> </td>
+        <td class=list-column> <%= mail_to customer.email, customer.email %> </td>
+        <td class="list-column">
+          <% form_tag url_for(:customers, :destroy, :id => customer.id), method: :delete, class: 'destroy-customer' do %>
+            <%= submit_tag pat(:delete), :class =>'btn btn-danger pull-right' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

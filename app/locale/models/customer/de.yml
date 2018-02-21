@@ -1,9 +1,10 @@
 de:
   models:
-    order:
-      name: Order
+    customer:
+      name: Kunde
       attributes:
         id: ID
+        name: Name
         first_name: Vorname
         last_name: Nachname
         address_1: Strasse
@@ -12,5 +13,7 @@ de:
         city: Stadt
         phone: Telefon
         email: Email
+        pay_cash: bezahlt Bar
+        pick_up: holt Ware ab
         created_at: Erstellt Am
         updated_at: Angepasst Am

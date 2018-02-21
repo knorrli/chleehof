@@ -41,9 +41,6 @@
     <h4 id="<%= category[:id] %>"><%= category[:name] %></h4>
     <% products.each do |product| %>
       <div class="product col-lg-3 col-sm-4 col-xs-12">
-        <div class="product-photo">
-          <%= image(product, data: { toggle: 'modal', target: '#lightbox'} ) %>
-        </div>
         <div class="product-information">
           <div class="product-name text-center">
             <strong><%= product.name %></strong>

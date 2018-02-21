@@ -1,0 +1,6 @@
+<h1>Neuer Kunde erfassen</h1>
+<div class="tabs-content">
+  <% form_for :customer, url(:customers, :create), class: 'form-horizontal' do |f| %>
+    <%= partial 'customers/form', :locals => { :f => f } %>
+ <% end %>
+</div>
