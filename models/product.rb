@@ -9,7 +9,8 @@ class Product < ActiveRecord::Base
   end
 
   def self.search(query)
-    where('identifier LIKE ? OR name LIKE ?', "#{query}%", "#{query}%")
+    query = query.downcase
+    where('lower(identifier) LIKE ? OR lower(name) LIKE ?', "#{query}%", "#{query}%")
   end
 
   def to_s

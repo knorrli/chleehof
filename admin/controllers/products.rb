@@ -10,7 +10,12 @@ Chleehof::Admin.controllers :products do
   end
 
   get :index do
-    @products = Product.ordered
+    if letter = params[:letter]
+      letter = letter.downcase
+      @products = Product.where('lower(name) LIKE ?', "#{letter}%").ordered
+    else
+      @products = Product.ordered.limit(20)
+    end
     render 'products/index'
   end
 

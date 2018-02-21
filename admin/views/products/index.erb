@@ -8,6 +8,16 @@
     <%= submit_tag "Suchen", class: 'btn btn-primary hidden' %>
   <% end %>
 </h1>
+<ul class="pagination">
+  <li class=<%= 'active' if !params[:letter] %>>
+    <%= link_to "Alle", url_for(:products, :index) %>
+  </li>
+  <% ('A'..'Z').to_a.each do |letter| %>
+    <li class=<%= 'active' if letter == params[:letter] %>>
+      <%= link_to letter, url_for(:products, :index, letter: letter) %>
+    </li>
+  <% end %>
+</ul>
 <table id=list class="table table-hover table-condensed">
   <thead>
     <tr>

@@ -13,7 +13,8 @@ Chleehof::Admin.controllers :customers do
 
   get :index do
     if letter = params[:letter]
-      @customers = Customer.where('last_name LIKE ? OR company LIKE ?', "#{letter}%", "#{letter}%").ordered
+      letter = letter.downcase
+      @customers = Customer.where('lower(last_name) LIKE ? OR lower(company) LIKE ?', "#{letter}%", "#{letter}%").ordered
     else
       @customers = Customer.order(:created_at).limit(20)
     end

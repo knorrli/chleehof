@@ -4,7 +4,7 @@
       <div class="col-md-12">
         <h3>Kunde</h3>
         <div id="customer-search">
-          <%= text_field_tag :customer_search, id: 'customer-search', data: {url: url(:customers, :search, format: :json), }, placeholder: 'Suche', class: 'form-control input-xlarge' %>
+          <%= text_field_tag :customer_search, id: 'customer-search', data: {url: url(:customers, :search, format: :json), }, placeholder: 'Suche', autofocus: true, class: 'form-control input-xlarge' %>
           <div id="customer-search-results" class="result-container hidden">
           </div>
         </div>

@@ -5,7 +5,8 @@ class Customer < ActiveRecord::Base
   validates_presence_of :address_1, :zip_code, :city
 
   def self.search(query)
-    where('company LIKE ? OR last_name LIKE ? OR first_name LIKE ? OR zip_code LIKE ? OR city LIKE ?', "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+    query = query.downcase
+    where('lower(company) LIKE ? OR lower(last_name) LIKE ? OR lower(first_name) LIKE ? OR lower(zip_code) LIKE ? OR lower(city) LIKE ?', "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
   end
 
   def self.ordered
