@@ -1,13 +1,22 @@
 Chleehof::Admin.controllers :customers do
 
   get :search, :provides => [:html, :json] do
-    @results = Customer.search params[:q]
-    @results.to_json
+    @customers = Customer.search params[:q]
+    case content_type
+    when :json
+      @customers.to_json
+    when :html
+      render 'customers/index'
+    end
   end
 
 
   get :index do
-    @customers = Customer.all
+    if letter = params[:letter]
+      @customers = Customer.where('last_name LIKE ? OR company LIKE ?', "#{letter}%", "#{letter}%").ordered
+    else
+      @customers = Customer.order(:created_at).limit(20)
+    end
     render 'customers/index'
   end
 

@@ -24,7 +24,7 @@
     if (results.length > 0) {
       for(result_index in results) {
         var result = results[result_index];
-        var customerInfo = `${result.first_name} ${result.last_name}, ${result.address_1}`
+        var customerInfo = `${result.name}, ${result.address_1}`
         var dataAttributes = `data-customer=${btoa(JSON.stringify(result))}`
         resultContent = resultContent + `<div class='customer-result search-result' ${dataAttributes}>${customerInfo}</div>`
       }
@@ -41,6 +41,7 @@
     hideCustomerResultContainer();
     $("#order_first_name").val(customerData.first_name);
     $("#order_last_name").val(customerData.last_name);
+    $("#order_company").val(customerData.company);
     $("#order_address_1").val(customerData.address_1);
     $("#order_address_2").val(customerData.address_2);
     $("#order_zip_code").val(customerData.zip_code);

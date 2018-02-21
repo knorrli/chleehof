@@ -1,72 +1,73 @@
 Chleehof::Admin.controllers :products do
+
+  get :search do
+    if params[:q].present?
+      @products = Product.search(params[:q]).ordered
+      render 'products/index'
+    else
+      redirect(url(:products, :index))
+    end
+  end
+
   get :index do
-    @title = "Products"
-    @products = Product.all
+    @products = Product.ordered
     render 'products/index'
   end
 
   get :new do
-    @title = pat(:new_title, :model => 'product')
     @product = Product.new
     render 'products/new'
   end
 
   post :create do
-    puts params.inspect
     @product = Product.new(params[:product])
     if @product.save
-      @title = pat(:create_title, :model => "product #{@product.id}")
-      flash[:success] = pat(:create_success, :model => 'Product')
-      params[:save_and_continue] ? redirect(url(:products, :index)) : redirect(url(:products, :edit, :id => @product.id))
+      flash[:success] = "#{@product} wurde gespeichert"
+      redirect(url(:products, :index))
     else
-      @title = pat(:create_title, :model => 'product')
-      flash.now[:error] = pat(:create_error, :model => 'product')
+      flash.now[:error] = "#{@product} konnte nicht gespeichert werden"
       render 'products/new'
     end
   end
 
   get :edit, :with => :id do
-    @title = pat(:edit_title, :model => "product #{params[:id]}")
     @product = Product.find(params[:id])
     if @product
       render 'products/edit'
     else
-      flash[:warning] = pat(:create_error, :model => 'product', :id => "#{params[:id]}")
+      flash[:warning] = "Produkt wurde nicht gefunden"
       halt 404
     end
   end
 
   put :update, :with => :id do
-    @title = pat(:update_title, :model => "product #{params[:id]}")
+    puts params.inspect
     @product = Product.find(params[:id])
     if @product
       if @product.update_attributes(params[:product])
-        flash[:success] = pat(:update_success, :model => 'Product', :id =>  "#{params[:id]}")
-        params[:save_and_continue] ?
-          redirect(url(:products, :index)) :
-          redirect(url(:products, :edit, :id => @product.id))
+        flash[:success] = "#{@product} wurde angepasst"
+        redirect(url(:products, :index))
       else
-        flash.now[:error] = pat(:update_error, :model => 'product')
+        flash.now[:error] = "#{@product} konnte nicht angepasst werden"
         render 'products/edit'
       end
     else
-      flash[:warning] = pat(:update_warning, :model => 'product', :id => "#{params[:id]}")
+      flash[:warning] = "Produkt wurde nicht gefunden"
       halt 404
     end
   end
 
   delete :destroy, :with => :id do
-    @title = "Products"
     product = Product.find(params[:id])
     if product
       if product.destroy
-        flash[:success] = pat(:delete_success, :model => 'Product', :id => "#{params[:id]}")
+        flash[:success] = "#{product} wurde gelöscht"
       else
-        flash[:error] = pat(:delete_error, :model => 'product')
+        flash[:error] = "#{product} konnte nicht gelöscht werden"
       end
       redirect url(:products, :index)
     else
-      flash[:warning] = pat(:delete_warning, :model => 'product', :id => "#{params[:id]}")
+      flash[:warning] = "Produkt wurde nicht gefunden"
       halt 404
     end
   end

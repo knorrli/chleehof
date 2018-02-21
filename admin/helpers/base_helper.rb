@@ -3,9 +3,9 @@
 module Chleehof
   class Admin
     module BaseHelper
-      # def simple_helper_method
-      # ...
-      # end
+      def formatted_price(price, options = {})
+        options[:currency] ? ("CHF %.2f" % price) : ('%.2f' % price)
+      end
     end
 
     helpers BaseHelper

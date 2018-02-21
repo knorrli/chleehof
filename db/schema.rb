@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 8) do
+ActiveRecord::Schema.define(version: 13) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 8) do
     t.boolean  "pick_up"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "company"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -50,20 +51,23 @@ ActiveRecord::Schema.define(version: 8) do
     t.string   "first_name"
     t.string   "phone"
     t.string   "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "last_name"
     t.string   "address_1"
     t.string   "address_2"
     t.string   "zip_code"
     t.string   "city"
+    t.string   "company"
+    t.integer  "customer_id"
   end
 
   create_table "products", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.integer  "price",      null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",                               null: false
+    t.decimal  "price",      precision: 8, scale: 2, null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.string   "identifier"
   end
 
 end

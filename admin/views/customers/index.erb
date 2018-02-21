@@ -1,7 +1,23 @@
 <h1 class="h1">
   Kunden
-    <%= text_field_tag :customer_search, placeholder: 'Suche', class: 'inline', autofocus: true %>
+  <% form_tag url_for(:customers, :search), method: :get, class: 'inline' do %>
+    <%= text_field_tag :q, value: params[:q], placeholder: 'Suche', autofocus: true %>
+    <% if params[:q] %>
+      <%= link_to 'Alle anzeigen', url_for(:customers, :index), class: 'btn btn-lg btn-default' %>
+    <% end %>
+    <%= submit_tag "Suchen", class: 'btn btn-primary hidden' %>
+  <% end %>
 </h1>
+<ul class="pagination">
+  <li class=<%= 'active' if !params[:letter] %>>
+    <%= link_to "NEU", url_for(:customers, :index) %>
+  </li>
+  <% ('A'..'Z').to_a.each do |letter| %>
+    <li class=<%= 'active' if letter == params[:letter] %>>
+      <%= link_to letter, url_for(:customers, :index, letter: letter) %>
+    </li>
+  <% end %>
+</ul>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -18,7 +34,7 @@
   </thead>
 
   <tbody>
-    <% @customers.ordered.each do |customer| %>
+    <% @customers.each do |customer| %>
       <tr class=list-row>
         <td class=list-column> <%= link_to customer.name, url_for(:customers, :edit, id: customer.id) %> </td>
         <td class=list-column> <%= customer.address_1 %> </td>

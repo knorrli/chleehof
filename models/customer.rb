@@ -1,19 +1,22 @@
 class Customer < ActiveRecord::Base
   has_many :orders
 
-  validates_presence_of :first_name, :last_name, :address_1, :zip_code, :city
+  validates_presence_of :first_name, :last_name, unless: :company?
+  validates_presence_of :address_1, :zip_code, :city
 
-  def self.search(input)
-    Customer.
-      where('last_name LIKE ? OR first_name LIKE ? OR zip_code LIKE ?', "%#{input}%", "%#{input}%", "%#{input}%").
-      limit(10)
+  def self.search(query)
+    where('company LIKE ? OR last_name LIKE ? OR first_name LIKE ? OR zip_code LIKE ? OR city LIKE ?', "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
   end
 
   def self.ordered
-    order(:last_name, :first_name)
+    order(:company, :last_name, :first_name)
   end
 
   def name
-    "#{last_name} #{first_name}"
+    company.present? ? company : "#{last_name} #{first_name}"
+  end
+
+  def as_json(options)
+    super.merge(name: name)
   end
 end

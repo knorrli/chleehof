@@ -8,7 +8,16 @@ class Product < ActiveRecord::Base
     order(:name)
   end
 
+  def self.search(query)
+    where('identifier LIKE ? OR name LIKE ?', "#{query}%", "#{query}%")
+  end
+
   def to_s
     name
+  end
+
+  def price_f(options = {})
+    return nil unless price
+    options[:currency] ? ("CHF %.2f" % price) : ('%.2f' % price)
   end
 end

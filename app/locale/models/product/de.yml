@@ -4,6 +4,7 @@ de:
       name: Produkt
       attributes:
         id: ID
+        identifier: Nummer
         name: Name
         price: Preis
         created_at: Erstellt Am

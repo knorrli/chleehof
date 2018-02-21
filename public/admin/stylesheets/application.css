@@ -9,6 +9,9 @@ body {
 .top-buffer {
   margin-top: 10px;
 }
+.inline {
+  display: inline-block;
+}
 /* -- End Custom Styles -- */
 
 .main {
