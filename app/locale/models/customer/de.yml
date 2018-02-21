@@ -7,6 +7,7 @@ de:
         name: Name
         first_name: Vorname
         last_name: Nachname
+        company: Firma
         address_1: Strasse
         address_2: Zusatz
         zip_code: PLZ

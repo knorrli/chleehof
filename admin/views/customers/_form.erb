@@ -16,6 +16,15 @@
       </div>
     </fieldset>
 
+    <% error = @customer.errors.include?(:company) %>
+    <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+      <%= f.label :company, :class => 'control-label' %>
+      <div class='controls'>
+        <%= f.text_field :company, :class => 'form-control input-xlarge input-with-feedback' %>
+      </div>
+    </fieldset>
+
+
     <% error = @customer.errors.include?(:address_1) %>
     <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
       <%= f.label :address_1, :class => 'control-label' %>
