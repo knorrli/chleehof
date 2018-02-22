@@ -1,12 +1,10 @@
 Chleehof::Admin.controllers :orders do
   get :index do
-    @title = "Orders"
     @orders = Order.all
     render 'orders/index'
   end
 
   get :new do
-    @title = pat(:new_title, :model => 'order')
     @order = Order.new
     render 'orders/new'
   end
@@ -14,18 +12,15 @@ Chleehof::Admin.controllers :orders do
   post :create do
     @order = Order.new(params[:order])
     if @order.save
-      @title = pat(:create_title, :model => "order #{@order.id}")
       flash[:success] = pat(:create_success, :model => 'Order')
       params[:save_and_continue] ? redirect(url(:orders, :index)) : redirect(url(:orders, :edit, :id => @order.id))
     else
-      @title = pat(:create_title, :model => 'order')
       flash.now[:error] = pat(:create_error, :model => 'order')
       render 'orders/new'
     end
   end
 
   get :edit, :with => :id do
-    @title = pat(:edit_title, :model => "order #{params[:id]}")
     @order = Order.find(params[:id])
     if @order
       render 'orders/edit'
@@ -36,7 +31,6 @@ Chleehof::Admin.controllers :orders do
   end
 
   put :update, :with => :id do
-    @title = pat(:update_title, :model => "order #{params[:id]}")
     @order = Order.find(params[:id])
     if @order
       if @order.update_attributes(params[:order])
@@ -55,7 +49,6 @@ Chleehof::Admin.controllers :orders do
   end
 
   delete :destroy, :with => :id do
-    @title = "Orders"
     order = Order.find(params[:id])
     if order
       if order.destroy

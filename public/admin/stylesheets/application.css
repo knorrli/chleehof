@@ -21,7 +21,7 @@ body {
   padding: 0 10px;
 }
 .main-wrapper {
-  padding-top: 70px /* same as footer's height */
+  /* padding-top: 70px /1* same as footer's height *1/ */
 }
 .main-wrapper-push {
   height: 70px; /* same as the footer */

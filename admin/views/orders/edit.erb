@@ -1,6 +1,6 @@
 <h1><%= "Bestellung Anpassen: #{@order}" %></h1>
 <div class="tabs-content">
-  <% form_for :order, url(:orders, :update, :id => @order.id), method: :put, id: 'order-form', class: 'form-horizontal' do |f| %>
+  <% form_for :order, url(:orders, :update, :id => @order.id), method: :put, autocomplete: 'off', id: 'order-form', class: 'form-horizontal' do |f| %>
     <%= partial 'orders/form', :locals => { :f => f } %>
   <% end %>
 </div>

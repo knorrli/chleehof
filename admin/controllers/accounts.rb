@@ -1,12 +1,10 @@
 Chleehof::Admin.controllers :accounts do
   get :index do
-    @title = "Accounts"
     @accounts = Account.all
     render 'accounts/index'
   end
 
   get :new do
-    @title = pat(:new_title, :model => 'account')
     @account = Account.new
     render 'accounts/new'
   end
@@ -14,18 +12,15 @@ Chleehof::Admin.controllers :accounts do
   post :create do
     @account = Account.new(params[:account])
     if @account.save
-      @title = pat(:create_title, :model => "account #{@account.id}")
       flash[:success] = pat(:create_success, :model => 'Account')
       params[:save_and_continue] ? redirect(url(:accounts, :index)) : redirect(url(:accounts, :edit, :id => @account.id))
     else
-      @title = pat(:create_title, :model => 'account')
       flash.now[:error] = pat(:create_error, :model => 'account')
       render 'accounts/new'
     end
   end
 
   get :edit, :with => :id do
-    @title = pat(:edit_title, :model => "account #{params[:id]}")
     @account = Account.find(params[:id])
     if @account
       render 'accounts/edit'
@@ -36,7 +31,6 @@ Chleehof::Admin.controllers :accounts do
   end
 
   put :update, :with => :id do
-    @title = pat(:update_title, :model => "account #{params[:id]}")
     @account = Account.find(params[:id])
     if @account
       if @account.update_attributes(params[:account])
@@ -55,7 +49,6 @@ Chleehof::Admin.controllers :accounts do
   end
 
   delete :destroy, :with => :id do
-    @title = "Accounts"
     account = Account.find(params[:id])
     if account
       if account != current_account && account.destroy
@@ -71,7 +64,6 @@ Chleehof::Admin.controllers :accounts do
   end
 
   delete :destroy_many do
-    @title = "Accounts"
     unless params[:account_ids]
       flash[:error] = pat(:destroy_many_error, :model => 'account')
       redirect(url(:accounts, :index))

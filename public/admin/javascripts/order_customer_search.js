@@ -13,7 +13,6 @@
         dataType: 'json',
         success: renderCustomerSearchResults
       })
-      showCustomerResultContainer();
     } else {
       hideCustomerResultContainer();
     }
@@ -33,21 +32,22 @@
         "<div><a href='/admin/customers/new'>Neuer Kunde registrieren?</a></div>"
     }
     $('#customer-search-results').html(resultContent);
+    showCustomerResultContainer();
   }
 
   var fillCustomerInfo = function() {
-    var customer = $(this);
-    var customerData = JSON.parse(atob(customer.data('customer')));
     hideCustomerResultContainer();
-    $("#order_first_name").val(customerData.first_name);
-    $("#order_last_name").val(customerData.last_name);
-    $("#order_company").val(customerData.company);
-    $("#order_address_1").val(customerData.address_1);
-    $("#order_address_2").val(customerData.address_2);
-    $("#order_zip_code").val(customerData.zip_code);
-    $("#order_city").val(customerData.city);
-    $("#order_phone").val(customerData.phone);
-    $("#order_email").val(customerData.email);
+    var customer = JSON.parse(atob($(this).data('customer')));
+    $("#order_customer_id").val(customer.id);
+    $("#order_first_name").val(customer.first_name);
+    $("#order_last_name").val(customer.last_name);
+    $("#order_company").val(customer.company);
+    $("#order_address_1").val(customer.address_1);
+    $("#order_address_2").val(customer.address_2);
+    $("#order_zip_code").val(customer.zip_code);
+    $("#order_city").val(customer.city);
+    $("#order_phone").val(customer.phone);
+    $("#order_email").val(customer.email);
   }
 
   var emptyCustomerResultsContainer = function() {

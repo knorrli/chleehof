@@ -3,11 +3,11 @@
     <div class="row">
       <div class="col-md-12">
         <h3>Kunde</h3>
-        <div id="customer-search">
+        <div class="search-container">
           <%= text_field_tag :customer_search, id: 'customer-search', data: {url: url(:customers, :search, format: :json), }, placeholder: 'Suche', autofocus: true, class: 'form-control input-xlarge' %>
-          <div id="customer-search-results" class="result-container hidden">
-          </div>
+          <div id="customer-search-results" class="result-container hidden"></div>
         </div>
+        <%= f.hidden_field :customer_id %>
         <% error = @order.errors.include?(:first_name) %>
         <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
           <%= f.label :first_name, :class => 'control-label' %>
@@ -66,45 +66,132 @@
           </div>
         </fieldset>
       </div>
-      <div class="col-md-6 top-buffer">
-        <%= f.submit pat(:save), :class => 'btn btn-primary' %>
-      </div>
-      <div class="col-md-6 top-buffer">
-        <%= link_to pat(:cancel), url(:orders, :index), :class => 'btn btn-danger pull-right' %>
-      </div>
     </div>
   </div>
   <div class="col-md-8">
     <h3>Produkte</h3>
-    <%= text_field_tag :product_search, id: 'product-search', placeholder: 'Suche', class: 'form-control input-xlarge' %>
-      <table class="table">
-        <thead>
-          <tr>
-            <th class="name">Name</th>
-            <th class="quantity text-right">Anzahl</th>
-            <th class="multiplier text-center"></th>
-            <th class="price text-right"><%= "Preis" %></th>
-            <th class="total-price text-right"><%= "Total" %></th>
+    <div class="search-container">
+      <%= text_field_tag :product_search, id: 'product-search', data: {url: url(:products, :search, format: :json), }, placeholder: 'Suche', class: 'form-control input-xlarge' %>
+      <div id="product-search-results" class="result-container hidden"></div>
+    </div>
+    <%# <div class="order-item-table"> %>
+    <%#   <div class="row h5"> %>
+    <%#     <div class="col-md-1 identifier">Nummer</div> %>
+    <%#     <div class="col-md-4 name">Name</div> %>
+    <%#     <div class="col-md-2 quantity text-right">Anzahl</div> %>
+    <%#     <div class="col-md-1 multiplier text-center"></div> %>
+    <%#     <div class="col-md-2 price text-right">Preis</div> %>
+    <%#     <div class="col-md-2 total-price text-right">Total</div> %>
+    <%#   </div> %>
+    <%#   <% Product.first(3).each do |product| %1> %>
+    <%#     <% f.fields_for :order_items, OrderItem.new(product: product, price: product.price) do |ff| %1> %>
+    <%#       <div class="row order-item"> %>
+    <%#         <div class="col-md-1 identifier"><%= product.identifier %1></div> %>
+    <%#         <div class="col-md-4 name"><%= product.name %1></div> %>
+    <%#         <div class="col-md-2 quantity text-right"><%= ff.text_field :quantity, class: 'form-control text-right input-xs' %1></div> %>
+    <%#         <div class="col-md-1 multiplier text-center">x</div> %>
+    <%#         <div class="col-md-2 price text-right"><%= ff.text_field :price, value: product.price, class: 'form-control text-right input-xs' %1></div> %>
+    <%#         <div class="col-md-2 total-price text-right"></div> %>
+    <%#       </div> %>
+    <%#     <% end %1> %>
+    <%#   <% end %1> %>
+    <%# </div> %>
+    <%# <div class="row"> %>
+    <%#   <div class="col-md-6 top-buffer"> %>
+    <%#     <%= f.submit pat(:save), :class => 'btn btn-primary' %1> %>
+    <%#   </div> %>
+    <%#   <div class="col-md-6 top-buffer"> %>
+    <%#     <%= link_to pat(:cancel), url(:orders, :index), :class => 'btn btn-danger pull-right' %1> %>
+    <%#   </div> %>
+    <%# </div> %>
+    <table class="table table-condensed order-item-table">
+      <thead>
+        <tr>
+          <th class="col-md-1 identifier">Nummer</th>
+          <th class="col-md-4 name">Name</th>
+          <th class="col-md-1 quantity text-right">Anzahl</th>
+          <th class="col-md-1 multiplier text-center"></th>
+          <th class="col-md-1 price text-right"><%= "Preis" %></th>
+          <th class="col-md-2 total-price text-right"><%= "Total" %></th>
+        </tr>
+      </thead>
+      <tbody class="order-items" id="order-items">
+        <% Product.first(3).each do |product| %>
+          <tr class="order-item">
+            <% f.fields_for :order_items, OrderItem.new(product: product, price: product.price_f) do |ff| %>
+              <td class="col-md-1 identifier"><%= product.identifier %></td>
+              <td class="col-md-4 name"><%= product.name %></td>
+              <td class="col-md-1 quantity text-right">
+                <%= ff.text_field :quantity, class: 'form-control input-sm text-right' %>
+              </td>
+              <td class="col-md-1 multiplier text-center">x</td>
+              <td class="col-md-1 price">
+                <%= ff.text_field :price, value: ff.object.price_f, class: 'form-control input-sm text-right' %>
+              </td>
+              <td class="col-md-2 total-price"></td>
+            <% end %>
           </tr>
-        </thead>
-        <tbody class="order-items">
-        </tbody>
+        <% end %>
+      </tbody>
 
-        <tfoot>
-          <tr class="total-row">
-            <th class="name">TOTAL</td>
-            <th class="quantity"></td>
-            <th class="multiplier"></td>
-            <th class="price text-right">
-              <span class="price_value"></span>
-              <span class="price_currency">CHF</span>
-            </td>
-            <th class="total-price text-right">
-              <span class="price_value"></span>
-              <span class="price_currency">CHF</span>
-            </td>
-          </tr>
-        </tfoot>
-      </table>
+      <tfoot>
+        <tr class="total-excl-vat-row">
+          <th class="col-md-1 identifier" colspan=2>TOTAL exkl. MwSt.</th>
+          <th class="col-md-1 quantity text-right">0</th>
+          <th class="col-md-1 multiplier text-center"></th>
+          <th class="col-md-1 price text-right"></th>
+          <th class="col-md-2 total-price text-right">
+            <span class="price_currency">CHF</span>
+            <span class="price_value">0</span>
+          </th>
+        </tr>
+        <tr class="bulk-discount-row">
+          <td class="col-md-1 identifier" colspan=2>Mengenrabatt</td>
+          <td class="col-md-1 quantity text-right"></td>
+          <td class="col-md-1 multiplier text-center"></td>
+          <td class="col-md-1 price text-right"></td>
+          <td class="col-md-2 total-price text-right">
+            <%= f.text_field :bulk_discount %>
+          </td>
+        </tr>
+        <tr class="spring-discount-row">
+          <td class="col-md-1 identifier" colspan=2>Frühlingsrabatt</td>
+          <td class="col-md-1 quantity text-right"></td>
+          <td class="col-md-1 multiplier text-center"></td>
+          <td class="col-md-1 price text-right"></td>
+          <td class="col-md-2 total-price text-right">
+            <%= f.text_field :spring_discount %>
+          </td>
+        </tr>
+        </tr>
+        <tr class="shipping-row">
+          <td class="col-md-1 identifier" colspan=2>Versandkosten</td>
+          <td class="col-md-1 quantity text-right"></td>
+          <td class="col-md-1 multiplier text-center"></td>
+          <td class="col-md-1 price text-right"></td>
+          <td class="col-md-2 total-price text-right">
+            <%= f.text_field :shipping_cost %>
+          </td>
+        <tr class="total-incl-vat-row">
+          <th class="col-md-1 identifier" colspan=2>TOTAL inkl. MwSt.</th>
+          <th class="col-md-1 quantity text-right">0</th>
+          <th class="col-md-1 multiplier text-center"></th>
+          <th class="col-md-1 price text-right"></th>
+          <th class="col-md-2 total-price text-right">
+            <span class="price_currency">CHF</span>
+            <span class="price_value">0</span>
+          </th>
+        </tr>
+        </tr>
+      </tfoot>
+    </table>
+    <div class="row">
+      <div class="col-md-6 top-buffer">
+        <%= link_to pat(:cancel), url(:orders, :index), :class => 'btn btn-danger pull-right' %>
+      </div>
+      <div class="col-md-6 top-buffer">
+        <%= f.submit pat(:save), :class => 'btn btn-primary' %>
+      </div>
+    </div>
   </div>
 </div>

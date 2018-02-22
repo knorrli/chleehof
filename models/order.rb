@@ -11,6 +11,10 @@ class Order < ActiveRecord::Base
     "Bestellung #{id}"
   end
 
+  def name
+    customer.name
+  end
+
   def contact_info
     [first_name, last_name, phone, email].compact.join(', ')
   end

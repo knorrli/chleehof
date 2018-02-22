@@ -1,11 +1,13 @@
 Chleehof::Admin.controllers :products do
 
-  get :search do
-    if params[:q].present?
-      @products = Product.search(params[:q]).ordered
+  get :search, provides: [:html, :json] do
+    redirect(url(:products, :index)) if params[:q].empty?
+    @products = Product.search(params[:q]).ordered
+    case content_type
+    when :json
+      @products.to_json
+    when :html
       render 'products/index'
-    else
-      redirect(url(:products, :index))
     end
   end
 

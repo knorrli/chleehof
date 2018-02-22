@@ -1,8 +1,9 @@
-#customer-search {
+.search-container {
   position: relative; }
 
 .result-container {
   position: absolute;
+  z-index: 2;
   background-color: white;
   width: 100%;
   border: 1px solid black;
@@ -10,7 +11,10 @@
   .result-container div {
     padding: 5px;
     border: 1px solid grey; }
-  .result-container .customer-result {
+  .result-container .search-result {
     cursor: pointer; }
+
+.order-item-table .order-item input {
+  padding: 3px; }
 
 /*# sourceMappingURL=orders.css.map */

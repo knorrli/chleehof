@@ -7,7 +7,6 @@
       <th class=header> <%= mat(:order, :name) %></th>
       <th class=header> <%= mat(:order, :phone) %></th>
       <th class=header> <%= mat(:order, :email) %></th>
-      <th class=header> <%= mat(:order, :comment) %></th>
       <th class=header> <%= mat(:order, :created_at) %></th>
       <th class="header list-row-action-header">
         <%= link_to "Neue Bestellung erfassen", url(:orders, :new), class: 'btn btn-primary' %>
@@ -21,7 +20,6 @@
         <td class=list-column> <%= link_to order.name, url(:orders, :edit, id: order.id) %> </td>
         <td class=list-column> <%= order.phone %> </td>
         <td class=list-column> <%= order.email %> </td>
-        <td class=list-column> <%= order.comment %> </td>
         <td class=list-column> <%= order.updated_at.strftime('%d.%m.%Y %H:%M') %></td>
         <td class="list-column">
           <% form_tag url(:orders, :destroy, :id => order.id), method: :delete, class: 'destroy-order' do %>

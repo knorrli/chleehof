@@ -86,13 +86,11 @@
     </div>
 
     <div class="row top-buffer">
-      <div class="col-md-4">
-        <%= f.submit pat(:save), :class => 'btn btn-primary' %>
+      <div class="col-md-6">
+        <%= link_to pat(:cancel), url(:customers, :index), :class => 'btn btn-danger' %>
       </div>
-      <div class="col-md-4">
-      </div>
-      <div class="col-md-4">
-        <%= link_to pat(:cancel), url(:customers, :index), :class => 'btn btn-danger pull-right' %>
+      <div class="col-md-6">
+        <%= f.submit pat(:save), :class => 'btn btn-primary pull-right' %>
       </div>
     </div>
 

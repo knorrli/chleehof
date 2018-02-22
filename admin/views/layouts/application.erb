@@ -13,7 +13,7 @@
     <%= stylesheet_link_tag 'bootstrap', 'application', 'orders' %>
   </head>
   <body>
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar navbar-inverted">
       <div class=navbar-inner>
         <div class=container>
           <%= link_to 'Neue Bestellung', url(:orders, :new), :class => 'navbar-brand' %>
@@ -46,6 +46,6 @@
       </div>
     </div>
 
-    <%= javascript_include_tag 'jquery-1.11.0.min', 'bootstrap/bootstrap.min', :application, :products, :orders, :customers, :order_customer_search %>
+    <%= javascript_include_tag 'jquery-1.11.0.min', 'bootstrap/bootstrap.min', :application, :products, :orders, :customers, :order_customer_search, :order_product_search %>
   </body>
 </html>

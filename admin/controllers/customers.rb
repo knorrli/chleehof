@@ -1,7 +1,8 @@
 Chleehof::Admin.controllers :customers do
 
-  get :search, :provides => [:html, :json] do
-    @customers = Customer.search params[:q]
+  get :search, provides: [:html, :json] do
+    redirect(url(:customers, :index)) if params[:q].empty?
+    @customers = Customer.search(params[:q]).ordered
     case content_type
     when :json
       @customers.to_json
@@ -32,7 +33,6 @@ Chleehof::Admin.controllers :customers do
       flash[:success] = "Kunde #{@customer.name} wurde gespeichert"
       redirect(url_for(:customers, :index))
     else
-      @title = pat(:create_title, :model => 'customer')
       flash.now[:error] = "Kunde #{@customer.name} kann nicht gespeichert werden"
       render 'customers/new'
     end
