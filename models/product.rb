@@ -21,4 +21,8 @@ class Product < ActiveRecord::Base
     return nil unless price
     options[:currency] ? ("CHF %.2f" % price) : ('%.2f' % price)
   end
+
+  def as_json(options)
+    super.merge(price_f: price_f)
+  end
 end

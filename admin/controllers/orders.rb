@@ -6,6 +6,10 @@ Chleehof::Admin.controllers :orders do
 
   get :new do
     @order = Order.new
+    if customer_id = params[:customer_id]
+      @order.assign_customer_attributes Customer.find_by(id: customer_id)
+      puts @order.inspect
+    end
     render 'orders/new'
   end
 

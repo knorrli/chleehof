@@ -18,7 +18,7 @@
     </li>
   <% end %>
 </ul>
-<table class="table table-hover">
+<table class="table table-hover table-condensed">
   <thead>
     <tr>
       <th class=header> <%= mat(:customer, :name) %></th>
@@ -27,8 +27,8 @@
       <th class=header> <%= mat(:customer, :city) %></th>
       <th class=header> <%= mat(:customer, :phone) %></th>
       <th class=header> <%= mat(:customer, :email) %></th>
-      <th class="header list-row-action-header">
-        <%= link_to "Neuer Kunde erfassen", url(:customers, :new), class: 'btn btn-primary' %>
+      <th class="header list-row-action-header" colspan=2>
+        <%= link_to "Neuer Kunde erfassen", url(:customers, :new), class: 'btn btn-primary pull-right' %>
       </th>
     </tr>
   </thead>
@@ -42,6 +42,9 @@
         <td class=list-column> <%= customer.city %> </td>
         <td class=list-column> <%= customer.phone %> </td>
         <td class=list-column> <%= mail_to customer.email, customer.email %> </td>
+        <td class="list-column">
+          <%= link_to "Bestellung", url_for(:orders, :new, customer_id: customer.id), class: 'btn btn-default' %>
+        </td>
         <td class="list-column">
           <% form_tag url_for(:customers, :destroy, :id => customer.id), method: :delete, class: 'destroy-customer' do %>
             <%= submit_tag pat(:delete), :class =>'btn btn-danger pull-right' %>
