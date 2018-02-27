@@ -9,5 +9,10 @@ de:
         email: Email
         crypted_password: Crypted password
         role: Role
+        vat_percentage: Prozentsatz
+        bulk_discount_percentage: Prozentsatz
+        bulk_discount_treshold: Untere Grenze
+        spring_discount_percentage: Prozentsatz
+        spring_discount_active: Aktiv
         created_at: Created at
         updated_at: Updated at

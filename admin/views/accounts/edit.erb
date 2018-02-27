@@ -1,10 +1,62 @@
-<ul class="nav nav-tabs">
-  <li> <%= link_to tag_icon(:list, pat(:list)), url(:accounts, :index) %></li>
-  <li> <%= link_to tag_icon(:plus, pat(:new)), url(:accounts, :new) %></li>
-  <li class="active"> <%= link_to tag_icon(:edit, pat(:edit)), url(:accounts, :edit, :id => @account.id) %></li>
-</ul>
-<div class="tabs-content">
+<h1>Einstellungen</h1>
+<div class="col-md-4">
   <% form_for :account, url(:accounts, :update, :id => @account.id), :method => :put, :class => 'form-horizontal' do |f| %>
-    <%= partial 'accounts/form', :locals => { :f => f } %>
+    <h4>Mehrwertsteuer</h4>
+    <div class="form-group">
+      <%= f.label :vat_percentage, class: 'col-sm-5 control-label' %>
+      <div class="col-sm-7">
+        <div class="input-group">
+          <%= f.text_field :vat_percentage, class: 'form-control text-right' %>
+          <span class="input-group-addon">%</span>
+        </div>
+      </div>
+    </div>
+    <h4>Mengenrabatt</h4>
+    <div class="form-group">
+      <%= f.label :bulk_discount_percentage, class: 'col-sm-5 control-label' %>
+      <div class="col-sm-7">
+        <div class="input-group">
+          <%= f.text_field :bulk_discount_percentage, class: 'form-control text-right' %>
+          <span class="input-group-addon">%</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :bulk_discount_treshold, class: 'col-sm-5 control-label' %>
+      <div class="col-sm-7">
+        <div class="input-group">
+          <%= f.text_field :bulk_discount_treshold, class: 'form-control text-right' %>
+          <span class="input-group-addon">CHF</span>
+        </div>
+      </div>
+    </div>
+    <h4>Frühlingsrabatt</h4>
+    <div class="form-group">
+      <%= f.label :spring_discount_active, class: 'col-sm-5 control-label' %>
+      <div class="col-sm-7">
+        <div class="checkbox">
+          <label>
+            <%= f.check_box :spring_discount_active %>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :spring_discount_percentage, class: 'col-sm-5 control-label' %>
+      <div class="col-sm-7">
+        <div class="input-group">
+          <%= f.text_field :spring_discount_percentage, class: 'form-control text-right' %>
+          <span class="input-group-addon">%</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-6">
+        <%= link_to pat(:cancel), url(:orders, :new), :class => 'btn btn-danger' %>
+      </div>
+      <div class="col-sm-6 pull-right">
+        <%= f.submit pat(:save), :class => 'btn btn-primary pull-right' %>
+      </div>
+    </div>
   <% end %>
 </div>

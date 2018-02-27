@@ -42,7 +42,6 @@
       $("#order-items").append(item);
     }
     $(".order-items").find("#order-item-"+product.id+" .quantity_input").focus();
-
   }
 
   var showProductResultContainer = function() {
@@ -58,14 +57,14 @@
       `<tr class="order-item" id="order-item-${product.id}">` +
       `<td class="col-md-1 identifier">${product.identifier}</td>` +
       `<td class="col-md-4 name">${product.name}</td>` +
-      `<td class="col-md-1 quantity text-right">` +
+      `<td class="col-md-1 quantity text-right form-group has-error">` +
       `<input type="text" name="order[order_items_attributes][${product.id}][quantity]" id="order_order_items_attributes_${product.id}_quantity" class="quantity_input form-control input-sm text-right">` +
       `</td>` +
       `<td class="col-md-1 multiplier text-center">x</td>` +
       `<td class="col-md-1 price">` +
-      `<input type="text" name="order[order_items_attributes][${product.id}][price]" value="${product.price}" id="order_order_items_attributes_${product.id}_price" class="price_input form-control input-sm text-right">` +
+      `<input type="text" name="order[order_items_attributes][${product.id}][price]" value="${product.price_f}" id="order_order_items_attributes_${product.id}_price" class="price_input form-control input-sm text-right">` +
       `</td>` +
-      `<td class="col-md-2 total-price"></td>` +
+      `<td class="col-md-2 total-price text-right">0</td>` +
       `</tr>`
     return orderItemHTML
   }

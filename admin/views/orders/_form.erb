@@ -81,82 +81,81 @@
           <th class="col-md-4 name">Name</th>
           <th class="col-md-1 quantity text-right">Anzahl</th>
           <th class="col-md-1 multiplier text-center"></th>
-          <th class="col-md-1 price text-right"><%= "Preis" %></th>
-          <th class="col-md-2 total-price text-right"><%= "Total" %></th>
+          <th class="col-md-1 price text-right">Preis</th>
+          <th class="col-md-2 total-price text-right">Total CHF</th>
         </tr>
       </thead>
       <tbody class="order-items" id="order-items">
-        <%# Rendered with JS %>
-        <%# <tr class="order-item" id="order-item-3"> %>
-        <%#   <td class="col-md-1 identifier">2</td> %>
-        <%#   <td class="col-md-4 name">Früchte- Gemüsekorb gross 3.5 kg</td> %>
-        <%#   <td class="col-md-1 quantity text-right"> %>
-        <%#     <input type="text" name="order[order_items_attributes][0][quantity]"  id="order_order_items_attributes_0_quantity" class="quantity_input form-control input-sm text-right"> %>
-        <%#   </td> %>
-        <%#   <td class="col-md-1 multiplier text-center">x</td> %>
-        <%#   <td class="col-md-1 price"> %>
-        <%#     <input type="text" name="order[order_items_attributes][0][price]" value="17.50" id="order_order_items_attributes_0_price" class="price_input form-control input-sm text-right"> %>
-        <%#   </td> %>
-        <%#   <td class="col-md-2 total-price"></td> %>
-        <%# </tr> %>
+        <%# Rendered with JS in order_product_search.js %>
       </tbody>
 
       <tfoot>
-        <tr class="total-excl-vat-row">
+        <tr id="total-excl-vat-row">
           <th class="col-md-1 identifier" colspan=2>TOTAL exkl. MwSt.</th>
           <th class="col-md-1 quantity text-right">0</th>
           <th class="col-md-1 multiplier text-center"></th>
           <th class="col-md-1 price text-right"></th>
           <th class="col-md-2 total-price text-right">
             <span class="price_currency">CHF</span>
-            <span class="price_value">0</span>
+            <span class="price_value">0.00</span>
           </th>
         </tr>
-        <tr class="bulk-discount-row">
-          <td class="col-md-1 identifier" colspan=2>Mengenrabatt</td>
+        <tr id="bulk-discount-row">
+          <td class="col-md-1 identifier" colspan=2><%= "Mengenrabatt #{current_account.bulk_discount_percentage}%" %></td>
           <td class="col-md-1 quantity text-right"></td>
           <td class="col-md-1 multiplier text-center"></td>
           <td class="col-md-1 price text-right"></td>
           <td class="col-md-2 total-price text-right">
-            <%= f.text_field :bulk_discount %>
+            <div class="input-group">
+              <span class="input-group-addon">–</span>
+              <%= f.text_field :bulk_discount, class: 'form-control input-sm' %>
+            </div>
           </td>
         </tr>
-        <tr class="spring-discount-row">
-          <td class="col-md-1 identifier" colspan=2>Frühlingsrabatt</td>
-          <td class="col-md-1 quantity text-right"></td>
-          <td class="col-md-1 multiplier text-center"></td>
-          <td class="col-md-1 price text-right"></td>
-          <td class="col-md-2 total-price text-right">
-            <%= f.text_field :spring_discount %>
-          </td>
+        <% if current_account.spring_discount_active? %>
+          <tr id="spring-discount-row">
+            <td class="col-md-1 identifier" colspan=2>Frühlingsrabatt</td>
+            <td class="col-md-1 quantity text-right"></td>
+            <td class="col-md-1 multiplier text-center"></td>
+            <td class="col-md-1 price text-right"></td>
+            <td class="col-md-2 total-price text-right">
+              <div class="input-group">
+                <span class="input-group-addon">–</span>
+                <%= f.text_field :spring_discount, class: 'form-control input-sm' %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
         </tr>
-        </tr>
-        <tr class="shipping-row">
+        <tr id="shipping-row">
           <td class="col-md-1 identifier" colspan=2>Versandkosten</td>
           <td class="col-md-1 quantity text-right"></td>
           <td class="col-md-1 multiplier text-center"></td>
           <td class="col-md-1 price text-right"></td>
           <td class="col-md-2 total-price text-right">
-            <%= f.text_field :shipping_cost %>
+            <div class="input-group">
+              <span class="input-group-addon">+</span>
+              <%= f.text_field :shipping_cost, class: 'form-control input-sm' %>
+            </div>
           </td>
-        <tr class="total-incl-vat-row">
-          <th class="col-md-1 identifier" colspan=2>TOTAL inkl. MwSt.</th>
+        <tr id="total-incl-vat-row">
+          <th class="col-md-1 identifier" colspan=2><%= "TOTAL inkl. #{current_account.vat_percentage}% MwSt." %></th>
           <th class="col-md-1 quantity text-right">0</th>
           <th class="col-md-1 multiplier text-center"></th>
           <th class="col-md-1 price text-right"></th>
           <th class="col-md-2 total-price text-right">
             <span class="price_currency">CHF</span>
-            <span class="price_value">0</span>
+            <span class="price_value">0.00</span>
           </th>
         </tr>
         </tr>
       </tfoot>
     </table>
-    <div class="row">
-      <div class="col-md-6 top-buffer">
+    <div class="row top-buffer">
+      <div class="col-md-6">
         <%= link_to pat(:cancel), url(:orders, :index), :class => 'btn btn-danger' %>
       </div>
-      <div class="col-md-6 top-buffer">
+      <div class="col-md-6">
         <%= f.submit pat(:save), :class => 'btn btn-primary pull-right' %>
       </div>
     </div>

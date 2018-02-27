@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 14) do
+ActiveRecord::Schema.define(version: 15) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -18,8 +18,13 @@ ActiveRecord::Schema.define(version: 14) do
     t.string   "email"
     t.string   "crypted_password"
     t.string   "role"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.decimal  "vat_percentage",             precision: 8, scale: 2
+    t.decimal  "bulk_discount_percentage",   precision: 8, scale: 2
+    t.integer  "bulk_discount_treshold"
+    t.boolean  "spring_discount_active"
+    t.decimal  "spring_discount_percentage", precision: 8, scale: 2
   end
 
   create_table "customers", force: :cascade do |t|
