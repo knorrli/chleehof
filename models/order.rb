@@ -17,6 +17,10 @@ class Order < ActiveRecord::Base
     "Bestellung #{id}"
   end
 
+  def customer_name
+    customer.name
+  end
+
   def customer_info
     "#{customer.name}, #{customer.address_1}, #{customer.zip_code} #{customer.city}"
   end
@@ -27,6 +31,7 @@ class Order < ActiveRecord::Base
 
   def assign_customer_attributes(customer)
     assign_attributes(
+      customer_id: customer.id,
       first_name: customer.first_name,
       last_name: customer.last_name,
       address_1: customer.address_1,
@@ -48,7 +53,7 @@ class Order < ActiveRecord::Base
     order_items.count
   end
 
-  def total_item_quantity
+  def total_quantity
     order_items.sum &:quantity
   end
 
@@ -60,7 +65,16 @@ class Order < ActiveRecord::Base
     total_item_price
   end
 
+  def total_price
+    current_total = total_item_price
+    current_total += bulk_discount if bulk_discount
+    current_total += spring_discount if spring_discount
+    current_total += shipping_cost if shipping_cost
+    current_total += vat_amount
+    (current_total*20.0).ceil/20.0
+  end
+
   def total_price_f
-    total_item_price - bulk_discount - spring_discount + shipping_cost + vat_amount
+    '%.2f' % total_price
   end
 end

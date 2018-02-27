@@ -22,6 +22,6 @@ class OrderItem < ActiveRecord::Base
   end
 
   def total_price_f
-    '%.2f' % price
+    '%.2f' % total_price
   end
 end

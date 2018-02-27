@@ -1,100 +1,102 @@
-<div class="row">
-  <div class="col-md-4">
-    <% error = @customer.errors.include?(:first_name) %>
-    <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
-      <%= f.label :first_name, :class => 'control-label' %>
-      <div class='controls'>
-        <%= f.text_field :first_name, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true %>
-      </div>
-    </fieldset>
-
-    <% error = @customer.errors.include?(:last_name) %>
-    <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
-      <%= f.label :last_name, :class => 'control-label' %>
-      <div class='controls'>
-        <%= f.text_field :last_name, :class => 'form-control input-xlarge input-with-feedback' %>
-      </div>
-    </fieldset>
-
-    <% error = @customer.errors.include?(:company) %>
-    <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
-      <%= f.label :company, :class => 'control-label' %>
-      <div class='controls'>
-        <%= f.text_field :company, :class => 'form-control input-xlarge input-with-feedback' %>
-      </div>
-    </fieldset>
-
-
-    <% error = @customer.errors.include?(:address_1) %>
-    <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
-      <%= f.label :address_1, :class => 'control-label' %>
-      <div class='controls'>
-        <%= f.text_field :address_1, :class => 'form-control input-xlarge input-with-feedback' %>
-      </div>
-    </fieldset>
-
-    <% error = @customer.errors.include?(:address_2) %>
-    <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
-      <%= f.label :address_2, :class => 'control-label' %>
-      <div class='controls'>
-        <%= f.text_field :address_2, :class => 'form-control input-xlarge input-with-feedback' %>
-      </div>
-    </fieldset>
-
-    <% error = @customer.errors.include?(:zip_code) %>
-    <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
-      <%= f.label :zip_code, :class => 'control-label' %>
-      <div class='controls'>
-        <%= f.text_field :zip_code, :class => 'form-control input-xlarge input-with-feedback' %>
-      </div>
-    </fieldset>
-
-    <% error = @customer.errors.include?(:city) %>
-    <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
-      <%= f.label :city, :class => 'control-label' %>
-      <div class='controls'>
-        <%= f.text_field :city, :class => 'form-control input-xlarge input-with-feedback' %>
-      </div>
-    </fieldset>
+<% error = @customer.errors.include?(:first_name) %>
+<fieldset class='form-group control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :first_name, :class => 'col-md-5 control-label' %>
+  <div class='col-md-7 controls'>
+    <%= f.text_field :first_name, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true %>
   </div>
-  <div class="col-md-4">
+</fieldset>
 
-    <% error = @customer.errors.include?(:phone) %>
-    <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
-      <%= f.label :phone, :class => 'control-label' %>
-      <div class='controls'>
-        <%= f.telephone_field :phone, :class => 'form-control input-xlarge input-with-feedback' %>
-      </div>
-    </fieldset>
+<% error = @customer.errors.include?(:last_name) %>
+<fieldset class='form-group control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :last_name, :class => 'col-md-5 control-label' %>
+  <div class='col-md-7 controls'>
+    <%= f.text_field :last_name, :class => 'form-control input-xlarge input-with-feedback' %>
+  </div>
+</fieldset>
 
-    <% error = @customer.errors.include?(:email) %>
-    <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
-      <%= f.label :email, :class => 'control-label' %>
-      <div class='controls'>
-        <%= f.email_field :email, :class => 'form-control input-xlarge input-with-feedback' %>
-      </div>
-    </fieldset>
+<% error = @customer.errors.include?(:company) %>
+<fieldset class='form-group control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :company, :class => 'col-md-5 control-label' %>
+  <div class='col-md-7 controls'>
+    <%= f.text_field :company, :class => 'form-control input-xlarge input-with-feedback' %>
+  </div>
+</fieldset>
 
-    <div class="controls">
-      <%= f.label :pay_cash, :class => 'control-label' %>
-      <%= f.check_box :pay_cash, :class => 'checkbox inline' %>
+
+<% error = @customer.errors.include?(:address_1) %>
+<fieldset class='form-group control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :address_1, :class => 'col-md-5 control-label' %>
+  <div class='col-md-7 controls'>
+    <%= f.text_field :address_1, :class => 'form-control input-xlarge input-with-feedback' %>
+  </div>
+</fieldset>
+
+<% error = @customer.errors.include?(:address_2) %>
+<fieldset class='form-group control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :address_2, :class => 'col-md-5 control-label' %>
+  <div class='col-md-7 controls'>
+    <%= f.text_field :address_2, :class => 'form-control input-xlarge input-with-feedback' %>
+  </div>
+</fieldset>
+
+<% error = @customer.errors.include?(:zip_code) %>
+<fieldset class='form-group control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :zip_code, :class => 'col-md-5 control-label' %>
+  <div class='col-md-7 controls'>
+    <%= f.text_field :zip_code, :class => 'form-control input-xlarge input-with-feedback' %>
+  </div>
+</fieldset>
+
+<% error = @customer.errors.include?(:city) %>
+<fieldset class='form-group control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :city, :class => 'col-md-5 control-label' %>
+  <div class='col-md-7 controls'>
+    <%= f.text_field :city, :class => 'form-control input-xlarge input-with-feedback' %>
+  </div>
+</fieldset>
+<% error = @customer.errors.include?(:phone) %>
+<fieldset class='form-group control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :phone, :class => 'col-md-5 control-label' %>
+  <div class='col-md-7 controls'>
+    <%= f.telephone_field :phone, :class => 'form-control input-xlarge input-with-feedback' %>
+  </div>
+</fieldset>
+
+<% error = @customer.errors.include?(:email) %>
+<fieldset class='form-group control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :email, :class => 'col-md-5 control-label' %>
+  <div class='col-md-7 controls'>
+    <%= f.email_field :email, :class => 'form-control input-xlarge input-with-feedback' %>
+  </div>
+</fieldset>
+
+<div class="form-group controls">
+  <%= f.label :pay_cash, :class => 'col-sm-5 control-label' %>
+  <div class="col-sm-7">
+    <div class="checkbox">
+      <label>
+        <%= f.check_box :pay_cash %>
+      </label>
     </div>
-
-    <div class="controls">
-      <%= f.label :pick_up, :class => 'control-label' %>
-      <%= f.check_box :pick_up, :class => 'checkbox inline' %>
-    </div>
-
-    <div class="row top-buffer">
-      <div class="col-md-6">
-        <%= link_to pat(:cancel), url(:customers, :index), :class => 'btn btn-danger' %>
-      </div>
-      <div class="col-md-6">
-        <%= f.submit pat(:save), :class => 'btn btn-primary pull-right' %>
-      </div>
-    </div>
-
   </div>
 </div>
 
+<div class="form-group controls">
+  <%= f.label :pick_up, :class => 'col-sm-5 control-label' %>
+  <div class="col-sm-7">
+    <div class="checkbox">
+      <label>
+        <%= f.check_box :pick_up %>
+      </label>
+    </div>
+  </div>
+</div>
 
+<div class="row top-buffer">
+  <div class="col-md-6">
+    <%= link_to pat(:cancel), url(:customers, :index), :class => 'btn btn-danger' %>
+  </div>
+  <div class="col-md-6">
+    <%= f.submit pat(:save), :class => 'btn btn-primary pull-right' %>
+  </div>
+</div>

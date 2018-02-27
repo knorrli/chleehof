@@ -11,14 +11,11 @@ Chleehof::Admin.controllers :customers do
     end
   end
 
-
   get :index do
-    if letter = params[:letter]
-      letter = letter.downcase
-      @customers = Customer.where('lower(last_name) LIKE ? OR lower(company) LIKE ?', "#{letter}%", "#{letter}%").ordered
-    else
-      @customers = Customer.order(:created_at).limit(20)
-    end
+    letter = params[:letter] || 'A'
+    params[:letter] = letter
+    letter = letter.downcase
+    @customers = Customer.where('lower(last_name) LIKE ? OR lower(company) LIKE ?', "#{letter}%", "#{letter}%").ordered
     render 'customers/index'
   end
 

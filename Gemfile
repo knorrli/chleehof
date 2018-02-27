@@ -23,8 +23,6 @@ gem 'sass'
 gem 'erubis', '~> 2.7.0'
 gem 'activerecord', '>= 3.1', :require => 'active_record'
 gem 'pg'
-gem 'paperclip'
-gem 'paperclip-rack', :require => 'paperclip/rack'
 gem 'prawn'
 gem 'prawn-table'
 

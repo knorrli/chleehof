@@ -77,11 +77,11 @@
     <table class="table table-condensed order-item-table">
       <thead>
         <tr>
-          <th class="col-md-1 identifier">Nummer</th>
-          <th class="col-md-4 name">Name</th>
-          <th class="col-md-1 quantity text-right">Anzahl</th>
-          <th class="col-md-2 price text-right">Preis</th>
-          <th class="col-md-2 total-price text-right">Total CHF</th>
+          <th class="col-md-1 identifier"><%= mat(:order, :id) %></th>
+          <th class="col-md-4 name"><%= mat(:order, :name) %></th>
+          <th class="col-md-1 quantity text-right"><%= mat(:order, :quantity) %></th>
+          <th class="col-md-2 price text-right"><%= mat(:order, :price) %></th>
+          <th class="col-md-2 total-price text-right"><%= mat(:order, :total_price) %></th>
         </tr>
       </thead>
       <tbody class="order-items" id="order-items">

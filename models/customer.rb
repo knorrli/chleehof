@@ -10,7 +10,7 @@ class Customer < ActiveRecord::Base
   end
 
   def self.ordered
-    order(:company, :last_name, :first_name)
+    order(:last_name, :company, :first_name)
   end
 
   def name

@@ -6165,6 +6165,8 @@ button.close {
   width: 100%;
   border: 1px solid black;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.9); }
+  .result-container .search-result:hover {
+    background-color: lightgrey; }
   .result-container div {
     padding: 5px;
     border: 1px solid grey; }

@@ -12,26 +12,35 @@
     <%= stylesheet_link_tag "bootstrap", "application" %>
   </head>
   <body>
-    <% form_tag url(:sessions, :create), :class=>"login form-horizontal" do %>
-      <div class="login-body modal-body">
-
-        <%= {:error => 'danger', :warning => 'warning', :success => 'success', :notice => 'info'}.map { |type, class_name| flash_tag(type, :class => "alert alert-#{class_name} fade in", :bootstrap => true) }.join.html_safe %>
-
-        <div class="form-group">
-          <label for="email" class="col-lg-2 control-label"><%= pat('login.email') %></label>
-          <div class="col-lg-10"><%= email_field_tag :email, :id => :email, :value => params[:email], :autofocus => true, :class => 'form-control' %></div>
+    <div class="container">
+      <h2>Login</h2>
+      <% form_tag url(:sessions, :create), :class=>"login form-horizontal" do %>
+        <div class="col-md-3">
         </div>
+        <div class="col-md-5">
 
-        <div class="form-group">
-          <label for="password" class="col-lg-2 control-label"><%= pat('login.password') %></label>
-          <div class="col-lg-10"><%= password_field_tag :password, :id => :password, :class => 'form-control' %></div>
+          <%= {:error => 'danger', :warning => 'warning', :success => 'success', :notice => 'info'}.map { |type, class_name| flash_tag(type, :class => "alert alert-#{class_name} fade in", :bootstrap => true) }.join.html_safe %>
+
+          <div class="form-group">
+            <%= label_tag :email, class: 'col-md-3 control-label' %>
+            <div class="col-md-9">
+              <%= email_field_tag :email, :id => :email, :value => params[:email], :autofocus => true, :class => 'form-control' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= label_tag :password, class: 'col-md-3 control-label' %>
+            <div class="col-md-9">
+              <%= password_field_tag :password, :id => :password, :class => 'form-control' %>
+            </div>
+          </div>
+
+          <%= link_to pat('cancel'), '/', class: 'btn btn-danger' %>
+
+          <%= submit_tag(pat('login.sign_in'), :class => "btn btn-primary pull-right") %>
         </div>
-
-        <%= link_to pat('cancel'), '/', class: 'btn btn-danger' %>
-
-        <%= submit_tag(pat('login.sign_in'), :class => "btn btn-primary pull-right") %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
     <%= javascript_include_tag 'jquery-1.11.0.min', (Padrino.env == :production ? 'bootstrap/bootstrap.min' : %w[bootstrap/affix bootstrap/alert bootstrap/button bootstrap/carousel bootstrap/collapse bootstrap/dropdown  bootstrap/tooltip bootstrap/transition  bootstrap/modal bootstrap/popover bootstrap/scrollspy bootstrap/tab]), :application %>
   </body>
 </html>

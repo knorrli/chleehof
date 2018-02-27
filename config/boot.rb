@@ -50,13 +50,15 @@ Padrino.dependency_paths.unshift Padrino.root('config/initializers/*.rb')
 #
 Padrino.before_load do
   I18n.locale = :de
-  Paperclip.options[:logger] = Padrino.logger
+  Padrino.dependency_paths << Padrino.root('admin/services/*.rb')
 end
 
 ##
 # Add your after (RE)load hooks here
 #
 Padrino.after_load do
+  Chleehof::App.prerequisites << Padrino.root('admin/services/*.rb')
+  Chleehof::Admin.prerequisites << Padrino.root('admin/services/*.rb')
 end
 
 Padrino.load!

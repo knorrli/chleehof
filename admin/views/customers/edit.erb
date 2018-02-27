@@ -1,4 +1,40 @@
-<h1>Neuer Kunde erfassen</h1>
 <% form_for @customer, url_for(:customers, :update, :id => @customer.id), method: :put, class: 'form-horizontal' do |f| %>
-  <%= partial 'customers/form', :locals => { :f => f } %>
+  <div class="row">
+    <div class="col-md-4">
+      <h2>Kunde bearbeiten</h2>
+      <%= partial 'customers/form', :locals => { :f => f } %>
+    </div>
+    <div class="col-md-8">
+      <h2>Bestellungen</h2>
+      <table id=list class="table table-hover">
+        <thead>
+          <tr>
+            <th class="header"><%= mat(:order, :created_at) %></th>
+            <th class="header"><%= mat(:order, :id) %></th>
+            <th class="header text-right"> <%= mat(:order, :quantity) %></th>
+            <th class="header text-right"> <%= mat(:order, :price) %></th>
+            <th class="header list-row-action-header">
+              <%= link_to "Neue Bestellung erfassen", url(:orders, :new), class: 'btn btn-primary pull-right' %>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @customer.orders.each do |order| %>
+            <tr class=list-row>
+              <td class="list-column"><%= order.created_at.strftime('%d.%m.%Y') %></td>
+              <td class="list-column"><%= link_to order, url_for(:orders, :edit, id: order.id) %></td>
+              <td class="list-column text-right"> <%= order.total_quantity %> </td>
+              <td class="list-column text-right"> <%= order.total_price_f %> </td>
+              <td class="list-column">
+                <% form_tag url(:orders, :destroy, :id => order.id), method: :delete, class: 'destroy-order' do %>
+                  <%= submit_tag pat(:delete), :class =>'btn btn-danger pull-right' %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 <% end %>

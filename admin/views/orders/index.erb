@@ -4,6 +4,7 @@
 <table id=list class="table table-hover">
   <thead>
     <tr>
+      <th class="header"><%= mat(:order, :created_at) %></th>
       <th class="header"><%= mat(:order, :id) %></th>
       <th class="header"> <%= mat(:order, :customer) %></th>
       <th class="header text-right"> <%= mat(:order, :quantity) %></th>
@@ -17,9 +18,10 @@
   <tbody>
     <% @orders.each do |order| %>
       <tr class=list-row>
-        <td class="list-column"><%= order.id %></td>
-        <td class="list-column"> <%= link_to order.customer_info, url(:orders, :edit, id: order.id) %> </td>
-        <td class="list-column text-right"> <%= order.total_item_quantity %> </td>
+        <td class="list-column"><%= order.created_at.strftime('%d.%m.%Y') %></td>
+        <td class="list-column"><%= link_to order, url_for(:orders, :edit, id: order.id) %></td>
+        <td class="list-column"> <%= link_to order.customer_name, url(:customers, :edit, id: order.customer_id) %> </td>
+        <td class="list-column text-right"> <%= order.total_quantity %> </td>
         <td class="list-column text-right"> <%= order.total_price_f %> </td>
         <td class="list-column">
           <% form_tag url(:orders, :destroy, :id => order.id), method: :delete, class: 'destroy-order' do %>

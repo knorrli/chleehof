@@ -16,12 +16,17 @@ Chleehof::Admin.controllers :orders do
   post :create do
     @order = Order.new(params[:order])
     if @order.save
-      flash[:success] = "Bestellung für #{@order.name} wurde gespeichert"
-      redirect(url(:orders, :index))
+      flash[:success] = "Bestellung für #{@order.customer_name} wurde gespeichert"
+      redirect(url(:orders, :show, id: @order.id, format: :pdf))
     else
       flash.now[:error] = "Bestellung konnte nicht gespeichert werden"
       render 'orders/new'
     end
+  end
+
+  get :show, with: :id, provides: :pdf do
+    @order = Order.find(params[:id])
+    OrderPdf.new(@order).render
   end
 
   get :edit, :with => :id do
@@ -38,8 +43,8 @@ Chleehof::Admin.controllers :orders do
     @order = Order.find(params[:id])
     if @order
       if @order.update_attributes(params[:order])
-        flash[:success] = "Bestellung für #{@order.name} wurde angepasst"
-        redirect(url(:orders, :edit, id: @order.id))
+        flash[:success] = "Bestellung für #{@order.customer_name} wurde angepasst"
+        redirect(url(:orders, :show, id: @order.id, format: :pdf))
       else
         flash.now[:error] = "Bestellung konnte nicht angepasst werden"
         render 'orders/edit'

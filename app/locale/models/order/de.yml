@@ -13,8 +13,10 @@ de:
         city: Stadt
         phone: Telefon
         email: Email
+        name: Artikelbezeichnung
         quantity: Bestellmenge
         price: Preis CHF
+        total_price: Total CHF
         customer: Kunde
         created_at: Erstellt Am
         updated_at: Angepasst Am

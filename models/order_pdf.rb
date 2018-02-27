@@ -1,9 +1,13 @@
 class OrderPdf
   include Prawn::View
 
+  def initialize(order)
+    @order = order
+  end
+
   def render
     header
-    products
+    line_items
 
     number_pages "<page>/<total>", align: :center, style: :bold, at: [bounds.left, 0]
 
@@ -18,28 +22,24 @@ class OrderPdf
     text "034 445 53 89, fam_luethi@hotmail.com", align: :center
   end
 
-  def products
-    Product.products.each do |product|
+  def line_items
+    table = []
 
-      table = []
-      header = ["Anz.", "Artikelbezeichnung", "CHF/Stk.", "Total"]
-      table << header
-      product.variants.each do |variant, price|
-        table << ["", variant.to_s, "#{'%.02f' % price}", ""]
-      end
-      table = make_table table, column_widths: { 0 => 60, 1 => (bounds.width - 180), 2 => 60, 3 => 60 }, cell_style: { padding: [1, 5, 2, 5] }
-      table.row(0).style font_style: :bold
-      table.column(2).style align: :right
+    header = ["Artikelbezeichnung", "Anzahl", "Preis", "Total CHF"]
+    table << header
 
-      if cursor < (table.height + 10)
-        start_new_page
-      end
-      font_size 12
-      text product.name, style: :bold
-      font_size 10
-      table.draw
-
-      move_down 10
+    @order.order_items.each do |item|
+      table << [item.name, item.quantity, item.price, item.total_price_f]
     end
+
+    table = make_table table, width: bounds.width
+    table.row(0).style font_style: :bold
+    table.column(1).style align: :right
+    table.column(2).style align: :right
+    table.column(3).style align: :right
+
+    table.draw
+
+    move_down 10
   end
 end
