@@ -8,6 +8,7 @@ ActiveRecord::Base.configurations[:production] = {
   :database  => 'chleehof',
   :username  => 'chleehof',
   :password  => '',
+  :host      => 'localhost',
   :port      => 5432
 
 }
