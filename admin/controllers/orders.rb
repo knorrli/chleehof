@@ -1,6 +1,6 @@
 Chleehof::Admin.controllers :orders do
   get :index do
-    @orders = Order.all
+    @orders = Order.ordered
     render 'orders/index'
   end
 
@@ -16,10 +16,10 @@ Chleehof::Admin.controllers :orders do
   post :create do
     @order = Order.new(params[:order])
     if @order.save
-      flash[:success] = pat(:create_success, :model => 'Order')
-      params[:save_and_continue] ? redirect(url(:orders, :index)) : redirect(url(:orders, :edit, :id => @order.id))
+      flash[:success] = "Bestellung für #{@order.name} wurde gespeichert"
+      redirect(url(:orders, :index))
     else
-      flash.now[:error] = pat(:create_error, :model => 'order')
+      flash.now[:error] = "Bestellung konnte nicht gespeichert werden"
       render 'orders/new'
     end
   end
@@ -29,7 +29,7 @@ Chleehof::Admin.controllers :orders do
     if @order
       render 'orders/edit'
     else
-      flash[:warning] = pat(:create_error, :model => 'order', :id => "#{params[:id]}")
+      flash[:warning] = "Bestellung konnte nicht gefunden werden"
       halt 404
     end
   end
@@ -38,16 +38,14 @@ Chleehof::Admin.controllers :orders do
     @order = Order.find(params[:id])
     if @order
       if @order.update_attributes(params[:order])
-        flash[:success] = pat(:update_success, :model => 'Order', :id =>  "#{params[:id]}")
-        params[:save_and_continue] ?
-          redirect(url(:orders, :index)) :
-          redirect(url(:orders, :edit, :id => @order.id))
+        flash[:success] = "Bestellung für #{@order.name} wurde angepasst"
+        redirect(url(:orders, :edit, id: @order.id))
       else
-        flash.now[:error] = pat(:update_error, :model => 'order')
+        flash.now[:error] = "Bestellung konnte nicht angepasst werden"
         render 'orders/edit'
       end
     else
-      flash[:warning] = pat(:update_warning, :model => 'order', :id => "#{params[:id]}")
+      flash[:warning] = "Bestellung konnte nicht gefunden werden"
       halt 404
     end
   end
@@ -56,13 +54,13 @@ Chleehof::Admin.controllers :orders do
     order = Order.find(params[:id])
     if order
       if order.destroy
-        flash[:success] = pat(:delete_success, :model => 'Order', :id => "#{params[:id]}")
+        flash[:success] = "Bestellung wurde gelöscht"
       else
-        flash[:error] = pat(:delete_error, :model => 'order')
+        flash[:error] = "Bestellung konnte nicht gelöscht werden"
       end
       redirect url(:orders, :index)
     else
-      flash[:warning] = pat(:delete_warning, :model => 'order', :id => "#{params[:id]}")
+      flash[:warning] = "Bestellung konnte nicht gefunden werden"
       halt 404
     end
   end

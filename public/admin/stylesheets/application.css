@@ -6171,6 +6171,9 @@ button.close {
   .result-container .search-result {
     cursor: pointer; }
 
+.order-item-table .form-control {
+  float: right;
+  width: 70%; }
 .order-item-table .order-item input {
   padding: 3px; }
 

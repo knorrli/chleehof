@@ -58,9 +58,9 @@
       `<td class="col-md-1 identifier">${product.identifier}</td>` +
       `<td class="col-md-4 name">${product.name}</td>` +
       `<td class="col-md-1 quantity text-right form-group">` +
+      `<input type="hidden" name="order[order_items_attributes][${product.id}][product_id]" id="order_order_items_attributes_${product.id}_product_id" value="${product.id}"</input>` +
       `<input type="number" name="order[order_items_attributes][${product.id}][quantity]" id="order_order_items_attributes_${product.id}_quantity" class="quantity_input form-control text-right">` +
       `</td>` +
-      `<td class="col-md-1 multiplier text-center">x</td>` +
       `<td class="col-md-1 price">` +
       `<input type="number" step="0.05" name="order[order_items_attributes][${product.id}][price]" value="${product.price_f}" id="order_order_items_attributes_${product.id}_price" class="price_input form-control text-right">` +
       `</td>` +

@@ -21,6 +21,11 @@
 }
 
 .order-item-table {
+  .form-control {
+    float: right;
+    width: 70%;
+  }
+
   .order-item {
     input {
       padding: 3px;

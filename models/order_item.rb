@@ -2,7 +2,7 @@ class OrderItem < ActiveRecord::Base
   belongs_to :order
   belongs_to :product
 
-  delegate :currency, to: :order
+  delegate :identifier, :name, to: :product
 
   validates_presence_of :product, :quantity, :price
 
@@ -19,5 +19,9 @@ class OrderItem < ActiveRecord::Base
 
   def total_price
     quantity * price
+  end
+
+  def total_price_f
+    '%.2f' % price
   end
 end

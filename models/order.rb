@@ -1,18 +1,24 @@
 class Order < ActiveRecord::Base
   belongs_to :customer
-  has_many :order_items
+  has_many :order_items, dependent: :destroy, autosave: true
   has_many :products, through: :order_items
 
-  accepts_nested_attributes_for :order_items, reject_if: proc { |attr| attr[:quantity].blank? }
+  accepts_nested_attributes_for :order_items, reject_if: proc { |attr| attr[:quantity].blank? }, allow_destroy: true
 
   validates_presence_of :first_name, :last_name, :address_1, :zip_code, :city
+
+  before_save :mark_items_for_destruction
+
+  def self.ordered
+    order(created_at: :desc)
+  end
 
   def to_s
     "Bestellung #{id}"
   end
 
-  def name
-    customer.name
+  def customer_info
+    "#{customer.name}, #{customer.address_1}, #{customer.zip_code} #{customer.city}"
   end
 
   def contact_info
@@ -32,6 +38,12 @@ class Order < ActiveRecord::Base
     )
   end
 
+  def mark_items_for_destruction
+    order_items.each do |item|
+      item.mark_for_destruction if item.quantity == 0
+    end
+  end
+
   def total_item_count
     order_items.count
   end
@@ -44,7 +56,11 @@ class Order < ActiveRecord::Base
     order_items.sum &:total_price
   end
 
-  def currency
-    "CHF"
+  def total_price_excl_vat
+    total_item_price
+  end
+
+  def total_price_f
+    total_item_price - bulk_discount - spring_discount + shipping_cost + vat_amount
   end
 end

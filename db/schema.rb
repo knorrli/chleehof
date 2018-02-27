@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 15) do
+ActiveRecord::Schema.define(version: 16) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -56,8 +56,8 @@ ActiveRecord::Schema.define(version: 15) do
     t.string   "first_name"
     t.string   "phone"
     t.string   "email"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
     t.string   "last_name"
     t.string   "address_1"
     t.string   "address_2"
@@ -65,6 +65,11 @@ ActiveRecord::Schema.define(version: 15) do
     t.string   "city"
     t.string   "company"
     t.integer  "customer_id"
+    t.decimal  "vat_percentage",  precision: 8, scale: 2
+    t.decimal  "vat_amount",      precision: 8, scale: 2
+    t.decimal  "bulk_discount",   precision: 8, scale: 2, default: "0.0"
+    t.decimal  "spring_discount", precision: 8, scale: 2, default: "0.0"
+    t.decimal  "shipping_cost",   precision: 8, scale: 2, default: "0.0"
   end
 
   create_table "products", force: :cascade do |t|
