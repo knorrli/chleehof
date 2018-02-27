@@ -7,8 +7,8 @@ ActiveRecord::Base.configurations[:production] = {
   :adapter   => 'postgresql',
   :database  => 'chleehof',
   :username  => 'chleehof',
-  :password  => '',
-  :host      => 'localhost',
+  :password  => ENV['CHLEEHOFDB_PW'],
+  :host      => '127.0.0.1',
   :port      => 5432
 
 }
