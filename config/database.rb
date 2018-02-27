@@ -1,18 +1,3 @@
-##
-# You can use other adapters like:
-#
-#   ActiveRecord::Base.configurations[:development] = {
-#     :adapter   => 'mysql2',
-#     :encoding  => 'utf8',
-#     :reconnect => true,
-#     :database  => 'your_database',
-#     :pool      => 5,
-#     :username  => 'root',
-#     :password  => '',
-#     :host      => 'localhost',
-#     :socket    => '/tmp/mysql.sock'
-#   }
-#
 ActiveRecord::Base.configurations[:development] = {
   :adapter => 'sqlite3',
   :database => Padrino.root('db', 'development.db')
@@ -20,20 +5,9 @@ ActiveRecord::Base.configurations[:development] = {
 
 ActiveRecord::Base.configurations[:production] = {
   :adapter   => 'postgresql',
-  :database  => 'd3ojm2o9qrndi0',
-  :username  => 'sixcuavtfqwajg',
-  :password  => '994d3fcb493a0f39e068106be1a5113088a582d2cff9e013ad4a2004de07e7ba',
-  :host      => 'ec2-54-243-187-133.compute-1.amazonaws.com',
-  :port      => 5432
-
-}
-
-ActiveRecord::Base.configurations[:test] = {
-  :adapter   => 'postgresql',
-  :database  => 'chleehof_test',
-  :username  => 'root',
+  :database  => 'chleehof',
+  :username  => 'chleehof',
   :password  => '',
-  :host      => 'localhost',
   :port      => 5432
 
 }
