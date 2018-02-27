@@ -9,6 +9,7 @@ de:
         email: Email
         crypted_password: Crypted password
         role: Role
+        cash_discount_percentage: Prozentsatz
         vat_percentage: Prozentsatz
         bulk_discount_percentage: Prozentsatz
         bulk_discount_treshold: Untere Grenze

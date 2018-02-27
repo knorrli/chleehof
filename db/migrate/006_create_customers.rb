@@ -1,7 +1,6 @@
 class CreateCustomers < ActiveRecord::Migration
   def self.up
     create_table :customers do |t|
-      t.string :company
       t.string :first_name
       t.string :last_name
 

@@ -6196,6 +6196,9 @@ body {
 .inline {
   display: inline-block; }
 
+.horizontal-spacer {
+  padding: 0 10px; }
+
 /* -- End Custom Styles -- */
 
 /*# sourceMappingURL=application.css.map */

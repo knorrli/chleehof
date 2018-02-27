@@ -1,12 +1,12 @@
 <h1>Einstellungen</h1>
 <div class="col-md-4">
   <% form_for :account, url(:accounts, :update, :id => @account.id), :method => :put, :class => 'form-horizontal' do |f| %>
-    <h4>Mehrwertsteuer</h4>
+    <h4>Barzahlungsrabatt</h4>
     <div class="form-group">
-      <%= f.label :vat_percentage, class: 'col-sm-5 control-label' %>
+      <%= f.label :cash_discount_percentage, class: 'col-sm-5 control-label' %>
       <div class="col-sm-7">
         <div class="input-group">
-          <%= f.text_field :vat_percentage, class: 'form-control text-right' %>
+          <%= f.text_field :cash_discount_percentage, class: 'form-control text-right' %>
           <span class="input-group-addon">%</span>
         </div>
       </div>
@@ -46,6 +46,16 @@
       <div class="col-sm-7">
         <div class="input-group">
           <%= f.text_field :spring_discount_percentage, class: 'form-control text-right' %>
+          <span class="input-group-addon">%</span>
+        </div>
+      </div>
+    </div>
+    <h4>Mehrwertsteuer</h4>
+    <div class="form-group">
+      <%= f.label :vat_percentage, class: 'col-sm-5 control-label' %>
+      <div class="col-sm-7">
+        <div class="input-group">
+          <%= f.text_field :vat_percentage, class: 'form-control text-right' %>
           <span class="input-group-addon">%</span>
         </div>
       </div>

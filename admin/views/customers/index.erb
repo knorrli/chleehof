@@ -9,6 +9,9 @@
   <% end %>
 </h1>
 <ul class="pagination">
+  <li class=<%= "active" if params[:letter].blank? %>>
+    <%= link_to "NEU", url_for(:customers, :index) %>
+  </li>
   <% ('A'..'Z').to_a.each do |letter| %>
     <li class=<%= 'active' if letter == params[:letter] %>>
       <%= link_to letter, url_for(:customers, :index, letter: letter) %>

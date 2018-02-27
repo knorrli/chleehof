@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 19) do
+ActiveRecord::Schema.define(version: 18) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -20,11 +20,11 @@ ActiveRecord::Schema.define(version: 19) do
     t.string   "role"
     t.datetime "created_at",                                                         null: false
     t.datetime "updated_at",                                                         null: false
-    t.decimal  "vat_percentage",             precision: 8, scale: 2, default: "7.7"
-    t.decimal  "bulk_discount_percentage",   precision: 8, scale: 2, default: "5.0"
-    t.integer  "bulk_discount_treshold",                             default: 300
-    t.boolean  "spring_discount_active",                             default: false
-    t.decimal  "spring_discount_percentage", precision: 8, scale: 2, default: "5.0"
+    t.decimal  "vat_percentage",             precision: 8, scale: 2
+    t.decimal  "bulk_discount_percentage",   precision: 8, scale: 2
+    t.integer  "bulk_discount_treshold"
+    t.boolean  "spring_discount_active"
+    t.decimal  "spring_discount_percentage", precision: 8, scale: 2
     t.decimal  "cash_discount_percentage",   precision: 8, scale: 2, default: "3.0"
   end
 
@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(version: 19) do
     t.decimal  "spring_discount", precision: 8, scale: 2, default: "0.0"
     t.decimal  "shipping_cost",   precision: 8, scale: 2, default: "0.0"
     t.decimal  "cash_discount",   precision: 8, scale: 2, default: "0.0"
-    t.boolean  "payed_cash",                              default: false
   end
 
   create_table "products", force: :cascade do |t|

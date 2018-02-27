@@ -1,10 +1,10 @@
 class AddSettingsToAccounts < ActiveRecord::Migration
   def self.up
-    add_column :accounts, :vat_percentage, :decimal, precision: 8, scale: 2
-    add_column :accounts, :bulk_discount_percentage, :decimal, precision: 8, scale: 2
-    add_column :accounts, :bulk_discount_treshold, :integer
-    add_column :accounts, :spring_discount_active, :boolean
-    add_column :accounts, :spring_discount_percentage, :decimal, precision: 8, scale: 2
+    add_column :accounts, :vat_percentage, :decimal, precision: 8, scale: 2, default: 7.7
+    add_column :accounts, :bulk_discount_percentage, :decimal, precision: 8, scale: 2, default: 5
+    add_column :accounts, :bulk_discount_treshold, :integer, default: 300
+    add_column :accounts, :spring_discount_active, :boolean, default: false
+    add_column :accounts, :spring_discount_percentage, :decimal, precision: 8, scale: 2, default: 5
   end
 
   def self.down

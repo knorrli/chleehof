@@ -13,6 +13,10 @@ class Order < ActiveRecord::Base
     order(created_at: :desc)
   end
 
+  def payed_cash?
+    cash_discount > 0
+  end
+
   def to_s
     "Bestellung #{id}"
   end
