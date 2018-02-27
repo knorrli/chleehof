@@ -6175,7 +6175,8 @@ button.close {
   padding: 3px; }
 
 .order-item .has-error {
-  background-color: #d9534f; }
+  background-color: #d9534f;
+  border-color: #d43f3a; }
 
 html, body {
   height: 100%; }

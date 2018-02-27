@@ -101,27 +101,27 @@
           </th>
         </tr>
         <tr id="bulk-discount-row">
-          <td class="col-md-1 identifier" colspan=2><%= "Mengenrabatt #{current_account.bulk_discount_percentage}%" %></td>
+          <td class="col-md-1 identifier" colspan=2><%= "Mengenrabatt ab CHF #{current_account.bulk_discount_treshold}: #{current_account.bulk_discount_percentage}%" %></td>
           <td class="col-md-1 quantity text-right"></td>
           <td class="col-md-1 multiplier text-center"></td>
           <td class="col-md-1 price text-right"></td>
           <td class="col-md-2 total-price text-right">
             <div class="input-group">
               <span class="input-group-addon">–</span>
-              <%= f.text_field :bulk_discount, class: 'form-control input-sm' %>
+              <%= f.text_field :bulk_discount, class: 'form-control text-right', data: { percentage: current_account.bulk_discount_percentage, treshold: current_account.bulk_discount_treshold } %>
             </div>
           </td>
         </tr>
         <% if current_account.spring_discount_active? %>
           <tr id="spring-discount-row">
-            <td class="col-md-1 identifier" colspan=2>Frühlingsrabatt</td>
+            <td class="col-md-1 identifier" colspan=2><%= "Frühlingsrabatt: #{current_account.spring_discount_percentage}%" %></td>
             <td class="col-md-1 quantity text-right"></td>
             <td class="col-md-1 multiplier text-center"></td>
             <td class="col-md-1 price text-right"></td>
             <td class="col-md-2 total-price text-right">
               <div class="input-group">
                 <span class="input-group-addon">–</span>
-                <%= f.text_field :spring_discount, class: 'form-control input-sm' %>
+                <%= f.text_field :spring_discount, class: 'form-control text-right', data: { percentage: current_account.spring_discount_percentage } %>
               </div>
             </td>
           </tr>
@@ -135,9 +135,19 @@
           <td class="col-md-2 total-price text-right">
             <div class="input-group">
               <span class="input-group-addon">+</span>
-              <%= f.text_field :shipping_cost, class: 'form-control input-sm' %>
+              <%= f.text_field :shipping_cost, class: 'form-control' %>
             </div>
           </td>
+        </tr>
+        <tr id="vat-row" data-vat-percentage=<%= current_account.vat_percentage %>>
+          <td class="col-md-1 identifier" colspan=2><%= "MwSt. #{current_account.vat_percentage}%" %></td>
+          <td class="col-md-1 quantity text-right"></td>
+          <td class="col-md-1 multiplier text-center"></td>
+          <td class="col-md-1 price text-right"></td>
+          <td class="col-md-2 total-price text-right">
+            <span class="vat_amount">0.00</span>
+          </td>
+        </tr>
         <tr id="total-incl-vat-row">
           <th class="col-md-1 identifier" colspan=2><%= "TOTAL inkl. #{current_account.vat_percentage}% MwSt." %></th>
           <th class="col-md-1 quantity text-right">0</th>

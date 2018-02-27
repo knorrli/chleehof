@@ -29,5 +29,6 @@
 }
 
 .order-item .has-error {
-  background-color: $brand-danger;
+  background-color: $btn-danger-bg;
+  border-color: $btn-danger-border;
 }

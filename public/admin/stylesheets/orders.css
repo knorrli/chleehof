@@ -1,5 +1,5 @@
 /*
-Error: Undefined variable: "$brand-danger".
+Error: Undefined variable: "$btn-danger-bg".
         on line 32 of /Users/simon/Projects/chleehof/admin/stylesheets/orders.scss
 
 27:     }
@@ -7,8 +7,9 @@ Error: Undefined variable: "$brand-danger".
 29: }
 30: 
 31: .order-item .has-error {
-32:   background-color: $brand-danger;
-33: }
+32:   background-color: $btn-danger-bg;
+33:   border-color: $btn-danger-border;
+34: }
 
 Backtrace:
 /Users/simon/Projects/chleehof/admin/stylesheets/orders.scss:32
@@ -84,4 +85,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$brand-danger\".\A         on line 32 of /Users/simon/Projects/chleehof/admin/stylesheets/orders.scss\A \A 27:     }\A 28:   }\A 29: }\A 30: \A 31: .order-item .has-error {\A 32:   background-color: $brand-danger;\A 33: }"; }
+  content: "Error: Undefined variable: \"$btn-danger-bg\".\A         on line 32 of /Users/simon/Projects/chleehof/admin/stylesheets/orders.scss\A \A 27:     }\A 28:   }\A 29: }\A 30: \A 31: .order-item .has-error {\A 32:   background-color: $btn-danger-bg;\A 33:   border-color: $btn-danger-border;\A 34: }"; }
