@@ -1,6 +1,10 @@
 ActiveRecord::Base.configurations[:development] = {
-  :adapter => 'sqlite3',
-  :database => Padrino.root('db', 'development.db')
+  :adapter   => 'postgresql',
+  :database  => 'chleehof',
+  :username  => 'chleehof',
+  :password  => '',
+  :host      => 'localhost',
+  :port      => 5432
 }
 
 ActiveRecord::Base.configurations[:production] = {
@@ -10,7 +14,6 @@ ActiveRecord::Base.configurations[:production] = {
   :password  => ENV['CHLEEHOFDB_PW'],
   :host      => '127.0.0.1',
   :port      => 5432
-
 }
 
 # Setup our logger

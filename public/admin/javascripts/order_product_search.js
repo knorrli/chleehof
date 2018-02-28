@@ -82,7 +82,7 @@
     $("#product-search").on('keyup', autocompleteProducts);
     $("#product-search").focus(showProductResultContainer).blur(hideProductResultContainer);
 
-    $("#order-form").off('click', addOrderItem)
-    $("#order-form").on('click', '.product-result', addOrderItem)
+    $("#order-form").off('mousedown', addOrderItem)
+    $("#order-form").on('mousedown', '.product-result', addOrderItem)
   });
 })();

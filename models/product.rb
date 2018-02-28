@@ -17,7 +17,7 @@ class Product < ActiveRecord::Base
 
   def self.search(query)
     query = query.downcase
-    where('lower(identifier) LIKE ? OR lower(name) LIKE ? OR lower(name) LIKE ?', "#{query}", "%#{query} %", "%#{query}%").distinct
+    where('identifier LIKE ? OR lower(name) LIKE ? OR lower(name) LIKE ?', "#{query}", "%#{query} %", "%#{query}%")#.order('cast(identifier as int)', :name)
   end
 
   def to_s

@@ -14,7 +14,7 @@ module Presenters
     def months
       @months ||= (1..12).inject({}) do |hash, month|
         month_name = I18n.t('date.month_names')[month]
-        hash[month_name] = Order.where("strftime('%Y', created_at) = ? AND cast(strftime('%m', created_at) as int) = ?", year, month).sum(&:total_price)
+        hash[month_name] = Order.where("date_part('year', created_at) = ? AND date_part('month', created_at) = ?", year, month).sum(&:total_price)
         hash
       end
     end
@@ -24,7 +24,7 @@ module Presenters
     end
 
     def start_date
-      @start_date ||= Order.order(:created_at).first.created_at
+      @start_date ||= Order.order(:created_at).first.try(:created_at) || Date.new(2018, 01, 01)
     end
 
     def end_date

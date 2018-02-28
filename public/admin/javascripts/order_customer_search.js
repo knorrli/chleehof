@@ -64,10 +64,10 @@
 
   $(document).ready(function() {
     $("#customer-search").on('keyup', autocompleteCustomers);
+
+    $("#order-form").off('mousedown', fillCustomerInfo)
+    $("#order-form").on('mousedown', '.customer-result', fillCustomerInfo)
+
     $("#customer-search").focus(showCustomerResultContainer).blur(hideCustomerResultContainer);
-
-
-    $("#order-form").off('click', fillCustomerInfo)
-    $("#order-form").on('click', '.customer-result', fillCustomerInfo)
   });
 })();
