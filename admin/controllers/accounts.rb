@@ -1,7 +1,7 @@
 Chleehof::Admin.controllers :accounts do
 
   get :edit, :with => :id do
-    @account = Account.find_by(params[:id])
+    @account = Account.find_by(id: params[:id])
     if @account
       render 'accounts/edit'
     else
