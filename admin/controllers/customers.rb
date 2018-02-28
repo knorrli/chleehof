@@ -42,7 +42,7 @@ Chleehof::Admin.controllers :customers do
     render 'customers/edit'
   end
 
-  put :update, with: :id do
+  put :update, :with => :id do
     @customer = Customer.find(params[:id])
     @customer.assign_attributes(params[:customer])
     if @customer.valid?
