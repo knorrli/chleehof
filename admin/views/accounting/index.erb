@@ -18,14 +18,14 @@
     <% @accounting.months.each do |month, monthly_total| %>
       <tr>
         <td class="col-md-3"><%= month %></td>
-        <td class="col-md-9 text-right">CHF <%= monthly_total %></td>
+        <td class="col-md-9 text-right"><%= formatted_price(monthly_total, currency: true) %></td>
       </tr>
     <% end %>
   </tbody>
   <tfoot>
     <tr>
       <th class="col-md-3"><%= "Total #{@accounting.year}" %></th>
-      <th class="col-md-9 text-right">CHF <%= @accounting.total_year %></th>
+      <th class="col-md-9 text-right"><%= formatted_price(@accounting.total_year, currency: true) %></th>
     </tr>
   </tfoot>
 </table>
