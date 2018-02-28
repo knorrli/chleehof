@@ -1,7 +1,6 @@
 (function() {
 
   var autocompleteCustomers = function(e) {
-    e.stopPropagation();
     var search = $(this);
     var input = search.val();
     if (input.length > 2) {
@@ -14,6 +13,7 @@
         success: renderCustomerSearchResults
       })
     } else {
+      emptyProductResultContainer();
       hideCustomerResultContainer();
     }
   }
@@ -50,8 +50,8 @@
     $("#order_email").val(customer.email);
   }
 
-  var emptyCustomerResultsContainer = function() {
-    $("#customer-search-results").html("");
+  var emptyProductResultContainer = function() {
+    $("#customer-search-results").empty();
   }
 
   var showCustomerResultContainer = function() {
@@ -63,7 +63,9 @@
   }
 
   $(document).ready(function() {
-    $("#order-form").on('keyup', '#customer-search', autocompleteCustomers)
+    $("#customer-search").on('keyup', autocompleteCustomers);
+    $("#customer-search").focus(showCustomerResultContainer).blur(hideCustomerResultContainer);
+
 
     $("#order-form").off('click', fillCustomerInfo)
     $("#order-form").on('click', '.customer-result', fillCustomerInfo)

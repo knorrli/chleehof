@@ -16,7 +16,7 @@
     <div class="navbar">
       <div class=navbar-inner>
         <div class=container>
-          <%= link_to 'Neue Bestellung', url(:orders, :new), :class => 'navbar-brand' %>
+          <%= link_to 'Neue Rechnung', url(:orders, :new), :class => 'navbar-brand' %>
           <ul class="nav navbar-nav pull-right">
             <li>
               <%= link_to "Einstellungen", url_for(:accounts, :edit, id: current_account.id) %>
@@ -31,7 +31,10 @@
               <%= link_to "Kunden", url(:customers, :index) %>
             </li>
             <li class="navbar-module">
-              <%= link_to "Bestellungen", url(:orders, :index) %>
+              <%= link_to "Rechnungen", url(:orders, :index) %>
+            </li>
+            <li class="navbar-module">
+              <%= link_to "Abrechnungen", url(:accounting, :index) %>
             </li>
           </ul>
         </div>

@@ -1,4 +1,4 @@
-<h1><%= "Produkt Anpassen: #{@product}" %></h1>
+<h2><%= @product %></h2>
 <% form_for :product, url(:products, :update, :id => @product.id), method: :put, multipart: true, class: 'form-horizontal' do |f| %>
   <%= partial 'products/form', :locals => { :f => f } %>
 <% end %>

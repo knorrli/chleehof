@@ -1,4 +1,4 @@
-<h1 class="h1">
+<h2 class="h2">
   Produkte
   <% form_tag url_for(:products, :search), method: :get, class: 'inline' do %>
     <%= text_field_tag :q, value: params[:q], placeholder: 'Suche', autofocus: true %>
@@ -7,7 +7,7 @@
     <% end %>
     <%= submit_tag "Suchen", class: 'btn btn-primary hidden' %>
   <% end %>
-</h1>
+</h2>
 <ul class="pagination">
   <li class=<%= 'active' if !params[:letter] %>>
     <%= link_to "Alle", url_for(:products, :index) %>

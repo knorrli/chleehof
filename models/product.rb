@@ -12,12 +12,12 @@ class Product < ActiveRecord::Base
   validates_presence_of :name, :price
 
   def self.ordered
-    order(:name)
+    order('cast(identifier as int)', :name)
   end
 
   def self.search(query)
     query = query.downcase
-    where('lower(identifier) LIKE ? OR lower(name) LIKE ?', "#{query}%", "%#{query}%")
+    where('lower(identifier) LIKE ? OR lower(name) LIKE ? OR lower(name) LIKE ?', "#{query}", "%#{query} %", "%#{query}%").distinct
   end
 
   def to_s

@@ -1,18 +1,18 @@
 /*
 Error: Undefined variable: "$btn-danger-bg".
-        on line 41 of /Users/simon/Projects/chleehof/admin/stylesheets/orders.scss
+        on line 40 of /Users/simon/Projects/chleehof/admin/stylesheets/orders.scss
 
-36:     }
-37:   }
-38: }
-39: 
-40: .order-item .has-error {
-41:   background-color: $btn-danger-bg;
-42:   border-color: $btn-danger-border;
-43: }
+35:     }
+36:   }
+37: }
+38: 
+39: .order-item .has-error {
+40:   background-color: $btn-danger-bg;
+41:   border-color: $btn-danger-border;
+42: }
 
 Backtrace:
-/Users/simon/Projects/chleehof/admin/stylesheets/orders.scss:41
+/Users/simon/Projects/chleehof/admin/stylesheets/orders.scss:40
 /usr/local/var/rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.22/lib/sass/script/tree/variable.rb:49:in `_perform'
 /usr/local/var/rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.22/lib/sass/script/tree/node.rb:58:in `perform'
 /usr/local/var/rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:397:in `visit_prop'
@@ -85,4 +85,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$btn-danger-bg\".\A         on line 41 of /Users/simon/Projects/chleehof/admin/stylesheets/orders.scss\A \A 36:     }\A 37:   }\A 38: }\A 39: \A 40: .order-item .has-error {\A 41:   background-color: $btn-danger-bg;\A 42:   border-color: $btn-danger-border;\A 43: }"; }
+  content: "Error: Undefined variable: \"$btn-danger-bg\".\A         on line 40 of /Users/simon/Projects/chleehof/admin/stylesheets/orders.scss\A \A 35:     }\A 36:   }\A 37: }\A 38: \A 39: .order-item .has-error {\A 40:   background-color: $btn-danger-bg;\A 41:   border-color: $btn-danger-border;\A 42: }"; }

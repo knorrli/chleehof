@@ -3,10 +3,10 @@
     <div class="row">
       <div class="col-md-12">
         <h3>Kunde</h3>
-        <div class="search-container">
-          <div class="form-group">
-            <div class="col-md-12">
-              <%= text_field_tag :customer_search, id: 'customer-search', data: {url: url(:customers, :search, format: :json), }, placeholder: 'Suche', autofocus: true, class: 'form-control' %>
+        <div class="search-container form-group">
+          <div class="col-md-12">
+            <%= text_field_tag :customer_search, id: 'customer-search', data: {url: url(:customers, :search, format: :json), }, placeholder: 'Suche', autofocus: true, class: 'form-control' %>
+            <div class="relative-container">
               <div id="customer-search-results" class="result-container hidden"></div>
             </div>
           </div>
@@ -80,8 +80,12 @@
     <h3>Produkte</h3>
     <div class="search-container">
       <div class="form-group">
-        <%= text_field_tag :product_search, id: 'product-search', data: {url: url(:products, :search, format: :json), }, placeholder: 'Suche', class: 'form-control input-xlarge' %>
-        <div id="product-search-results" class="result-container hidden"></div>
+        <div class="col-md-12">
+          <%= text_field_tag :product_search, id: 'product-search', data: {url: url(:products, :search, format: :json), }, placeholder: 'Suche', class: 'form-control' %>
+          <div class="relative-container">
+            <div id="product-search-results" class="result-container hidden"></div>
+          </div>
+        </div>
       </div>
     </div>
     <table class="table table-condensed order-item-table">
@@ -195,7 +199,7 @@
         <%= link_to pat(:cancel), url(:orders, :index), :class => 'btn btn-danger' %>
       </div>
       <div class="col-md-6">
-        <%= f.submit pat(:save), :class => 'btn btn-primary pull-right' %>
+        <%= f.submit "Rechnung Abschliessen", :class => 'btn btn-primary pull-right' %>
       </div>
     </div>
   </div>

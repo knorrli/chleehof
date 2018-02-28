@@ -6,7 +6,7 @@ class Customer < ActiveRecord::Base
 
   def self.search(query)
     query = query.downcase
-    where('lower(company) LIKE ? OR lower(last_name) LIKE ? OR lower(first_name) LIKE ? OR lower(zip_code) LIKE ? OR lower(city) LIKE ?', "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+    where('lower(company) LIKE ? OR lower(last_name) LIKE ? OR lower(first_name) LIKE ? OR lower(zip_code) LIKE ? OR lower(city) LIKE ?', "%#{query}%", "%#{query}%", "%#{query}%", "#{query}%", "%#{query}%")
   end
 
   def self.new_customers

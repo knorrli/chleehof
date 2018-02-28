@@ -16,7 +16,7 @@ class OrderPdf
 
   def header
     font_size 15
-    text "Bestellung Verpackungsmaterial", align: :center
+    text "Rechnung Verpackungsmaterial", align: :center
     font_size 10
     text "Familie Lüthi, Chleehof 8, 3422 Kirchberg", align: :center
     text "034 445 53 89, fam_luethi@hotmail.com", align: :center

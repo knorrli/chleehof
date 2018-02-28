@@ -3,6 +3,8 @@
 
   $(function() {
 
+    var alertTimeout = 4000;
+
     // Automatically close alerts if there was any present.
     if ($('.alert').length > 0) {
       setTimeout(function() { $('.alert').alert('close'); }, alertTimeout);

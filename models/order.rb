@@ -18,7 +18,7 @@ class Order < ActiveRecord::Base
   end
 
   def to_s
-    "Bestellung #{id}"
+    "Rechnung #{id}"
   end
 
   def customer_name

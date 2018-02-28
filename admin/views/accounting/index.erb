@@ -1,0 +1,31 @@
+<h2><%= "Abrechnung #{@accounting.year}" %></h2>
+<ul class="pagination">
+  <% @accounting.years.each do |year| %>
+    <li class=<%= 'active' if year == @accounting.year %>>
+      <%= link_to year, url_for(:accounting, :index, year: year) %>
+    </li>
+  <% end %>
+</ul>
+
+<table class="table table-condensed">
+  <thead>
+    <tr>
+      <th class="col-md-3">Monat</th>
+      <th class="col-md-9 text-right">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @accounting.months.each do |month, monthly_total| %>
+      <tr>
+        <td class="col-md-3"><%= month %></td>
+        <td class="col-md-9 text-right">CHF <%= monthly_total %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th class="col-md-3"><%= "Total #{@accounting.year}" %></th>
+      <th class="col-md-9 text-right">CHF <%= @accounting.total_year %></th>
+    </tr>
+  </tfoot>
+</table>

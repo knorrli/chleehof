@@ -1,7 +1,6 @@
 (function() {
 
   var autocompleteProducts = function(e) {
-    e.stopPropagation();
     var search = $(this);
     var input = search.val();
     if (input.length > 0) {
@@ -15,6 +14,7 @@
       })
       showProductResultContainer();
     } else {
+      emptyProductResultContainer();
       hideProductResultContainer();
     }
   }
@@ -24,7 +24,12 @@
     if (results.length > 0) {
       for(result_index in results) {
         var result = results[result_index];
-        var productInfo = `${result.identifier} | ${result.name}`
+        var productInfo;
+        if (result.identifier == '') {
+          productInfo = `${result.name}`
+        } else {
+          productInfo = `${result.identifier} | ${result.name}`
+        }
         var dataAttributes = `data-product=${btoa(JSON.stringify(result))}`
         resultContent = resultContent + `<div class='product-result search-result' ${dataAttributes}>${productInfo}</div>`
       }
@@ -42,6 +47,10 @@
       $("#order-items").append(item);
     }
     $(".order-items").find("#order-item-"+product.id+" .quantity_input").focus();
+  }
+
+  var emptyProductResultContainer = function() {
+    $("#product-search-results").empty();
   }
 
   var showProductResultContainer = function() {
@@ -70,7 +79,8 @@
   }
 
   $(document).ready(function() {
-    $("#order-form").on('keyup', '#product-search', autocompleteProducts)
+    $("#product-search").on('keyup', autocompleteProducts);
+    $("#product-search").focus(showProductResultContainer).blur(hideProductResultContainer);
 
     $("#order-form").off('click', addOrderItem)
     $("#order-form").on('click', '.product-result', addOrderItem)
