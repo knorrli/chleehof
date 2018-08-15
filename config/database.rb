@@ -1,7 +1,6 @@
 ActiveRecord::Base.configurations[:development] = {
   :adapter   => 'postgresql',
   :database  => 'chleehof',
-  :username  => 'chleehof',
   :password  => '',
   :host      => 'localhost',
   :port      => 5432

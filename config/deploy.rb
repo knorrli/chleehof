@@ -4,7 +4,7 @@ lock "3.7.2"
 set :application, "chleehof"
 set :repo_url, "git@github.com:jugglinghobo/chleehof.git"
 
-set :rvm_ruby_version, '2.2.3'
+set :rvm_ruby_version, '2.4.0'
 
 set :ssh_options, {
   port: 37797,
