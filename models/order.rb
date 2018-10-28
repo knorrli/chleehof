@@ -22,11 +22,11 @@ class Order < ActiveRecord::Base
   end
 
   def customer_name
-    customer.name
+    "#{first_name} #{last_name}"
   end
 
-  def customer_info
-    "#{customer.name}, #{customer.address_1}, #{customer.zip_code} #{customer.city}"
+  def customer_address
+    [address_1, address_2, "#{zip_code} #{city}"].reject(&:blank?).join("\n")
   end
 
   def contact_info
@@ -57,6 +57,26 @@ class Order < ActiveRecord::Base
     order_items.count
   end
 
+  def spring_discount?
+    !spring_discount.zero?
+  end
+
+  def shipping_cost?
+    !shipping_cost.zero?
+  end
+
+  def cash_discount_percentage
+    "TODO"
+  end
+
+  def bulk_discount_percentage
+    "TODO"
+  end
+
+  def spring_discount_percentage
+    "TODO"
+  end
+
   def total_quantity
     order_items.sum &:quantity
   end
@@ -71,9 +91,9 @@ class Order < ActiveRecord::Base
 
   def total_price
     current_total = total_item_price
-    current_total += bulk_discount if bulk_discount
-    current_total += spring_discount if spring_discount
-    current_total += shipping_cost if shipping_cost
+    current_total += bulk_discount
+    current_total += spring_discount
+    current_total += shipping_cost
     current_total += vat_amount
     (current_total*20.0).ceil/20.0
   end

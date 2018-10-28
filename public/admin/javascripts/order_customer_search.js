@@ -29,13 +29,14 @@
       }
     } else {
       resultContent = "<div>Keine Kunden gefunden</div>" +
-        "<div><a href='/admin/customers/new'>Neuer Kunde registrieren?</a></div>"
+        "<div class='new-customer-link'><a href='/admin/customers/new'>Neuer Kunde registrieren?</a></div>"
     }
     $('#customer-search-results').html(resultContent);
     showCustomerResultContainer();
   }
 
   var fillCustomerInfo = function() {
+    debugger;
     hideCustomerResultContainer();
     var customer = JSON.parse(atob($(this).data('customer')));
     $("#order_customer_id").val(customer.id);
@@ -48,6 +49,7 @@
     $("#order_city").val(customer.city);
     $("#order_phone").val(customer.phone);
     $("#order_email").val(customer.email);
+    $("#order_payed_cash").prop('checked', customer.pay_cash)
   }
 
   var emptyProductResultContainer = function() {
@@ -65,9 +67,11 @@
   $(document).ready(function() {
     $("#customer-search").on('keyup', autocompleteCustomers);
 
-    $("#order-form").off('mousedown', fillCustomerInfo)
-    $("#order-form").on('mousedown', '.customer-result', fillCustomerInfo)
+    $("#order-form").off('mousedown', fillCustomerInfo);
+    $("#order-form").on('mousedown', '.customer-result', fillCustomerInfo);
 
+    $("#customer-search").off('mousedown', renderNewCustomerForm);
+    $("#customer-search").on('mousedown', '.new-customer-link', renderNewCustomerForm);
     $("#customer-search").focus(showCustomerResultContainer).blur(hideCustomerResultContainer);
   });
 })();

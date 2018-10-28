@@ -4,7 +4,7 @@ module Presenters
     attr_accessor :year
 
     def initialize(args = {})
-      @year = args.fetch(:year, Date.today.year.to_s)
+      @year = args.fetch(:year, Date.current.year.to_s)
     end
 
     def years
@@ -12,7 +12,7 @@ module Presenters
     end
 
     def months
-      @months ||= (1..12).inject({}) do |hash, month|
+      @months ||= (1..12).to_a.inject({}) do |hash, month|
         month_name = I18n.t('date.month_names')[month]
         hash[month_name] = Order.where("date_part('year', created_at) = ? AND date_part('month', created_at) = ?", year, month).sum(&:total_price)
         hash
@@ -28,7 +28,7 @@ module Presenters
     end
 
     def end_date
-      Date.today
+      Date.current
     end
 
   end

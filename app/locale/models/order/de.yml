@@ -4,6 +4,7 @@ de:
       name: Order
       attributes:
         id: ID
+        number: Nummer
         first_name: Vorname
         last_name: Nachname
         company: Firma

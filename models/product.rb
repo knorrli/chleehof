@@ -12,7 +12,7 @@ class Product < ActiveRecord::Base
   validates_presence_of :name, :price
 
   def self.ordered
-    order('cast(identifier as int)', :name)
+    order(:name)
   end
 
   def self.search(query)

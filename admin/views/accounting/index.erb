@@ -17,8 +17,8 @@
   <tbody>
     <% @accounting.months.each do |month, monthly_total| %>
       <tr>
-        <td class="col-md-3"><%= month %></td>
-        <td class="col-md-9 text-right"><%= formatted_price(monthly_total, currency: true) %></td>
+        <td class="col-md-6"><%= month %></td>
+        <td class="col-md-6 text-right"><%= formatted_price(monthly_total, currency: true) %></td>
       </tr>
     <% end %>
   </tbody>

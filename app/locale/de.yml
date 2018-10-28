@@ -8,3 +8,18 @@ de:
               blank: Name muss ausgefüllt werden
   edit_order: Bestellung bearbeiten
   print_order: Bestellung ausdrucken
+  date:
+    month_names:
+    -
+    - Januar
+    - Februar
+    - März
+    - April
+    - Mai
+    - Juni
+    - Juli
+    - August
+    - September
+    - Oktober
+    - November
+    - Dezember

@@ -12,18 +12,18 @@
           </div>
         </div>
         <%= f.hidden_field :customer_id %>
-        <% error = @order.errors.include?(:first_name) %>
-        <fieldset class='form-group <%= error ? 'has-error' : ''%>'>
-          <%= f.label :first_name, :class => 'col-md-4 control-label' %>
-          <div class='col-md-8 controls'>
-            <%= f.text_field :first_name, :class => 'form-control input-xlarge input-with-feedback' %>
-          </div>
-        </fieldset>
         <% error = @order.errors.include?(:last_name) %>
         <fieldset class='form-group <%= error ? 'has-error' : ''%>'>
           <%= f.label :last_name, :class => 'col-md-4 control-label' %>
           <div class='col-md-8 controls'>
             <%= f.text_field :last_name, :class => 'form-control input-xlarge input-with-feedback' %>
+          </div>
+        </fieldset>
+        <% error = @order.errors.include?(:first_name) %>
+        <fieldset class='form-group <%= error ? 'has-error' : ''%>'>
+          <%= f.label :first_name, :class => 'col-md-4 control-label' %>
+          <div class='col-md-8 controls'>
+            <%= f.text_field :first_name, :class => 'form-control input-xlarge input-with-feedback' %>
           </div>
         </fieldset>
         <div class="form-group">
