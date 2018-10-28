@@ -21,6 +21,10 @@ class Customer < ActiveRecord::Base
     company.present? ? company : "#{last_name} #{first_name}"
   end
 
+  def address
+    [address_1, address_2, "#{zip_code} #{city}"].reject(&:blank?).join("\n")
+  end
+
   def as_json(options)
     super.merge(name: name)
   end

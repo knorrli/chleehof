@@ -15,18 +15,24 @@ Chleehof::Admin.controllers :orders do
 
   post :create do
     @order = Order.new(params[:order])
+    @order.bulk_discount_treshold = current_account.bulk_discount_treshold
     if @order.save
       flash[:success] = "Rechnung für #{@order.customer_name} wurde gespeichert"
-      redirect(url(:orders, :show, id: @order.id, format: :pdf))
+      redirect(url(:orders, :show, id: @order.id))
     else
       flash.now[:error] = "Rechnung konnte nicht gespeichert werden"
       render 'orders/new'
     end
   end
 
-  get :show, with: :id, provides: :pdf do
+  get :show, with: :id, provides: [:html, :pdf] do
     @order = Order.find(params[:id])
-    OrderPdf.new(@order).render
+    case content_type
+    when :html
+      render  'orders/show'
+    when :pdf
+      OrderPdf.new(@order).render
+    end
   end
 
   get :edit, :with => :id do
@@ -42,9 +48,10 @@ Chleehof::Admin.controllers :orders do
   put :update, :with => :id do
     @order = Order.find(params[:id])
     if @order
+      @order.bulk_discount_treshold = current_account.bulk_discount_treshold
       if @order.update_attributes(params[:order])
         flash[:success] = "Rechnung für #{@order.customer_name} wurde angepasst"
-        redirect(url(:orders, :show, id: @order.id, format: :pdf))
+        redirect(url(:orders, :show, id: @order.id))
       else
         flash.now[:error] = "Rechnung konnte nicht angepasst werden"
         render 'orders/edit'

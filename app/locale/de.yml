@@ -6,3 +6,5 @@ de:
           attributes:
             name:
               blank: Name muss ausgefüllt werden
+  edit_order: Bestellung bearbeiten
+  print_order: Bestellung ausdrucken

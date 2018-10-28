@@ -34,7 +34,7 @@ end
 # Test requirements
 
 # Padrino Stable Gem
-gem 'padrino', '0.13.3.3'
+gem 'padrino', git: 'git@github.com:padrino/padrino-framework.git'
 
 gem 'capistrano', '~> 3.9'
 gem 'capistrano-rbenv', '~> 2.1'

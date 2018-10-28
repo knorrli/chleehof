@@ -1,0 +1,125 @@
+<% customer = @order.customer %>
+<h2><%= "#{@order} für #{customer.name}" %></h2>
+
+<div class="row">
+  <div class="col-md-4 customer">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Kunde</h3>
+        <address>
+          <p><strong><%= customer.name %></strong></p>
+          <%= simple_format customer.address %>
+          <% if phone = customer.phone %>
+            <p><%= link_to phone, "tel:#{phone}" %></p>
+          <% end %>
+          <% if email = customer.email %>
+            <p><%= link_to email %></p>
+          <% end %>
+        </address>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <h3>Bestellung</h3>
+    <table class="table table-condensed order-item-table">
+      <thead>
+        <tr>
+          <th class="col-md-1 identifier"><%= mat(:order, :id) %></th>
+          <th class="col-md-4 name"><%= mat(:order, :name) %></th>
+          <th class="col-md-1 quantity text-right"><%= mat(:order, :quantity) %></th>
+          <th class="col-md-2 price text-right"><%= mat(:order, :price) %></th>
+          <th class="col-md-2 total-price text-right"><%= mat(:order, :total_price) %></th>
+        </tr>
+      </thead>
+      <tbody class="order-items" id="order-items">
+        <% @order.order_items.each do |item| %>
+          <% product_id = item.product_id %>
+          <tr class="order-item" id="order-item-<%= product_id %>">
+            <td class="col-md-1 identifier"><%= item.identifier %></td>
+            <td class="col-md-4 name"><%= item.name %></td>
+            <td class="col-md-1 quantity text-right">
+              <%= item.quantity %>
+            </td>
+            <td class="col-md-1 price text-right">
+              <%= item.price_f %>
+            </td>
+            <td class="col-md-2 total-price text-right"><%= item.total_price_f %></td>
+          </tr>
+        <% end %>
+      </tbody>
+
+      <tfoot>
+        <tr id="total-excl-vat-row">
+          <th class="col-md-1 identifier" colspan=2>TOTAL exkl. MwSt.</th>
+          <th class="col-md-1 quantity text-right"><%= @order.total_quantity %></th>
+          <th class="col-md-2 price text-right"></th>
+          <th class="col-md-2 total-price text-right">
+            <span class="price_currency">CHF</span>
+            <span class="price_value"><%= formatted_price @order.total_item_price %></span>
+          </th>
+        </tr>
+        <tr id="cash-discount-row">
+          <td class="col-md-1 identifier" colspan=2>
+            <%= "Barzahlungsrabatt #{current_account.cash_discount_percentage}%" %>
+          </td>
+          <td class="col-md-1 quantity text-right"></td>
+          <td class="col-md-2 price text-right"></td>
+          <td class="col-md-2 total-price text-right">
+            <span id="cash_discount"><%= formatted_price @order.cash_discount %></span>
+          </td>
+        </tr>
+        <tr id="bulk-discount-row">
+          <td class="col-md-1 identifier" colspan=2><%= "Mengenrabatt ab CHF #{current_account.bulk_discount_treshold}: #{current_account.bulk_discount_percentage}%" %></td>
+          <td class="col-md-1 quantity text-right"></td>
+          <td class="col-md-2 price text-right"></td>
+          <td class="col-md-2 total-price text-right">
+            <span id="bulk_discount"><%= formatted_price @order.bulk_discount %></span>
+          </td>
+        </tr>
+        <% if current_account.spring_discount_active? %>
+          <tr id="spring-discount-row">
+            <td class="col-md-1 identifier" colspan=2><%= "Frühlingsrabatt: #{current_account.spring_discount_percentage}%" %></td>
+            <td class="col-md-1 quantity text-right"></td>
+            <td class="col-md-2 price text-right"></td>
+            <td class="col-md-2 total-price text-right">
+              <span id="spring_discount"><%= formatted_price @order.spring_discount %></span>
+            </td>
+          </tr>
+        <% end %>
+        </tr>
+        <tr id="total-incl-vat-row">
+          <td class="col-md-1 identifier" colspan=2><%= "MwSt. #{@order.vat_percentage}%" %></td>
+          <td class="col-md-1 quantity text-right"></td>
+          <td class="col-md-2 price text-right"></td>
+          <td class="col-md-2 total-price text-right"><%= formatted_price @order.vat_amount %></td>
+        </tr>
+        <tr id="shipping-cost-row">
+          <td class="col-md-1 identifier" colspan=2>Versandkosten</td>
+          <td class="col-md-1 quantity text-right"></td>
+          <td class="col-md-2 price text-right">
+          </td>
+          <td class="col-md-2 total-price text-right"><%= formatted_price @order.shipping_cost %></td>
+        </tr>
+        <tr id="total-price-row">
+          <th class="col-md-1 identifier" colspan=2><%= "GESAMTTOTAL:" %></th>
+          <th class="col-md-1 quantity text-right"><%= @order.total_quantity %></th>
+          <th class="col-md-2 price text-right">
+          </th>
+          <th class="col-md-2 total-price text-right">
+            <span class="price_currency">CHF</span>
+            <span class="price_value"><%= @order.total_price_f %></span>
+          </th>
+        </tr>
+        </tr>
+      </tfoot>
+    </table>
+    <div class="row top-buffer">
+      <div class="col-md-6">
+        <%= link_to t('edit_order'), url(:orders, :edit, id: @order.id), class: 'btn btn-default' %>
+      </div>
+      <div class="col-md-6">
+        <%= link_to t('print_order'), url(:orders, :show, id: @order.id, format: :pdf), target: :blank, :class => 'btn btn-primary pull-right' %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -106,7 +106,9 @@
 
   $(document).ready(function() {
     // initial calculation for existing items
-    recalculate();
+    if ($("#order-form").length > 0) {
+      recalculate();
+    }
 
     $("#order-form .order-item-table").off('change', recalculate);
     $("#order-form .order-item-table").on('change', recalculate);
