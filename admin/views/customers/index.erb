@@ -7,6 +7,9 @@
     <% end %>
     <%= submit_tag "Suchen", class: 'btn btn-primary hidden' %>
   <% end %>
+  <div class="pull-right">
+    <%= link_to "Neuer Kunde erfassen", url_for(:customers, :new), class: 'btn btn-primary btn-lg' %>
+  </div>
 </h2>
 <ul class="pagination">
   <li class=<%= "active" if params[:letter].blank? %>>
@@ -28,7 +31,7 @@
       <th class=header> <%= mat(:customer, :phone) %></th>
       <th class=header> <%= mat(:customer, :email) %></th>
       <th class="header list-row-action-header" colspan=2>
-        <%= link_to "Neuer Kunde erfassen", url(:customers, :new), class: 'btn btn-primary pull-right' %>
+        <%# <%= link_to "Neuer Kunde erfassen", url(:customers, :new), class: 'btn btn-primary pull-right' %1> %>
       </th>
     </tr>
   </thead>
