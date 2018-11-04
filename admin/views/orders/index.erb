@@ -18,7 +18,11 @@
       <tr class=list-row>
         <td class="list-column"><%= order.created_at.strftime('%d.%m.%Y') %></td>
         <td class="list-column"><%= link_to order, url_for(:orders, :show, id: order.id) %></td>
-        <td class="list-column"> <%= link_to order.customer_name, url(:customers, :edit, id: order.customer_id) %> </td>
+        <% if order.customer %>
+          <td class="list-column"> <%= link_to order.customer_name, url(:customers, :edit, id: order.customer_id) %> </td>
+        <% else %>
+          <td class="list-column"><%= order.customer_name %></td>
+        <% end %>
         <td class="list-column text-right"> <%= order.total_quantity %> </td>
         <td class="list-column text-right"> <%= order.total_price_f %> </td>
         <td class="list-column">

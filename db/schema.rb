@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20) do
+ActiveRecord::Schema.define(version: 21) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20) do
     t.boolean "spring_discount_active", default: false
     t.decimal "spring_discount_percentage", precision: 8, scale: 2, default: "5.0"
     t.decimal "cash_discount_percentage", precision: 8, scale: 2, default: "3.0"
+    t.string "vat_number"
+    t.string "iban"
   end
 
   create_table "customers", id: :serial, force: :cascade do |t|

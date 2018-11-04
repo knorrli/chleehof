@@ -8,6 +8,15 @@ class OrderPdf
   end
 
   def render
+    2.times do
+      render_order_page
+    end
+
+    number_pages "<page>/<total>", align: :center, style: :bold, at: [bounds.left, 0]
+    super
+  end
+
+  def render_order_page
     header
     move_down 50
     customer_address
@@ -15,11 +24,8 @@ class OrderPdf
     order_header
     move_down 40
     line_items
-
+    move_down 30
     footer
-
-    number_pages "<page>/<total>", align: :center, style: :bold, at: [bounds.left, 0]
-    super
   end
 
   private
@@ -96,7 +102,6 @@ class OrderPdf
   end
 
   def footer
-    move_down 30
     text "Betrag dankend erhalten", style: :bold
   end
 
