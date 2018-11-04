@@ -7,6 +7,9 @@
     <% end %>
     <%= submit_tag "Suchen", class: 'btn btn-primary hidden' %>
   <% end %>
+  <div class="pull-right">
+    <%= link_to "Neues Produkt erfassen", url_for(:products, :new), format: :pdf, class: 'btn btn-primary btn-lg' %>
+  </div>
 </h2>
 <ul class="pagination">
   <li class=<%= 'active' if !params[:letter] %>>
@@ -27,7 +30,7 @@
       <th class="header"></th>
       <th class="header"> <%= mat(:product, :updated_at) %></th>
       <th class="header list-row-action-header">
-        <%= link_to "Neues Produkt erfassen", url(:products, :new), class: 'btn btn-primary pull-right' %>
+        <%= link_to "Liste ausdrucken", url_for(:products, :index, letter: params[:letter], format: :pdf), class: 'btn btn-primary pull-right', target: :blank %>
       </th>
     </tr>
   </thead>

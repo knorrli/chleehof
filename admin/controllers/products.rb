@@ -11,14 +11,19 @@ Chleehof::Admin.controllers :products do
     end
   end
 
-  get :index do
+  get :index, provides: [:html, :pdf] do
     if letter = params[:letter]
       letter = letter.downcase
       @products = Product.where('lower(name) LIKE ?', "#{letter}%").ordered
     else
-      @products = Product.ordered.limit(20)
+      @products = Product.ordered
     end
-    render 'products/index'
+    case content_type
+    when :pdf
+      ProductListPdf.new(@products).render
+    when :html
+      render 'products/index'
+    end
   end
 
   get :new do

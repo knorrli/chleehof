@@ -1,3 +1,11 @@
+<% error = @customer.errors.include?(:last_name) %>
+<fieldset class='form-group control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :last_name, :class => 'col-md-5 control-label' %>
+  <div class='col-md-7 controls'>
+    <%= f.text_field :last_name, :class => 'form-control input-xlarge input-with-feedback' %>
+  </div>
+</fieldset>
+
 <% error = @customer.errors.include?(:first_name) %>
 <fieldset class='form-group control-group <%= error ? 'has-error' : ''%>'>
   <%= f.label :first_name, :class => 'col-md-5 control-label' %>
@@ -6,13 +14,6 @@
   </div>
 </fieldset>
 
-<% error = @customer.errors.include?(:last_name) %>
-<fieldset class='form-group control-group <%= error ? 'has-error' : ''%>'>
-  <%= f.label :last_name, :class => 'col-md-5 control-label' %>
-  <div class='col-md-7 controls'>
-    <%= f.text_field :last_name, :class => 'form-control input-xlarge input-with-feedback' %>
-  </div>
-</fieldset>
 
 <% error = @customer.errors.include?(:company) %>
 <fieldset class='form-group control-group <%= error ? 'has-error' : ''%>'>

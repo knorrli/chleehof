@@ -11,7 +11,7 @@ class ProductImporter
       product = Product.new(
         identifier: row[0],
         name: row[1],
-        price: row[2],
+        price: row[3].present? ? row[3] : row[2],
       )
 
       if product.valid?
