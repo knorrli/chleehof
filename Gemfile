@@ -25,10 +25,10 @@ gem 'activerecord', '>= 3.1', :require => 'active_record'
 gem 'pg'
 gem 'prawn'
 gem 'prawn-table'
+gem 'pry'
 
 group :development do
   gem 'sqlite3'
-  gem 'pry'
 end
 
 # Test requirements
