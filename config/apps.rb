@@ -26,10 +26,11 @@
 # override these settings in the subapps as needed.
 #
 Padrino.configure_apps do
-  # enable :sessions
+	# use Rack::Session::Pool, :expire_after => 1825 * 86400 # 5 years = 1825 days in seconds
+
   set :session_secret, '61e5613ba84810ec0f3b919a2a582b5c53cd23cb1b9ad1951b575f195895dd4b'
   set :protection, :except => :path_traversal
-  set :protect_from_csrf, true
+  # set :protect_from_csrf, true
 
   disable :reload
   enable :reload
