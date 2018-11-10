@@ -7,7 +7,13 @@ module Chleehof
     register Padrino::Mailer
     register Padrino::Helpers
     register Padrino::Admin::AccessControl
-    enable  :sessions
+    use Rack::Session::Cookie,
+      :key => 'rack.login',
+      # :domain => 'luethi-chleehof.ch',
+      :path => '/',
+      :expire_after => 1825 * 86400, # In seconds
+      :secret => '61e5613ba84810ec0f3b919a2a582b5c53cd23cb1b9ad1951b575f195895dd4b'
+
     disable :store_location
     layout :application
 
