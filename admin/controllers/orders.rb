@@ -18,6 +18,7 @@ Chleehof::Admin.controllers :orders do
     logger.info "1"
     @order = Order.new(params[:order])
     logger.info "2"
+    logger.info "CURRENT_ACCOUNT: #{current_account}"
     @order.bulk_discount_treshold = current_account.bulk_discount_treshold
     logger.info "3"
     if @order.save
