@@ -2,7 +2,7 @@
 <fieldset class='form-group control-group <%= error ? 'has-error' : ''%>'>
   <%= f.label :last_name, :class => 'col-md-5 control-label' %>
   <div class='col-md-7 controls'>
-    <%= f.text_field :last_name, :class => 'form-control input-xlarge input-with-feedback' %>
+    <%= f.text_field :last_name, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true %>
   </div>
 </fieldset>
 
@@ -10,7 +10,7 @@
 <fieldset class='form-group control-group <%= error ? 'has-error' : ''%>'>
   <%= f.label :first_name, :class => 'col-md-5 control-label' %>
   <div class='col-md-7 controls'>
-    <%= f.text_field :first_name, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true %>
+    <%= f.text_field :first_name, :class => 'form-control input-xlarge input-with-feedback' %>
   </div>
 </fieldset>
 
