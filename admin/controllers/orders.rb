@@ -14,22 +14,13 @@ Chleehof::Admin.controllers :orders do
   end
 
   post :create do
-    logger.info params.inspect
-    logger.info "1"
     @order = Order.new(params[:order])
-    logger.info "2"
-    logger.info "CURRENT_ACCOUNT: #{current_account}"
     @order.bulk_discount_treshold = current_account.bulk_discount_treshold
-    logger.info "3"
     if @order.save
-      logger.info "SAVE"
       flash[:success] = "Rechnung für #{@order.customer_name} wurde gespeichert"
-      logger.info "REDIRECT"
       redirect(url(:orders, :show, id: @order.id))
     else
-      logger.info "ERROR"
       flash.now[:error] = "Rechnung konnte nicht gespeichert werden"
-      logger.info "RENDER"
       render 'orders/new'
     end
   end
