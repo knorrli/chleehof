@@ -15,6 +15,7 @@ Chleehof::Admin.controllers :orders do
 
   post :create do
     logger.info params.inspect
+    require 'pry'; binding.pry
     @order = Order.new(params[:order])
     @order.bulk_discount_treshold = current_account.bulk_discount_treshold
     if @order.save
