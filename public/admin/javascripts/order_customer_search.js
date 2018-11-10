@@ -70,8 +70,8 @@
     $("#order-form").off('mousedown', fillCustomerInfo);
     $("#order-form").on('mousedown', '.customer-result', fillCustomerInfo);
 
-    $("#customer-search").off('mousedown', renderNewCustomerForm);
-    $("#customer-search").on('mousedown', '.new-customer-link', renderNewCustomerForm);
+    // $("#customer-search").off('mousedown', showCustomerResultContainer);
+    // $("#customer-search").on('mousedown', '.new-customer-link', showCustomerResultContainer);
     $("#customer-search").focus(showCustomerResultContainer).blur(hideCustomerResultContainer);
   });
 })();

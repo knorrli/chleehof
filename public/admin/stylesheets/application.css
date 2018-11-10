@@ -6204,4 +6204,7 @@ body {
 .relative-container {
   position: relative; }
 
+.footer {
+  height: 50px; }
+
 /*# sourceMappingURL=application.css.map */

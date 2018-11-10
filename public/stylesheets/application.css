@@ -1081,7 +1081,7 @@ th {
 
 html {
   font-size: 10px;
-  -webkit-tap-highlight-color: transparent; }
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -5780,7 +5780,7 @@ button.close {
   color: #ffffff;
   text-align: center;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-  background-color: transparent; }
+  background-color: rgba(0, 0, 0, 0); }
 
 .carousel-control.left {
   background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
@@ -5862,7 +5862,7 @@ button.close {
   border-radius: 10px;
   cursor: pointer;
   background-color: #000 \9;
-  background-color: transparent; }
+  background-color: rgba(0, 0, 0, 0); }
 
 .carousel-indicators .active {
   margin: 0;
@@ -6198,7 +6198,7 @@ img[data-toggle='modal'] {
   cursor: pointer; }
 
 #banner {
-  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.3) 30%, white), url("/images/sky_banner.jpg");
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.3) 30%, white), url("/images/sky_banner.jpg");
   background-size: 100%;
   background-repeat: no-repeat; }
 

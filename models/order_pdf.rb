@@ -8,9 +8,9 @@ class OrderPdf
   end
 
   def render
-    2.times do
-      render_order_page
-    end
+    render_order_page
+    start_new_page
+    render_order_page
 
     number_pages "<page>/<total>", align: :center, style: :bold, at: [bounds.left, 0]
     super
@@ -68,7 +68,7 @@ class OrderPdf
   def line_items
     table = []
 
-    header = ["ArtikelNr.", "Artikel", "Bestellmenge", "Preis", "Total CHF"]
+    header = ["Nr.", "Artikel", "Bestellmenge", "Preis", "Total CHF"]
     table << header
 
     @order.order_items.each do |item|
@@ -87,13 +87,15 @@ class OrderPdf
     end
     table << [{ content: "Total inkl. #{@order.vat_percentage}% MwSt.", colspan: 2}, "#{@order.total_quantity} Stk.", "", "#{@order.total_price_f}"]
 
-    table = make_table table, width: bounds.width, cell_style: { borders: [] }
+    col1 = bounds.width / 12
+
+    table = make_table table, header: true, width: bounds.width, column_widths: [col1, col1*5, col1*2, col1*2, col1*2], cell_style: { borders: [] }
     table.column(2).style align: :right
     table.column(3).style align: :right
     table.column(4).style align: :right
 
     table.row(0).style font_style: :bold, borders: [:bottom]
-    table.row(-6).style font_style: :bold, borders: [:bottom]
+    table.row(-5).style font_style: :bold, borders: [:top]
     table.row(-1).style font_style: :bold, borders: [:top]
 
     table.draw
