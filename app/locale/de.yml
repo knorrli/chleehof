@@ -6,8 +6,8 @@ de:
           attributes:
             name:
               blank: Name muss ausgefüllt werden
-  edit_order: Bestellung bearbeiten
-  print_order: Bestellung ausdrucken
+  edit_order: Rechnung bearbeiten
+  print_order: Rechnung ausdrucken
   date:
     month_names:
     -
