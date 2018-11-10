@@ -15,7 +15,7 @@
           <th class="header text-right"> <%= mat(:order, :quantity) %></th>
           <th class="header text-right"> <%= mat(:order, :price) %></th>
           <th class="header list-row-action-header">
-            <%= link_to "Neue Rechnung erfassen", url(:orders, :new), class: 'btn btn-primary pull-right' %>
+            <%= link_to "Neue Rechnung erfassen", url(:orders, :new, customer_id: @customer.id), class: 'btn btn-primary pull-right' %>
           </th>
         </tr>
       </thead>
