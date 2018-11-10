@@ -36,7 +36,6 @@
   }
 
   var fillCustomerInfo = function() {
-    debugger;
     hideCustomerResultContainer();
     var customer = JSON.parse(atob($(this).data('customer')));
     $("#order_customer_id").val(customer.id);
@@ -50,6 +49,11 @@
     $("#order_phone").val(customer.phone);
     $("#order_email").val(customer.email);
     $("#order_payed_cash").prop('checked', customer.pay_cash)
+  }
+
+  var redirectToNewCustomerForm = function() {
+    var url = $(this).find('a').attr('href');
+    window.location.href = url;
   }
 
   var emptyProductResultContainer = function() {
@@ -72,6 +76,8 @@
 
     // $("#customer-search").off('mousedown', showCustomerResultContainer);
     // $("#customer-search").on('mousedown', '.new-customer-link', showCustomerResultContainer);
-    $("#customer-search").focus(showCustomerResultContainer).blur(hideCustomerResultContainer);
+    $("#customer-search").off('click', redirectToNewCustomerForm);
+    $("#customer-search").focus(showCustomerResultContainer).focusout(hideCustomerResultContainer);
+    $("#customer-search-results").on('mousedown', '.new-customer-link', redirectToNewCustomerForm);
   });
 })();
