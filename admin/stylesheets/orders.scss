@@ -30,9 +30,21 @@
   }
 
   .order-item {
+    .delete-item {
+      color: red;
+    }
+    &.new-item {
+      background-color: #DAF7A6;
+    }
+
+    &.deleted {
+      display: none;
+    }
+
     input {
       padding: 3px;
     }
+
   }
 }
 

@@ -74,10 +74,8 @@
     $("#order-form").off('mousedown', fillCustomerInfo);
     $("#order-form").on('mousedown', '.customer-result', fillCustomerInfo);
 
-    // $("#customer-search").off('mousedown', showCustomerResultContainer);
-    // $("#customer-search").on('mousedown', '.new-customer-link', showCustomerResultContainer);
-    $("#customer-search").off('click', redirectToNewCustomerForm);
     $("#customer-search").focus(showCustomerResultContainer).focusout(hideCustomerResultContainer);
+    $("#customer-search-results").off('mousedown', redirectToNewCustomerForm);
     $("#customer-search-results").on('mousedown', '.new-customer-link', redirectToNewCustomerForm);
   });
 })();

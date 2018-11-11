@@ -1,21 +1,21 @@
 /*
 Error: Undefined variable: "$btn-danger-bg".
-        on line 40 of /Users/igor/Projects/chleehof/admin/stylesheets/orders.scss
+        on line 52 of /Users/igor/Projects/chleehof/admin/stylesheets/orders.scss
 
-35:     }
-36:   }
-37: }
-38: 
-39: .order-item .has-error {
-40:   background-color: $btn-danger-bg;
-41:   border-color: $btn-danger-border;
-42: }
-43: 
-44: address p {
-45:   margin: 0;
+47: 
+48:   }
+49: }
+50: 
+51: .order-item .has-error {
+52:   background-color: $btn-danger-bg;
+53:   border-color: $btn-danger-border;
+54: }
+55: 
+56: address p {
+57:   margin: 0;
 
 Backtrace:
-/Users/igor/Projects/chleehof/admin/stylesheets/orders.scss:40
+/Users/igor/Projects/chleehof/admin/stylesheets/orders.scss:52
 /Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/sass-3.6.0/lib/sass/script/tree/variable.rb:49:in `_perform'
 /Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/sass-3.6.0/lib/sass/script/tree/node.rb:50:in `perform'
 /Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/sass-3.6.0/lib/sass/tree/visitors/perform.rb:398:in `visit_prop'
@@ -58,10 +58,7 @@ Backtrace:
 /Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/sass-3.6.0/lib/sass/plugin.rb:82:in `update_stylesheets'
 /Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/sass-3.6.0/lib/sass/plugin.rb:54:in `check_for_updates'
 /Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/sass-3.6.0/lib/sass/plugin/rack.rb:51:in `call'
-/Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rack-protection-2.0.4/lib/rack/protection/base.rb:50:in `call'
 /Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rack-protection-2.0.4/lib/rack/protection/xss_header.rb:18:in `call'
-/Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rack-protection-2.0.4/lib/rack/protection/base.rb:50:in `call'
-/Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rack-protection-2.0.4/lib/rack/protection/base.rb:50:in `call'
 /Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rack-protection-2.0.4/lib/rack/protection/json_csrf.rb:26:in `call'
 /Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rack-protection-2.0.4/lib/rack/protection/base.rb:50:in `call'
 /Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rack-protection-2.0.4/lib/rack/protection/base.rb:50:in `call'
@@ -71,8 +68,6 @@ Backtrace:
 /Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/bundler/gems/padrino-framework-02feacb6afa9/padrino-core/lib/padrino-core/reloader/rack.rb:25:in `call'
 /Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/bundler/gems/padrino-framework-02feacb6afa9/padrino-core/lib/padrino-core/logger.rb:485:in `call'
 /Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/sinatra-2.0.4/lib/sinatra/show_exceptions.rb:22:in `call'
-/Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rack-2.0.5/lib/rack/session/abstract/id.rb:232:in `context'
-/Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rack-2.0.5/lib/rack/session/abstract/id.rb:226:in `call'
 /Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/sinatra-2.0.4/lib/sinatra/base.rb:1957:in `call'
 /Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/sinatra-2.0.4/lib/sinatra/base.rb:1502:in `block in call'
 /Users/igor/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/sinatra-2.0.4/lib/sinatra/base.rb:1729:in `synchronize'
@@ -88,4 +83,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$btn-danger-bg\".\A         on line 40 of /Users/igor/Projects/chleehof/admin/stylesheets/orders.scss\A \A 35:     }\A 36:   }\A 37: }\A 38: \A 39: .order-item .has-error {\A 40:   background-color: $btn-danger-bg;\A 41:   border-color: $btn-danger-border;\A 42: }\A 43: \A 44: address p {\A 45:   margin: 0;"; }
+  content: "Error: Undefined variable: \"$btn-danger-bg\".\A         on line 52 of /Users/igor/Projects/chleehof/admin/stylesheets/orders.scss\A \A 47: \A 48:   }\A 49: }\A 50: \A 51: .order-item .has-error {\A 52:   background-color: $btn-danger-bg;\A 53:   border-color: $btn-danger-border;\A 54: }\A 55: \A 56: address p {\A 57:   margin: 0;"; }

@@ -104,6 +104,13 @@
     $(identifier).prop('readonly', true);
   }
 
+  var deleteItem = function() {
+    item = $(this).parents(".order-item");
+    item.find('.quantity_input').val(0);
+    debugger;
+    item.addClass('deleted');
+  }
+
   $(document).ready(function() {
     // initial calculation for existing items
     if ($("#order-form").length > 0) {
@@ -112,6 +119,10 @@
 
     $("#order-form .order-item-table").off('change', recalculate);
     $("#order-form .order-item-table").on('change', recalculate);
+
+
+    $("#order-form").off('click', deleteItem);
+    $("#order-form").on('click', '.delete-item', deleteItem);
   });
 })();
 

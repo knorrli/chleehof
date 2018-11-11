@@ -1,6 +1,11 @@
+$fa-font-path: "../webfonts";
+
 @import "bootstrap";
 @import "bootstrap/variables";
+@import "fontawesome/fontawesome.scss";
+@import "fontawesome/solid.scss";
 @import "orders";
+
 
 html, body {
   height: 100%;

@@ -41,12 +41,16 @@
 
   var addOrderItem = function() {
     hideProductResultContainer();
+    removeOtherNewItemStates();
     var product = JSON.parse(atob($(this).data('product')))
     if ($("#order-item-"+product.id).length == 0) {
       var item = orderItem(product);
       $("#order-items").append(item);
+    } else {
+      $("#order-item-"+product.id).removeClass('deleted');
     }
-    $(".order-items").find("#order-item-"+product.id+" .quantity_input").focus();
+    row = $(".order-items").find("#order-item-"+product.id+"");
+    row.addClass('new-item');
   }
 
   var emptyProductResultContainer = function() {
@@ -61,9 +65,14 @@
     $('#product-search-results').addClass('hidden');
   }
 
+  var removeOtherNewItemStates = function() {
+    $(".order-items .order-item").removeClass('new-item');
+  }
+
   var orderItem = function(product) {
     var orderItemHTML =
       `<tr class="order-item" id="order-item-${product.id}">` +
+      `<td class="col-md-1 delete-action"><a class="fa fa-times delete-item" href="#"></a></td>` +
       `<td class="col-md-1 identifier">${product.identifier}</td>` +
       `<td class="col-md-4 name">${product.name}</td>` +
       `<td class="col-md-1 quantity text-right form-group">` +

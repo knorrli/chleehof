@@ -91,6 +91,7 @@
     <table class="table table-condensed order-item-table">
       <thead>
         <tr>
+          <th class="col-md-1 delete-action"></th>
           <th class="col-md-1 identifier"><%= mat(:order, :id) %></th>
           <th class="col-md-4 name"><%= mat(:order, :name) %></th>
           <th class="col-md-1 quantity text-right"><%= mat(:order, :quantity) %></th>
@@ -103,6 +104,7 @@
           <% product_id = item.product_id %>
           <input type="hidden" name="order[order_items_attributes][<%= product_id %>][id]" value="<%= item.id %>" id="order_order_items_attributes_<%= product_id %>_id">
           <tr class="order-item" id="order-item-<%= product_id %>">
+            <td class="col-md-1 delete-action"><%= link_to "", "#", class: "fa fa-times delete-item"%></td>
             <td class="col-md-1 identifier"><%= item.identifier %></td>
             <td class="col-md-4 name"><%= item.name %></td>
             <td class="col-md-1 quantity text-right form-group">
@@ -119,7 +121,7 @@
 
       <tfoot>
         <tr id="total-excl-vat-row">
-          <th class="col-md-1 identifier" colspan=2>TOTAL exkl. MwSt.</th>
+          <th class="col-md-1 identifier" colspan=3>TOTAL exkl. MwSt.</th>
           <th class="col-md-1 quantity text-right">0</th>
           <th class="col-md-2 price text-right"></th>
           <th class="col-md-2 total-price text-right">
@@ -128,7 +130,7 @@
           </th>
         </tr>
         <tr id="cash-discount-row">
-          <td class="col-md-1 identifier" colspan=2>
+          <td class="col-md-1 identifier" colspan=3>
             <%= f.check_box :payed_cash, class: 'inline' %>
             <span class="horizontal-spacer"></span>
             <%= "Barzahlungsrabatt #{current_account.cash_discount_percentage}%" %>
@@ -142,7 +144,7 @@
           </td>
         </tr>
         <tr id="bulk-discount-row">
-          <td class="col-md-1 identifier" colspan=2><%= "Mengenrabatt ab CHF #{current_account.bulk_discount_treshold}: #{current_account.bulk_discount_percentage}%" %></td>
+          <td class="col-md-1 identifier" colspan=3><%= "Mengenrabatt ab CHF #{current_account.bulk_discount_treshold}: #{current_account.bulk_discount_percentage}%" %></td>
           <td class="col-md-1 quantity text-right"></td>
           <td class="col-md-2 price text-right">
             <%= f.number_field :bulk_discount, readonly: true, class: 'form-control text-right', data: { percentage: current_account.bulk_discount_percentage, treshold: current_account.bulk_discount_treshold } %>
@@ -153,7 +155,7 @@
         </tr>
         <% if current_account.spring_discount_active? %>
           <tr id="spring-discount-row">
-            <td class="col-md-1 identifier" colspan=2><%= "Frühlingsrabatt: #{current_account.spring_discount_percentage}%" %></td>
+            <td class="col-md-1 identifier" colspan=3><%= "Frühlingsrabatt: #{current_account.spring_discount_percentage}%" %></td>
             <td class="col-md-1 quantity text-right"></td>
             <td class="col-md-2 price text-right">
               <%= f.number_field :spring_discount, readonly: true, class: 'form-control text-right', data: { percentage: current_account.spring_discount_percentage } %>
@@ -164,7 +166,7 @@
           </tr>
         <% end %>
         <tr id="total-incl-vat-row">
-          <td class="col-md-1 identifier" colspan=2><%= "MwSt. #{current_account.vat_percentage}%" %></td>
+          <td class="col-md-1 identifier" colspan=3><%= "MwSt. #{current_account.vat_percentage}%" %></td>
           <td class="col-md-1 quantity text-right"></td>
           <td class="col-md-2 price text-right">
             <%= f.hidden_field :vat_percentage, value: current_account.vat_percentage %>
@@ -173,7 +175,7 @@
           <td class="col-md-2 total-price text-right">0.00</td>
         </tr>
         <tr id="shipping-cost-row">
-          <td class="col-md-1 identifier" colspan=2>Versandkosten</td>
+          <td class="col-md-1 identifier" colspan=3>Versandkosten</td>
           <td class="col-md-1 quantity text-right"></td>
           <td class="col-md-2 price text-right">
             <%= f.number_field :shipping_cost, step: '0.05', class: 'form-control text-right' %>
@@ -181,7 +183,7 @@
           <td class="col-md-2 total-price text-right">0.00</td>
         </tr>
         <tr id="total-price-row">
-          <th class="col-md-1 identifier" colspan=2><%= "GESAMTTOTAL" %></th>
+          <th class="col-md-1 identifier" colspan=3><%= "GESAMTTOTAL" %></th>
           <th class="col-md-1 quantity text-right">0</th>
           <th class="col-md-2 price text-right">
           </th>
