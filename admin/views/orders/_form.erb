@@ -137,7 +137,7 @@
           </td>
           <td class="col-md-1 quantity text-right"></td>
           <td class="col-md-2 price text-right">
-            <%= f.number_field :cash_discount, readonly: true, class: 'form-control text-right', data: { percentage: current_account.cash_discount_percentage } %>
+            <%= f.text_field :cash_discount, readonly: true, class: 'form-control text-right', data: { percentage: current_account.cash_discount_percentage } %>
           </td>
           <td class="col-md-2 total-price text-right">
             <span id="cash_discount">0.00</span>
@@ -147,7 +147,7 @@
           <td class="col-md-1 identifier" colspan=3><%= "Mengenrabatt ab CHF #{current_account.bulk_discount_treshold}: #{current_account.bulk_discount_percentage}%" %></td>
           <td class="col-md-1 quantity text-right"></td>
           <td class="col-md-2 price text-right">
-            <%= f.number_field :bulk_discount, readonly: true, class: 'form-control text-right', data: { percentage: current_account.bulk_discount_percentage, treshold: current_account.bulk_discount_treshold } %>
+            <%= f.text_field :bulk_discount, readonly: true, class: 'form-control text-right', data: { percentage: current_account.bulk_discount_percentage, treshold: current_account.bulk_discount_treshold } %>
           </td>
           <td class="col-md-2 total-price text-right">
             <span id="bulk_discount">0.00</span>
@@ -158,7 +158,7 @@
             <td class="col-md-1 identifier" colspan=3><%= "Frühlingsrabatt: #{current_account.spring_discount_percentage}%" %></td>
             <td class="col-md-1 quantity text-right"></td>
             <td class="col-md-2 price text-right">
-              <%= f.number_field :spring_discount, readonly: true, class: 'form-control text-right', data: { percentage: current_account.spring_discount_percentage } %>
+              <%= f.text_field :spring_discount, readonly: true, class: 'form-control text-right', data: { percentage: current_account.spring_discount_percentage } %>
             </td>
             <td class="col-md-2 total-price text-right">
               <span id="spring_discount">0.00</span>
@@ -170,7 +170,7 @@
           <td class="col-md-1 quantity text-right"></td>
           <td class="col-md-2 price text-right">
             <%= f.hidden_field :vat_percentage, value: current_account.vat_percentage %>
-            <%= f.number_field :vat_amount, step: 0.1, readonly: true, class: 'form-control text-right' %>
+            <%= f.text_field :vat_amount, readonly: true, class: 'form-control text-right' %>
           </td>
           <td class="col-md-2 total-price text-right">0.00</td>
         </tr>
@@ -178,7 +178,7 @@
           <td class="col-md-1 identifier" colspan=3>Versandkosten</td>
           <td class="col-md-1 quantity text-right"></td>
           <td class="col-md-2 price text-right">
-            <%= f.text_field :shipping_cost, class: 'form-control text-right' %>
+            <%= f.text_field :shipping_cost, value: formatted_price(f.object.shipping_cost), class: 'form-control text-right' %>
           </td>
           <td class="col-md-2 total-price text-right">0.00</td>
         </tr>
