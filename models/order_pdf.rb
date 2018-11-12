@@ -29,7 +29,7 @@ class OrderPdf
 
   def header
     font_size 9
-    draw_text "MwSt-Nr.: CHE-110.836.851", at: [350, cursor - 20]
+    text_box "MwSt-Nr.: CHE-110.836.851", at: [420, cursor]
     font_size 15
     text "Verpackungsmaterial für Direktvermarkter", style: :bold
     font_size 10
