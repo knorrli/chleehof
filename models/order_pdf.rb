@@ -11,14 +11,12 @@ class OrderPdf
     render_order_page
     start_new_page
     render_order_page
-
-    number_pages "<page>/<total>", align: :center, style: :bold, at: [bounds.left, 0]
     super
   end
 
   def render_order_page
     header
-    move_down 50
+    move_down 30
     customer_address
     move_down 60
     order_header
@@ -53,7 +51,7 @@ class OrderPdf
 
   def customer_address
     font_size 12
-    bounding_box([300, cursor], width: 500) do
+    bounding_box([400, cursor], width: 500) do
       text order.customer_name
       text order.customer_address
     end
