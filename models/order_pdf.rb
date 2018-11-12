@@ -16,11 +16,10 @@ class OrderPdf
 
   def render_order_page
     header
-    # move_down 20
     customer_address
-    move_down 60
-    order_header
     move_down 40
+    order_header
+    move_down 15
     line_items
     move_down 30
     footer
@@ -30,7 +29,7 @@ class OrderPdf
 
   def header
     font_size 9
-    draw_text "MwSt-Nr.: CHE-110.836.851", at: [350, cursor - 30]
+    draw_text "MwSt-Nr.: CHE-110.836.851", at: [350, cursor - 20]
     font_size 15
     text "Verpackungsmaterial für Direktvermarkter", style: :bold
     font_size 10
@@ -51,7 +50,7 @@ class OrderPdf
 
   def customer_address
     font_size 12
-    bounding_box([330, 590], width: 500) do
+    bounding_box([330, 640], width: 500) do
       text order.customer_name
       text order.customer_address
     end
@@ -87,7 +86,7 @@ class OrderPdf
 
     col1 = bounds.width / 12
 
-    table = make_table table, header: true, width: bounds.width, column_widths: [col1, col1*5, col1*2, col1*2, col1*2], cell_style: { borders: [] }
+    table = make_table table, header: true, width: bounds.width, column_widths: [col1, col1*5, col1*2, col1*2, col1*2], cell_style: { padding: [3, 5, 3, 5], borders: [] }
     table.column(2).style align: :right
     table.column(3).style align: :right
     table.column(4).style align: :right
