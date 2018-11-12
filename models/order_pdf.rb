@@ -16,7 +16,7 @@ class OrderPdf
 
   def render_order_page
     header
-    move_down 30
+    # move_down 20
     customer_address
     move_down 60
     order_header
@@ -51,7 +51,7 @@ class OrderPdf
 
   def customer_address
     font_size 12
-    bounding_box([400, cursor], width: 500) do
+    bounding_box([330, 590], width: 500) do
       text order.customer_name
       text order.customer_address
     end
