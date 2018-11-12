@@ -83,16 +83,16 @@ class OrderPdf
     end
     table << [{ content: "Total inkl. #{@order.vat_percentage}% MwSt.", colspan: 2}, "#{@order.total_quantity} Stk.", "", "#{@order.total_price_f}"]
 
-    col1 = bounds.width / 12
+    col1 = bounds.width / 24
 
-    table = make_table table, header: true, width: bounds.width, column_widths: [col1, col1*5, col1*2, col1*2, col1*2], cell_style: { padding: [3, 5, 3, 5], borders: [] }
+    table = make_table table, header: true, width: bounds.width, column_widths: [col1*2, col1*12, col1*4, col1*2, col1*4], cell_style: { padding: [3, 3, 3, 3], borders: [:left, :right, :top, :bottom] }
     table.column(2).style align: :right
     table.column(3).style align: :right
     table.column(4).style align: :right
 
-    table.row(0).style font_style: :bold, borders: [:bottom]
-    table.row(-5).style font_style: :bold, borders: [:top]
-    table.row(-1).style font_style: :bold, borders: [:top]
+    table.row(0).style font_style: :bold, borders: [:top, :bottom, :left, :right]
+    table.row(-5).style font_style: :bold, borders: [:top, :bottom, :left, :right]
+    table.row(-1).style font_style: :bold, borders: [:top, :bottom, :left, :right]
 
     table.draw
 
