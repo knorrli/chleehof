@@ -91,6 +91,7 @@ class Order < ActiveRecord::Base
 
   def total_price
     current_total = total_item_price
+    current_total += cash_discount
     current_total += bulk_discount
     current_total += spring_discount
     current_total += shipping_cost
