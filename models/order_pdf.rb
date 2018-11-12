@@ -50,7 +50,7 @@ class OrderPdf
 
   def customer_address
     font_size 12
-    bounding_box([330, 640], width: 500) do
+    bounding_box([300, 640], width: 500) do
       text order.customer_name
       text order.customer_address
     end
@@ -58,8 +58,7 @@ class OrderPdf
   end
 
   def order_header
-    draw_text "RECHNUNG", style: :bold, at: [0, cursor]
-    draw_text "Kirchberg, #{@order.updated_at.strftime('%d.%m.%Y')}", at: [bounds.right - 120, cursor]
+    draw_text "RECHNUNG vom #{@order.updated_at.strftime('%d.%m.%Y')}", style: :bold, at: [0, cursor]
   end
 
   def line_items
