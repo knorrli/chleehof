@@ -71,7 +71,7 @@ class OrderPdf
       table << [item.identifier, item.name, "#{item.quantity} Stk.", formatted_price(item.price), item.total_price_f]
     end
 
-    table << [{content: "Total exkl. #{@order.vat_percentage}% MwSt.", colspan: 2}, "#{@order.total_quantity} Stk.", "", "CHF #{formatted_price(@order.total_item_price)}"]
+    table << [{content: "Total exkl. #{@order.vat_percentage}% MwSt.", colspan: 2}, "", "", "CHF #{formatted_price(@order.total_item_price)}"]
     table << [{content: "Barzahlungsrabatt #{@order.cash_discount_percentage}%", colspan: 2}, "", "", "#{formatted_price(@order.cash_discount)}"]
     table << [{ content: "Mengenrabatt ab CHF #{@order.bulk_discount_treshold}: #{@order.bulk_discount_percentage}%", colspan: 2}, "", "", "#{formatted_price(@order.bulk_discount)}"]
     if @order.spring_discount?
@@ -81,7 +81,7 @@ class OrderPdf
     if @order.shipping_cost?
       table << [{ content: "Versandkosten", colspan: 2}, "", "", "#{formatted_price(@order.shipping_cost)}"]
     end
-    table << [{ content: "Total inkl. #{@order.vat_percentage}% MwSt.", colspan: 2}, "#{@order.total_quantity} Stk.", "", "#{@order.total_price_f}"]
+    table << [{ content: "Total inkl. #{@order.vat_percentage}% MwSt.", colspan: 2}, "", "", "#{@order.total_price_f}"]
 
     col1 = bounds.width / 24
 
