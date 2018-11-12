@@ -41,6 +41,7 @@
 
   var addOrderItem = function() {
     hideProductResultContainer();
+    emptyProductSearchInput();
     removeOtherNewItemStates();
     var product = JSON.parse(atob($(this).data('product')))
     if ($("#order-item-"+product.id).length == 0) {
@@ -51,6 +52,10 @@
     }
     row = $(".order-items").find("#order-item-"+product.id+"");
     row.addClass('new-item');
+  }
+
+  var emptyProductSearchInput = function() {
+    $("#product-search").val("");
   }
 
   var emptyProductResultContainer = function() {
