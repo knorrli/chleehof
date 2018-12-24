@@ -25,7 +25,7 @@
       </thead>
 
       <tbody>
-        <% @customer.orders.each do |order| %>
+        <% @customer.orders.ordered.each do |order| %>
           <tr class=list-row>
             <td class="list-column"><%= order.created_at.strftime('%d.%m.%Y') %></td>
             <td class="list-column"><%= link_to order, url_for(:orders, :show, id: order.id) %></td>

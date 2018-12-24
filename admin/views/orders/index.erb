@@ -4,18 +4,22 @@
     <%= link_to "Neue Rechnung erfassen", url(:orders, :new), class: 'btn btn-primary btn-lg' %>
   </div>
 </h2>
-<% (@first_year..Date.current.year).to_a.each do |year| %>
-  <ul class="pagination">
-    <li class=<%= 'active' if year == @year %>>
-      <%= link_to @year, url_for(:orders, :index, year: @year) %>
-    </li>
-    <% (1..12).to_a.each do |month| %>
-      <li class=<%= 'active' if month == @month %>>
-        <%= link_to I18n.t('date.month_names')[month], url_for(:orders, :index, year: @year, month: month) %>
+<div class="orders-pagination">
+  <% (@first_year..Date.current.year).to_a.each do |year| %>
+    <% year_active = (year == @year) %>
+    <ul class="pagination">
+      <li class=<%= 'active' if year_active %>>
+        <%= link_to year, url_for(:orders, :index, year: year, month: 0) %>
       </li>
-    <% end %>
-  </ul>
-<% end %>
+      <% (1..12).to_a.each do |month| %>
+        <% month_active = year_active && (month == @month) %>
+        <li class=<%= 'active' if month_active %>>
+          <%= link_to I18n.t('date.month_names')[month], url_for(:orders, :index, year: year, month: month) %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
 <table id=list class="table table-hover">
   <thead>
     <tr>

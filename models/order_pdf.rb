@@ -100,7 +100,13 @@ class OrderPdf
   end
 
   def footer
-    text "Betrag dankend erhalten", style: :bold
+    rectangle [0, cursor], 10, 10
+    stroke
+    text_box "Betrag dankend erhalten", style: :bold, at: [15, cursor]
+    move_down font_size + 5
+    rectangle [0, cursor], 10, 10
+    stroke
+    text_box "Betrag auf Rechnung", style: :bold, at: [15, cursor]
   end
 
   def formatted_price(price, options = {})

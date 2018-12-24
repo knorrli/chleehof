@@ -18,7 +18,7 @@ class OrderItem < ActiveRecord::Base
   end
 
   def total_price
-    quantity * price
+    quantity * (price || 0)
   end
 
   def total_price_f
