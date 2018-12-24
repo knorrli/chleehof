@@ -1,3 +1,4 @@
+// $font-size-base: 18px;
 $fa-font-path: "../webfonts";
 
 @import "bootstrap";
@@ -11,7 +12,7 @@ html, body {
   height: 100%;
 }
 body {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 /* -- Custom Styles -- */

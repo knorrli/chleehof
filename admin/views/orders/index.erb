@@ -1,4 +1,19 @@
-<h2>Rechnungen</h2>
+<h2>
+  Rechnungen
+  <div class="pull-right">
+    <%= link_to "Neue Rechnung erfassen", url(:orders, :new), class: 'btn btn-primary btn-lg' %>
+  </div>
+</h2>
+<ul class="pagination">
+  <li class=<%= 'active' if !params[:month] %>>
+    <%= link_to @year, url_for(:orders, :index, year: @year) %>
+  </li>
+  <% (1..12).to_a.each do |month| %>
+    <li class=<%= 'active' if month == params[:month] %>>
+      <%= link_to I18n.t('date.month_names')[month], url_for(:orders, :index, year: @year, month: month) %>
+    </li>
+  <% end %>
+</ul>
 <table id=list class="table table-hover">
   <thead>
     <tr>
@@ -8,7 +23,6 @@
       <th class="header text-right"> <%= mat(:order, :quantity) %></th>
       <th class="header text-right"> <%= mat(:order, :price) %></th>
       <th class="header list-row-action-header">
-        <%= link_to "Neue Rechnung erfassen", url(:orders, :new), class: 'btn btn-primary pull-right' %>
       </th>
     </tr>
   </thead>

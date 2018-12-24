@@ -1,6 +1,12 @@
 Chleehof::Admin.controllers :orders do
-  get :index do
-    @orders = Order.ordered
+  get :index, with: [:year, '(:month)'] do
+    @year = params[:year] ||= Date.current.year
+    @month = params[:month]
+    @orders = Order.where("date_part('year', updated_at) = ?", @year)
+    if @month
+      @orders = @orders.where("date_part('month', created_at) = ?", @month)
+    end
+    @orders = @orders.ordered
     render 'orders/index'
   end
 
