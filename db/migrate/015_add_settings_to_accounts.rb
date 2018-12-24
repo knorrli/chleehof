@@ -1,4 +1,4 @@
-class AddSettingsToAccounts < ActiveRecord::Migration
+class AddSettingsToAccounts < ActiveRecord::Migration[5.1]
   def self.up
     add_column :accounts, :vat_percentage, :decimal, precision: 8, scale: 2, default: 7.7
     add_column :accounts, :bulk_discount_percentage, :decimal, precision: 8, scale: 2, default: 5

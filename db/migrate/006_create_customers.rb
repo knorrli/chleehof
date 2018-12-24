@@ -1,4 +1,4 @@
-class CreateCustomers < ActiveRecord::Migration
+class CreateCustomers < ActiveRecord::Migration[5.1]
   def self.up
     create_table :customers do |t|
       t.string :first_name

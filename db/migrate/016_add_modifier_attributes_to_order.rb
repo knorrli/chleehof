@@ -1,4 +1,4 @@
-class AddModifierAttributesToOrder < ActiveRecord::Migration
+class AddModifierAttributesToOrder < ActiveRecord::Migration[5.1]
   def self.up
     add_column :orders, :vat_percentage, :decimal, precision: 8, scale: 2
     add_column :orders, :vat_amount, :decimal, precision: 8, scale: 2
