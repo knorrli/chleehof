@@ -10133,6 +10133,13 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Free';
   font-weight: 900; }
 
+.orders-pagination .pagination {
+  margin: 0; }
+.orders-pagination .pagination:first-child {
+  margin-top: 20px; }
+.orders-pagination .pagination:last-child {
+  margin-bottom: 20px; }
+
 .search-container {
   position: relative; }
 
@@ -10162,10 +10169,6 @@ readers do not read off random characters that represent icons */
 .order-item-table .order-item input {
   padding: 3px; }
 
-.order-item .has-error {
-  background-color: #d9534f;
-  border-color: #d43f3a; }
-
 address p {
   margin: 0; }
 
@@ -10173,7 +10176,7 @@ html, body {
   height: 100%; }
 
 body {
-  font-size: 16px; }
+  font-size: 18px; }
 
 /* -- Custom Styles -- */
 .top-buffer {

@@ -28,9 +28,9 @@
         resultContent = resultContent + `<div class='customer-result search-result' ${dataAttributes}>${customerInfo}</div>`
       }
     } else {
-      resultContent = "<div>Keine Kunden gefunden</div>" +
-        "<div class='new-customer-link'><a href='/admin/customers/new'>Neuer Kunde registrieren?</a></div>"
+      resultContent = "<div>Keine Kunden gefunden</div>"
     }
+    resultContent = resultContent + "<div class='new-customer-link'><a href='/admin/customers/new'>Neuer Kunde registrieren?</a></div>"
     $('#customer-search-results').html(resultContent);
     showCustomerResultContainer();
   }

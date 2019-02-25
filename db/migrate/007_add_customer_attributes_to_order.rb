@@ -1,4 +1,4 @@
-class AddCustomerAttributesToOrder < ActiveRecord::Migration
+class AddCustomerAttributesToOrder < ActiveRecord::Migration[5.1]
   def self.up
     rename_column :orders, :name, :first_name
     add_column :orders, :last_name, :string

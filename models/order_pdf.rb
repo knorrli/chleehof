@@ -100,7 +100,21 @@ class OrderPdf
   end
 
   def footer
-    text "Betrag dankend erhalten", style: :bold
+    # rectangle [0, cursor], 10, 10
+    # stroke
+    text_box payment_text, style: :bold, at: [0, cursor]
+    # move_down font_size + 5
+    # rectangle [0, cursor], 10, 10
+    # stroke
+    # text_box "Betrag auf Rechnung, zahlbar innert 30 Tagen", style: :bold, at: [15, cursor]
+  end
+
+  def payment_text
+    if @order.payed_cash?
+      "Betrag dankend erhalten"
+    else
+      "Betrag auf Rechnung, zahlbar innert 30 Tagen bis am #{(@order.updated_at + 30.days).strftime('%d.%m.%Y')}"
+    end
   end
 
   def formatted_price(price, options = {})

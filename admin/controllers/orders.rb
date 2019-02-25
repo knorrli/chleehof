@@ -1,6 +1,11 @@
 Chleehof::Admin.controllers :orders do
-  get :index do
-    @orders = Order.ordered
+
+  get :index, map: '/orders(/:year-:month)?' do
+    @first_year = Order.order(:created_at).first.created_at.year
+    @year = (params[:year] || Date.current.year).to_i
+    @month = (params[:month] == '0' ? nil : params[:month])
+    @orders = Order.where("date_part('year', updated_at) = ?", @year)
+    @orders = @orders.ordered
     render 'orders/index'
   end
 

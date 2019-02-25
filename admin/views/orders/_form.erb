@@ -5,7 +5,7 @@
         <h3>Kunde</h3>
         <div class="search-container form-group">
           <div class="col-md-12">
-            <%= text_field_tag :customer_search, id: 'customer-search', data: {url: url(:customers, :search, format: :json), }, placeholder: 'Suche', autofocus: true, class: 'form-control' %>
+            <%= text_field_tag :customer_search, id: 'customer-search', data: {url: url(:customers, :search, format: :json), }, placeholder: 'Suche', autofocus: true, class: 'form-control input-lg' %>
             <div class="relative-container">
               <div id="customer-search-results" class="result-container hidden"></div>
             </div>
@@ -81,7 +81,7 @@
     <div class="search-container">
       <div class="form-group">
         <div class="col-md-12">
-          <%= text_field_tag :product_search, id: 'product-search', data: {url: url(:products, :search, format: :json), }, placeholder: 'Suche', class: 'form-control' %>
+          <%= text_field_tag :product_search, id: 'product-search', data: {url: url(:products, :search, format: :json), }, placeholder: 'Suche', class: 'form-control input-lg' %>
           <div class="relative-container">
             <div id="product-search-results" class="result-container hidden"></div>
           </div>
@@ -197,10 +197,10 @@
     </table>
     <div class="row top-buffer">
       <div class="col-md-6">
-        <%= link_to pat(:cancel), url(:orders, :index), :class => 'btn btn-danger' %>
+        <%= link_to pat(:cancel), url(:orders, :index), :class => 'btn btn-lg btn-danger' %>
       </div>
       <div class="col-md-6">
-        <%= f.submit "Rechnung Abschliessen", :class => 'btn btn-primary pull-right' %>
+        <%= f.submit "Rechnung Abschliessen", :class => 'btn btn-lg btn-primary pull-right' %>
       </div>
     </div>
   </div>
