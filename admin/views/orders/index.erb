@@ -1,25 +1,17 @@
 <h2>
-  Rechnungen
+  <span>
+    Rechnungen
+  </span>
+  <div class="inline">
+    
+  <% form_tag url_for(:orders, :index), method: :get, id: 'order-pagination-form' do %>
+    <%= select_tag :year, options: (@first_year .. Date.current.year).to_a.map {|a| [a, a] }, selected: @year, class: 'form-control input-lg' %>
+  <% end %>
+  </div>
   <div class="pull-right">
     <%= link_to "Neue Rechnung erfassen", url(:orders, :new), class: 'btn btn-primary btn-lg' %>
   </div>
 </h2>
-<div class="orders-pagination">
-  <% (@first_year..Date.current.year).to_a.each do |year| %>
-    <% year_active = (year == @year) %>
-    <ul class="pagination">
-      <li class=<%= 'active' if year_active %>>
-        <%= link_to year, url_for(:orders, :index, year: year, month: 0) %>
-      </li>
-      <% (1..12).to_a.each do |month| %>
-        <% month_active = year_active && (month == @month) %>
-        <li class=<%= 'active' if month_active %>>
-          <%= link_to I18n.t('date.month_names')[month], url_for(:orders, :index, year: year, month: month) %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
-</div>
 <table id=list class="table table-hover">
   <thead>
     <tr>
