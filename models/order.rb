@@ -14,7 +14,7 @@ class Order < ActiveRecord::Base
   end
 
   def payed_cash?
-    cash_discount > 0
+    cash_discount < 0
   end
 
   def to_s
