@@ -1,0 +1,30 @@
+<h2>
+  Kategorien
+
+  <div class="pull-right">
+    <%= link_to "Neue Kategorie erfassen", url_for(:categories, :new), class: 'btn btn-primary btn-lg' %>
+  </div>
+</h2>
+
+<table class="table table-hover table-condensed">
+  <thead>
+    <tr>
+      <th class=header> <%= mat(:category, :name) %></th>
+      <th class="header list-row-action-header" colspan=2>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr class=list-row>
+        <td class=list-column> <%= link_to category.name, url_for(:categories, :edit, id: category.id) %> </td>
+        <td class="list-column">
+          <% form_tag url_for(:categories, :destroy, :id => category.id), method: :delete, class: 'destroy-category' do %>
+            <%= submit_tag pat(:delete), :class =>'btn btn-danger pull-right' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,16 @@
+<% error = @category.errors.include?(:name) %>
+<fieldset class='form-group control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :name, :class => 'col-md-5 control-label' %>
+  <div class='col-md-7 controls'>
+    <%= f.text_field :name, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true %>
+  </div>
+</fieldset>
+
+<div class="row top-buffer">
+  <div class="col-md-6">
+    <%= link_to pat(:cancel), url(:categories, :index), :class => 'btn btn-danger btn-lg' %>
+  </div>
+  <div class="col-md-6">
+    <%= f.submit pat(:save), :class => 'btn btn-primary btn-lg pull-right' %>
+  </div>
+</div>

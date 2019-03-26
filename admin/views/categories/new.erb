@@ -1,0 +1,8 @@
+<h1>Neuer Kategorie erfassen</h1>
+<% form_for :category, url(:categories, :create), class: 'form-horizontal' do |f| %>
+  <div class="row">
+    <div class="col-md-4">
+      <%= partial 'categories/form', :locals => { :f => f } %>
+    </div>
+  </div>
+<% end %>

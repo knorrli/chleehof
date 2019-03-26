@@ -12,6 +12,14 @@
       </div>
     </fieldset>
 
+    <% error = @product.errors.include?(:category) %>
+    <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+      <%= f.label :category, :class => 'control-label' %>
+      <div class='controls'>
+        <%= f.select :category_id, collection: Category.ordered, fields: [:name, :id], class: 'form-control input-xlarge input-with-feedback' %>
+      </div>
+    </fieldset>
+
     <% error = @product.errors.include?(:price) %>
     <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
       <%= f.label :price, :class => 'control-label' %>
