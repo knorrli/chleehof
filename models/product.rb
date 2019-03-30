@@ -11,6 +11,10 @@ class Product < ActiveRecord::Base
 
   validates_presence_of :name, :price
 
+  before_save :trim_name
+
+  enum grouping_type: { bund: 1, karton: 2, pack: 3, bogen: 4, rolle: 5 }, _prefix: true
+
   def self.ordered
     order(:name)
   end
@@ -22,6 +26,11 @@ class Product < ActiveRecord::Base
 
   def to_s
     name
+  end
+
+  def grouping_s
+    return nil unless grouping.present?
+    "#{I18n.t(grouping_type, scope: 'models.product.attributes.grouping_type')} à #{grouping}"
   end
 
   def price_f(options = {})
@@ -81,5 +90,9 @@ class Product < ActiveRecord::Base
 
   def self.product
     @product ||= Struct.new(:name, :category, :photo, :variants)
+  end
+
+  def trim_name
+    self.name = name.strip
   end
 end

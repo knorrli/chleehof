@@ -1,14 +1,40 @@
 <div class="row">
   <div class="col-md-4">
-    <%= f.label :identifier, :class => 'control-label' %>
-    <div class='controls'>
-      <%= f.text_field :identifier, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true %>
-    </div>
+
     <% error = @product.errors.include?(:name) %>
     <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
       <%= f.label :name, :class => 'control-label' %>
       <div class='controls'>
         <%= f.text_field :name, :class => 'form-control input-xlarge input-with-feedback' %>
+      </div>
+    </fieldset>
+
+    <fieldset class="control-group">
+      <%= f.label :identifier, :class => 'control-label' %>
+      <div class='controls'>
+        <%= f.text_field :identifier, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true %>
+      </div>
+    </fieldset>
+
+    <fieldset class="control-group">
+      <%= f.label :vomhof_number, :class => 'control-label' %>
+      <div class='controls'>
+        <%= f.text_field :vomhof_number, :class => 'form-control input-xlarge input-with-feedback' %>
+      </div>
+    </fieldset>
+
+    <fieldset class="control-group">
+      <%= f.label :grouping, :class => 'control-label' %>
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.select :grouping_type, options: Product.grouping_types.keys, class: 'form-control input-xlarge' %>
+        </div>
+        <div class="col-md-1">
+          à
+        </div>
+        <div class="col-md-5">
+          <%= f.text_field :grouping, :class => 'form-control input-xlarge input-with-feedback' %>
+        </div>
       </div>
     </fieldset>
 

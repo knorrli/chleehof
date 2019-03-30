@@ -25,10 +25,10 @@
   <thead>
     <tr>
       <th class="header"> <%= mat(:product, :identifier) %></th>
+      <th class="header"> <%= mat(:product, :vomhof_number) %></th>
+      <th class="header"> <%= mat(:product, :grouping) %></th>
       <th class="header"> <%= mat(:product, :name) %></th>
       <th class="header text-right"> <%= mat(:product, :price) %></th>
-      <th class="header"></th>
-      <th class="header"> <%= mat(:product, :updated_at) %></th>
       <th class="header list-row-action-header">
         <%= link_to "Liste ausdrucken", url_for(:products, :index, letter: params[:letter], format: :pdf), class: 'btn btn-primary pull-right', target: :blank %>
       </th>
@@ -39,10 +39,10 @@
     <% @products.each do |product| %>
       <tr class='list-row'>
         <td class='list-column'><%= product.identifier %></td>
+        <td class='list-column'><%= product.vomhof_number %></td>
+        <td class='list-column'><%= product.grouping_s %></td>
         <td class='list-column'><%= link_to product.name, url_for(:products, :edit, id: product.id) %></td>
         <td class='list-column text-right'><%= product.price_f %></td>
-        <td></td>
-        <td class='list-column'><%= product.updated_at.strftime('%d.%m.%Y %H:%M') %></td>
         <td class='list-column'>
           <% form_tag url(:products, :destroy, id: product.id), method: :delete, class: 'destroy-product' do %>
             <%= submit_tag pat(:delete), class: 'btn btn-danger pull-right' %>
