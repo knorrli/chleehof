@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,QAAS;EACP,MAAM,EAAE,MAAM;EAEZ,mCAAa;IACX,KAAK,EAAE,GAAG",
+"mappings": "AAAA,QAAS;EACP,MAAM,EAAE,MAAM;EAEZ,mCAAa;IACX,KAAK,EAAE,GAAG;EAId,uBAAe;IACb,SAAS,EAAE,KAAK;IAChB,UAAU,EAAE,KAAK;IACjB,UAAU,EAAE,KAAK",
 "sources": ["../../app/stylesheets/products.scss"],
 "names": [],
 "file": "products.css"

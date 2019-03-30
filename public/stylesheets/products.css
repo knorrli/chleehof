@@ -2,5 +2,9 @@
   margin: 15px 0; }
   .product .product-form input.amount {
     width: 30%; }
+  .product .product-photo {
+    min-width: 255px;
+    min-height: 255px;
+    max-height: 255px; }
 
 /*# sourceMappingURL=products.css.map */
