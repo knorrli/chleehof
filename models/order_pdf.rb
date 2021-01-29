@@ -39,7 +39,7 @@ class OrderPdf
     text "3422 Kirchberg"
     text "Tel. 034 445 53 89"
     text "Natel 079 583 77 55"
-    text "fam_luethi@hotmail.com"
+    text "vomhof@hotmail.com"
     font_size 14
     text "www.luethi-chleehof.ch"
     move_down 10
