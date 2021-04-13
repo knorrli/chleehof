@@ -1,18 +1,19 @@
-ActiveRecord::Base.configurations[:development] = {
-  :adapter   => 'postgresql',
-  :database  => 'chleehof',
-  :password  => '',
-  :host      => 'localhost',
-  :port      => 5432
-}
-
-ActiveRecord::Base.configurations[:production] = {
-  :adapter   => 'postgresql',
-  :database  => 'chleehof',
-  :username  => 'chleehof',
-  :password  => ENV['CHLEEHOFDB_PW'],
-  :host      => '127.0.0.1',
-  :port      => 5432
+ActiveRecord::Base.configurations = {
+  development: {
+    :adapter   => 'postgresql',
+    :database  => 'chleehof',
+    :password  => '',
+    :host      => 'localhost',
+    :port      => 5432
+  },
+  production: {
+    :adapter   => 'postgresql',
+    :database  => 'chleehof',
+    :username  => 'chleehof',
+    :password  => ENV['CHLEEHOFDB_PW'],
+    :host      => '127.0.0.1',
+    :port      => 5432
+  }
 }
 
 # Setup our logger
