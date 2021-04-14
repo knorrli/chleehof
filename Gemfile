@@ -16,13 +16,7 @@ gem 'pry'
 
 gem 'padrino', '~> 0.15.0'
 
-group :development do
-  gem 'sqlite3'
-end
-
-# Test requirements
-
-
+# DEPLOYMENT
 gem 'capistrano', '~> 3.9'
 gem 'capistrano-rbenv', '~> 2.1'
 gem 'capistrano-bundler', '~> 1.1', '>= 1.1.4'
