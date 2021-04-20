@@ -10172,6 +10172,13 @@ readers do not read off random characters that represent icons */
 address p {
   margin: 0; }
 
+.submit-fixed-to-left {
+  position: fixed;
+  right: 20px;
+  bottom: 10%; }
+  .submit-fixed-to-left input.btn-xxl {
+    font-size: 50px; }
+
 html, body {
   height: 100%; }
 
@@ -10188,6 +10195,9 @@ body {
     .navbar #navbar li a {
       padding-left: 11px;
       padding-right: 11px; }
+
+td.spacer {
+  min-width: 60px; }
 
 .top-buffer {
   margin-top: 10px; }

@@ -8,6 +8,9 @@ class OrderItem < ActiveRecord::Base
 
   validates_uniqueness_of :product_id, scope: :order
 
+  after_save :update_stock
+  before_destroy :restock
+
   def to_s
     product.to_s
   end
@@ -23,5 +26,19 @@ class OrderItem < ActiveRecord::Base
 
   def total_price_f
     '%.2f' % total_price
+  end
+
+  private
+
+  def update_stock
+    if self.saved_changes[:quantity]
+      old_quantity = self.saved_changes[:quantity][0].to_i
+      new_quantity = self.saved_changes[:quantity][1].to_i
+      product.update_attributes(stock_quantity: product.stock_quantity - (new_quantity - old_quantity))
+    end
+  end
+
+  def restock
+    product.update_attributes(stock_quantity: product.stock_quantity + self.attribute_in_database(:quantity))
   end
 end

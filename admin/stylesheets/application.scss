@@ -6,6 +6,7 @@ $fa-font-path: "../webfonts";
 @import "fontawesome/fontawesome.scss";
 @import "fontawesome/solid.scss";
 @import "orders";
+@import "inventory";
 
 
 html, body {
@@ -31,6 +32,10 @@ body {
       padding-right: 11px;
     }
   }
+}
+
+td.spacer {
+  min-width: 60px;
 }
 
 .top-buffer {

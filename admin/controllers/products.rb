@@ -12,7 +12,9 @@ Chleehof::Admin.controllers :products do
   end
 
   get :index, provides: [:html, :pdf] do
-    if letter = params[:letter]
+    if params[:stock]
+      @products = Product.ordered_by_stock_quantity
+    elsif filter = params[:filter]
       letter = letter.downcase
       @products = Product.where('lower(name) LIKE ?', "#{letter}%").ordered
     else

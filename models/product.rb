@@ -12,6 +12,10 @@ class Product < ActiveRecord::Base
     where(track_stock: true)
   end
 
+  def self.ordered_by_stock_quantity
+    order(:track_stock, stock_quantity: :asc)
+  end
+
   def self.search(query)
     query = query.downcase
     where('identifier LIKE ? OR lower(name) LIKE ? OR lower(name) LIKE ?', "#{query}", "%#{query} %", "%#{query}%")
