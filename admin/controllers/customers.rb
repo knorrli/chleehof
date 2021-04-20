@@ -16,7 +16,7 @@ Chleehof::Admin.controllers :customers do
       letter = letter.downcase
       @customers = Customer.where('lower(last_name) LIKE ? OR lower(company) LIKE ?', "#{letter}%", "#{letter}%").ordered
     else
-      @customers = Customer.new_customers
+      @customers = Customer.newest_customers
     end
     render 'customers/index'
   end

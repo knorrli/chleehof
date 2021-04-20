@@ -9,8 +9,8 @@ class Customer < ActiveRecord::Base
     where('lower(company) LIKE ? OR lower(last_name) LIKE ? OR lower(first_name) LIKE ? OR lower(zip_code) LIKE ? OR lower(city) LIKE ?', "%#{query}%", "%#{query}%", "%#{query}%", "#{query}%", "%#{query}%")
   end
 
-  def self.new_customers
-    where('created_at > ?', 1.week.ago).order(created_at: :desc)
+  def self.newest_customers
+    order(created_at: :desc).last(100)
   end
 
   def self.ordered

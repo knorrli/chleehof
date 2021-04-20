@@ -59,7 +59,6 @@ end
 # Add your after (RE)load hooks here
 #
 Padrino.after_load do
-  Chleehof::App.prerequisites << Padrino.root('admin/services/*.rb')
   Chleehof::Admin.prerequisites << Padrino.root('admin/services/*.rb')
   Chleehof::Admin.prerequisites << Padrino.root('admin/presenters/*.rb')
 end

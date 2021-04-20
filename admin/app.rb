@@ -12,7 +12,8 @@ module Chleehof
       # :domain => 'luethi-chleehof.ch',
       :path => '/',
       :expire_after => 1825 * 86400, # In seconds
-      :secret => '61e5613ba84810ec0f3b919a2a582b5c53cd23cb1b9ad1951b575f195895dd4b'
+      :secret => '61e5613ba84810ec0f3b919a2a582b5c53cd23cb1b9ad1951b575f195895dd4b',
+      :same_site => :strict
 
     disable :store_location
     layout :application

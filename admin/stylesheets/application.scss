@@ -16,6 +16,23 @@ body {
 }
 
 /* -- Custom Styles -- */
+.navbar {
+  border-bottom: 3px solid $brand-primary;
+
+  .container-fluid > .navbar-brand {
+    margin-left: 0;
+  }
+
+  #navbar li {
+    font-size: 16px;
+
+    a {
+      padding-left: 11px;
+      padding-right: 11px;
+    }
+  }
+}
+
 .top-buffer {
   margin-top: 10px;
 }

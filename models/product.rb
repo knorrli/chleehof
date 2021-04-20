@@ -1,11 +1,4 @@
 class Product < ActiveRecord::Base
-  CATEGORIES = {
-    schalen_koerbe: { name: 'Schalen & Körbe', id: 'schalen_koerbe', path: '1_schalen_und_koerbe' },
-    taschen_beutel: { name: 'Taschen & Beutel', id: 'taschen_beutel', path: '2_taschen_beutel' },
-    glaswaren: { name: 'Glaswaren', id: 'glaswaren', path: '3_glaswaren' },
-    beschriftungen: { name: 'Beschriftungen', id: 'Beschriftungen', path: '4_beschriftungen' },
-    diverses: { name: 'Diverses', id: 'diverses', path: '5_diverses' }
-  }
   has_many :order_items
   has_many :orders, through: :order_items
 
