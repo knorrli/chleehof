@@ -12,7 +12,6 @@ services:
       #
       # https://stackoverflow.com/questions/29181032/add-a-volume-to-docker-but-exclude-a-sub-folder
       - /home/app/.git/
-    # env_file: .env.dev
     environment:
       DATABASE_HOST: postgres
       DATABASE_NAME: chleehof

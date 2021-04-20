@@ -1,11 +1,11 @@
 ActiveRecord::Base.configurations = {
   development: {
     :adapter   => 'postgresql',
-    :database  => 'chleehof',
-    :username => 'postgres',
-    :password  => 'password',
-    :host      => 'postgres',
-    :port      => 5432
+    :database  => ENV.fetch('DATABASE_NAME', 'chleehof'),
+    :username => ENV.fetch('DATABASE_USERNAME', 'postgres'),
+    :password  => ENV.fetch('DATABASE_PASSWORD', 'password'),
+    :host      => ENV.fetch('DATABASE_HOST', '127.0.0.1'),
+    :port      => ENV.fetch('DATABASE_PORT', 5432)
   },
   production: {
     :adapter   => 'postgresql',
