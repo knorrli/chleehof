@@ -107,8 +107,8 @@
   var deleteItem = function() {
     item = $(this).parents(".order-item");
     item.find('.quantity_input').val(0);
-    debugger;
     item.addClass('deleted');
+    recalculate();
   }
 
   $(document).ready(function() {
