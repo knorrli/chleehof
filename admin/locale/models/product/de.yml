@@ -7,5 +7,7 @@ de:
         identifier: Nummer
         name: Name
         price: Preis
+        track_stock: Inventar aktiv
+        stock_quantity: Lagerbestand
         created_at: Erstellt Am
         updated_at: Geändert Am

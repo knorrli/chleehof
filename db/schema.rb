@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 22) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "identifier"
+    t.boolean "track_stock", default: true
     t.integer "stock_quantity", default: 0
   end
 
