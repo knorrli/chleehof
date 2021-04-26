@@ -1081,7 +1081,7 @@ th {
 
 html {
   font-size: 10px;
-  -webkit-tap-highlight-color: transparent; }
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -1392,14 +1392,14 @@ a.bg-info:focus {
   background-color: #afd9ee; }
 
 .bg-warning {
-  background-color: #fcf8e3; }
+  background-color: #ffe350; }
 
 a.bg-warning:hover,
 a.bg-warning:focus {
   background-color: #f7ecb5; }
 
 .bg-danger {
-  background-color: #f2dede; }
+  background-color: #ff665f; }
 
 a.bg-danger:hover,
 a.bg-danger:focus {
@@ -5780,7 +5780,7 @@ button.close {
   color: #ffffff;
   text-align: center;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-  background-color: transparent; }
+  background-color: rgba(0, 0, 0, 0); }
 
 .carousel-control.left {
   background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
@@ -5862,7 +5862,7 @@ button.close {
   border-radius: 10px;
   cursor: pointer;
   background-color: #000 \9;
-  background-color: transparent; }
+  background-color: rgba(0, 0, 0, 0); }
 
 .carousel-indicators .active {
   margin: 0;

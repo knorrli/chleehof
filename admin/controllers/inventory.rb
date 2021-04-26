@@ -1,8 +1,13 @@
 Chleehof::Admin.controllers :inventory do
   
-  get :index do
+  get :index, provides: [:pdf, :html] do
     @products = Product.order(:track_stock, :name)
-    render 'inventory/index'
+    case content_type
+    when :pdf
+      InventoryListPdf.new(@products).render
+    when :html
+      render 'inventory/index'
+    end
   end
 
   post :index do

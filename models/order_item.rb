@@ -31,7 +31,7 @@ class OrderItem < ActiveRecord::Base
   private
 
   def update_stock
-    if self.saved_changes[:quantity]
+    if self.saved_changes[:quantity] && product.track_stock
       old_quantity = self.saved_changes[:quantity][0].to_i
       new_quantity = self.saved_changes[:quantity][1].to_i
       product.update_attributes(stock_quantity: product.stock_quantity - (new_quantity - old_quantity))
@@ -39,6 +39,8 @@ class OrderItem < ActiveRecord::Base
   end
 
   def restock
-    product.update_attributes(stock_quantity: product.stock_quantity + self.attribute_in_database(:quantity))
+    if product.track_stock
+      product.update_attributes(stock_quantity: product.stock_quantity + self.attribute_in_database(:quantity))
+    end
   end
 end

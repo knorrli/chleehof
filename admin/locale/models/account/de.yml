@@ -19,3 +19,5 @@ de:
         spring_discount_active: Aktiv
         created_at: Created at
         updated_at: Updated at
+        threshold_notice: Grenze Gelb
+        threshold_warn: Grenze Rot

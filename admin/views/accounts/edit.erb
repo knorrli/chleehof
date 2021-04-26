@@ -1,7 +1,7 @@
 <h1>Einstellungen</h1>
 <% form_for :account, url(:accounts, :update, :id => @account.id), :method => :put, :class => 'form-horizontal' do |f| %>
   <div class="col-md-4">
-    <h4>Barzahlungsrabatt</h4>
+    <h3>Barzahlungsrabatt</h3>
     <div class="form-group">
       <%= f.label :cash_discount_percentage, class: 'col-sm-5 control-label' %>
       <div class="col-sm-7">
@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <h4>Mengenrabatt</h4>
+    <h3>Mengenrabatt</h3>
     <div class="form-group">
       <%= f.label :bulk_discount_percentage, class: 'col-sm-5 control-label' %>
       <div class="col-sm-7">
@@ -30,7 +30,7 @@
         </div>
       </div>
     </div>
-    <h4>Frühlingsrabatt</h4>
+    <h3>Frühlingsrabatt</h3>
     <div class="form-group">
       <%= f.label :spring_discount_active, class: 'col-sm-5 control-label' %>
       <div class="col-sm-7">
@@ -50,7 +50,8 @@
         </div>
       </div>
     </div>
-    <h4>Mehrwertsteuer</h4>
+
+    <h3>Mehrwertsteuer</h3>
     <div class="form-group">
       <%= f.label :vat_percentage, class: 'col-sm-5 control-label' %>
       <div class="col-sm-7">
@@ -60,6 +61,27 @@
         </div>
       </div>
     </div>
+
+    <h3>Inventar Warnungen</h3>
+    <div class="form-group">
+      <%= f.label :threshold_notice, class: 'col-sm-5 control-label text-warning' %>
+      <div class="col-sm-7">
+        <div class="input-group">
+          <%= f.text_field :threshold_notice, class: 'form-control text-right' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :threshold_warn, class: 'col-sm-5 control-label text-danger' %>
+      <div class="col-sm-7">
+        <div class="input-group">
+          <%= f.text_field :threshold_warn, class: 'form-control text-right' %>
+        </div>
+      </div>
+    </div>
+
+
     <div class="form-group">
       <div class="col-sm-6">
         <%= link_to pat(:cancel), url(:orders, :new), :class => 'btn btn-danger' %>
@@ -72,22 +94,5 @@
   <div class="col-md-2">
     
   </div>
-  <%# <div class="col-md-6"> %>
-  <%#   <h4>MwSt. Nummer</h4> %>
-  <%#   <div class="form-group"> %>
-  <%#     <%= f.label :vat_number, class: 'col-sm-5 control-label' %1> %>
-  <%#     <div class="col-sm-7"> %>
-  <%#       <%= f.text_field :vat_number, class: 'form-control' %1> %>
-  <%#     </div> %>
-  <%#   </div> %>
-
-  <%#   <h4>IBAN</h4> %>
-  <%#   <div class="form-group"> %>
-  <%#     <%= f.label :iban, class: 'col-sm-5 control-label' %1> %>
-  <%#     <div class="col-sm-7"> %>
-  <%#       <%= f.text_field :iban, class: 'form-control' %1> %>
-  <%#     </div> %>
-  <%#   </div> %>
-  <%# </div> %>
 <% end %>
 

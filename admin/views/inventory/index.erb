@@ -1,44 +1,42 @@
 <h2 class="h2">
   Inventar für Produkte
+  <div class="pull-right">
+    <%= link_to "Liste ausdrucken", url_for(:inventory, :index, format: :pdf), class: 'btn btn-primary btn-lg pull-right', target: :blank %>
+  </div>
 </h2>
 
-<% form_tag url_for(:inventory, :index), id: 'inventory-form', class: 'inline' do %>
-  <div class="row">
-    <div class="col-md-12">
-    <table id=list class="table table-hover table-condensed">
-      <thead>
-        <tr>
-          <th class="header"><%= mat(:product, :stock_quantity) %></th>
-          <th class="header"><%= mat(:product, :track_stock) %></th>
-          <th class="header"></th>
-          <th class="header"> <%= mat(:product, :identifier) %></th>
-          <th class="header"> <%= mat(:product, :name) %></th>
-        </tr>
-      </thead>
+<% form_tag url_for(:inventory, :index), id: 'inventory-form', class: '' do %>
+  <table id="list" class="table table-hover table-condensed">
+    <thead>
+      <tr>
+        <th class="header"><%= mat(:product, :stock_quantity) %></th>
+        <th class="header"><%= mat(:product, :track_stock) %></th>
+        <th class="header"></th>
+        <th class="header"> <%= mat(:product, :identifier) %></th>
+        <th class="header"> <%= mat(:product, :name) %></th>
+      </tr>
+    </thead>
 
-      <tbody>
-        <% @products.each do |product| %>
-          <tr>
-            <td>
-              <%= number_field_tag "[inventory][#{product.id}][stock_quantity]", value: product.stock_quantity, :class => 'form-control form-control-lg' %>
-            </td>
-            <td class='list-column text-center'>
-              <%= hidden_field_tag  "[inventory][#{product.id}][track_stock]", value: false %>
-              <%= check_box_tag "[inventory][#{product.id}][track_stock]", checked: product.track_stock, tabindex: -1 %>
-            </td>
-            <td class="spacer"></td>
-            <td class='list-column'><%= product.identifier %></td>
-            <td class='list-column'><%= link_to product.name, url_for(:products, :edit, id: product.id), tabindex: -1 %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    </div>
-    <div class="col-md-2">
-      <div class="submit-fixed-to-left">
-        <%= submit_tag pat(:save), class: 'btn btn-primary btn-xxl' %>
-      </div>
-    </div>
+    <tbody>
+      <% @products.each do |product| %>
+        <tr class="list-row">
+          <td>
+            <%= number_field_tag "[inventory][#{product.id}][stock_quantity]", value: product.stock_quantity, :class => 'form-control form-control-lg' %>
+          </td>
+          <td class='list-column text-center'>
+            <%= hidden_field_tag  "[inventory][#{product.id}][track_stock]", value: false %>
+            <%= check_box_tag "[inventory][#{product.id}][track_stock]", checked: product.track_stock, tabindex: -1 %>
+          </td>
+          <td class="spacer"></td>
+          <td class='list-column'><%= product.identifier %></td>
+          <td class='list-column'><%= link_to product.name, url_for(:products, :edit, id: product.id), tabindex: -1 %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="submit-fixed-to-left">
+    <%= submit_tag pat(:save), class: 'btn btn-primary btn-lg' %>
   </div>
 
 <% end %>
