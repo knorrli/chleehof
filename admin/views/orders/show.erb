@@ -6,7 +6,12 @@
       <div class="col-md-12">
         <h3>Kunde</h3>
         <address>
-          <p><strong><%= @order.customer_name %></strong></p>
+          <% if @order.company.present? %>
+            <p><strong><%= @order.company %></strong></p>
+            <p><%= @order.customer_name %></p>
+          <% else %>
+            <p><strong><%= @order.customer_name %></strong></p>
+          <% end %>
           <%= simple_format @order.customer_address %>
           <% if @order.phone.present? %>
             <% phone = @order.phone %>
@@ -115,10 +120,10 @@
     </table>
     <div class="row top-buffer">
       <div class="col-md-6">
-        <%= link_to t('edit_order'), url(:orders, :edit, id: @order.id), class: 'btn btn-default' %>
+        <%= link_to t('edit_order'), url(:orders, :edit, id: @order.id), class: 'btn btn-lg btn-default' %>
       </div>
       <div class="col-md-6">
-        <%= link_to t('print_order'), url(:orders, :show, id: @order.id, format: :pdf), target: :blank, :class => 'btn btn-primary pull-right' %>
+        <%= link_to t('print_order'), url(:orders, :show, id: @order.id, format: :pdf), target: :blank, :class => 'btn btn-lg btn-primary pull-right' %>
       </div>
     </div>
   </div>
