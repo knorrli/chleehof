@@ -23,7 +23,7 @@ services:
   ###############################
   #### Third-party Services #####
   ###############################
-  postgres:
+  db:
     image: postgres:11
     environment:
       - POSTGRES_DB=chleehof
