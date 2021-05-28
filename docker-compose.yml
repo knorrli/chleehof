@@ -18,7 +18,7 @@ services:
       DATABASE_PASSWORD: password
       DATABASE_USERNAME: postgres
     depends_on:
-      - postgres
+      - db
 
   ###############################
   #### Third-party Services #####
