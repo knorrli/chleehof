@@ -26,4 +26,5 @@ backup_file="$PWD/backups/current.dump"
 if [ -f $backup_file ]; then
   echo "Loading backup"
   PGPASSWORD="$db_password" pg_restore -Fc -h "$db_host" -U "$db_user" -d "$db_name" -O -x -1 -c "$backup_file"
+  padrino rake ar:migrate
 fi
