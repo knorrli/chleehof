@@ -13,7 +13,7 @@ class Product < ActiveRecord::Base
   end
 
   def self.ordered_by_stock_quantity
-    order(:track_stock, stock_quantity: :asc)
+    tracking_stock.order(track_stock: :desc, stock_quantity: :asc)
   end
 
   def self.search(query)

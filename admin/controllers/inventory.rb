@@ -1,11 +1,12 @@
 Chleehof::Admin.controllers :inventory do
   
   get :index, provides: [:pdf, :html] do
-    @products = Product.order(:track_stock, :name)
     case content_type
     when :pdf
+      @products = Product.order(name: :asc)
       InventoryListPdf.new(@products).render
     when :html
+      @products = Product.order(track_stock: :asc, name: :asc)
       render 'inventory/index'
     end
   end
