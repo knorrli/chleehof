@@ -1,5 +1,5 @@
 Chleehof::Admin.controllers :base do
-  get :index, :map => "/" do
-    render "base/index"
+  get :admin, :map => "/admin" do
+    redirect_to '/'
   end
 end
