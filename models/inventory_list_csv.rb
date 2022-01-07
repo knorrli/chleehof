@@ -8,8 +8,7 @@ class InventoryListCsv
   end
 
   def generate
-    CSV.generate(headers: true) do |csv|
-      csv.to_io.write "\xEF\xBB\xBF"
+    CSV.generate("\uFEFF", headers: true, col_sep: ";") do |csv|
       csv << headers
       products.each_with_index do |product, index|
         csv << product_row(product, index+2)
