@@ -6,7 +6,7 @@ class MonthlyOrderOverviewPdf
   def initialize(year, month)
     @year = year
     @month = month
-    @orders = Order.where("date_part('year', created_at) = ? AND date_part('month', created_at) = ?", year, month).order(payed_cash: :asc, :created_at: :asc)
+    @orders = Order.where("date_part('year', created_at) = ? AND date_part('month', created_at) = ?", year, month).order(payed_cash: :asc, created_at: :asc)
   end
 
   def render
