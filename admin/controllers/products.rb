@@ -13,7 +13,7 @@ Chleehof::Admin.controllers :products do
 
   get :index, provides: [:html, :pdf] do
     if params[:stock]
-      @products = Product.ordered_by_stock_quantity
+      @products = Product.tracking_stock.order('(inventory_threshold_warn - stock_quantity) DESC')
     elsif letter = params[:letter]
       letter = letter.downcase
       @products = Product.where('lower(name) LIKE ?', "#{letter}%").ordered

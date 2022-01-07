@@ -20,7 +20,7 @@
               <th class="header text-right"> <%= mat(:order, :quantity) %></th>
             </tr>
           </thead>
-          <% @product.orders.ordered.last(10).each do |order| %>
+          <% @product.orders.ordered.first(10).each do |order| %>
             <tbody>
               <tr class=list-row>
                 <td class="list-column"><%= order.created_at.strftime('%d.%m.%Y') %></td>
