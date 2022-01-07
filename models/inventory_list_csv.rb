@@ -18,7 +18,7 @@ class InventoryListCsv
         '',
         '',
         '',
-        "=SUBTOTAL(9,E2:E#{products.count+1})"
+        "=SUMME(E2:E#{products.count+1})"
       ]
     end
   end
