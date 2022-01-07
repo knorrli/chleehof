@@ -51,6 +51,7 @@ class OrderPdf
   def customer_address
     font_size 12
     bounding_box([300, 640], width: 500) do
+      text order.company if order.company.present?
       text order.customer_name
       text order.customer_address
     end

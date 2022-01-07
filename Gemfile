@@ -19,5 +19,5 @@ gem 'padrino', '~> 0.15.0'
 # DEPLOYMENT
 gem 'capistrano', '~> 3.9'
 gem 'capistrano-rbenv', '~> 2.1'
-gem 'capistrano-bundler', '~> 1.1', '>= 1.1.4'
+gem 'capistrano-bundler', '~> 2.0'
 gem 'capistrano-passenger', '~> 0.2.0'
