@@ -19,5 +19,7 @@ de:
         price: Preis CHF
         total_price: Total CHF
         customer: Kunde
+        payed_by_cash: Barzahlung
+        payed_by_invoice: auf Rechnung
         created_at: Erstellt Am
         updated_at: Angepasst Am

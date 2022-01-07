@@ -11,21 +11,29 @@
   <thead>
     <tr>
       <th class="col-md-3">Monat</th>
-      <th class="col-md-9 text-right">Total</th>
+      <th class="col-md-3 text-right">Total Bar</th>
+      <th class="col-md-3 text-right">Total auf Rechnung</th>
+      <th class="col-md-3 text-right">Gesamttotal</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
-    <% @accounting.months.each do |month, monthly_total| %>
+    <% @accounting.months.each do |month, values| %>
       <tr>
-        <td class="col-md-6"><%= month %></td>
-        <td class="col-md-6 text-right"><%= formatted_price(monthly_total, currency: true) %></td>
+        <td class="col-md-3"><%= values[:month_name] %></td>
+        <td class="col-md-3 text-right"><%= formatted_price(values[:cash], currency: true) %></td>
+        <td class="col-md-3 text-right"><%= formatted_price(values[:invoice], currency: true) %></td>
+        <td class="col-md-3 text-right"><%= formatted_price(values[:total], currency: true) %></td>
+        <td class="col-md-3"><%= link_to "Übersicht", url_for(:accounting, :monthly_overview, year: @accounting.year, month: month, format: :pdf), target: :blank, class: 'btn btn-primary' %></td>
       </tr>
     <% end %>
   </tbody>
   <tfoot>
     <tr>
       <th class="col-md-3"><%= "Total #{@accounting.year}" %></th>
-      <th class="col-md-9 text-right"><%= formatted_price(@accounting.total_year, currency: true) %></th>
+      <th class="col-md-3 text-right"><%= formatted_price(@accounting.total_year_cash, currency: true) %></th>
+      <th class="col-md-3 text-right"><%= formatted_price(@accounting.total_year_invoice, currency: true) %></th>
+      <th class="col-md-3 text-right"><%= formatted_price(@accounting.total_year, currency: true) %></th>
     </tr>
   </tfoot>
 </table>

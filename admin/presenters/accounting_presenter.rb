@@ -14,13 +14,29 @@ module Presenters
     def months
       @months ||= (1..12).to_a.inject({}) do |hash, month|
         month_name = I18n.t('date.month_names')[month]
-        hash[month_name] = Order.where("date_part('year', created_at) = ? AND date_part('month', created_at) = ?", year, month).sum(&:total_price)
+        cash_total = Order.paid_by_cash.where("date_part('year', created_at) = ? AND date_part('month', created_at) = ?", year, month).sum(&:total_price)
+        invoice_total = Order.paid_by_invoice.where("date_part('year', created_at) = ? AND date_part('month', created_at) = ?", year, month).sum(&:total_price)
+        overall_total = cash_total + invoice_total
+        hash[month] = {
+          month_name: month_name,
+          cash: cash_total,
+          invoice: invoice_total,
+          total: overall_total
+        }
         hash
       end
     end
 
+    def total_year_cash
+      @total_year_cash ||= months.values.sum { |month| month[:cash] }
+    end
+
+    def total_year_invoice
+      @total_year_invoice ||= months.values.sum { |month| month[:invoice] }
+    end
+
     def total_year
-      months.values.sum
+      total_year_cash + total_year_invoice
     end
 
     def start_date

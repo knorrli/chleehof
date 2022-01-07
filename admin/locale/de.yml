@@ -8,6 +8,10 @@ de:
               blank: Name muss ausgefüllt werden
   edit_order: Rechnung bearbeiten
   print_order: Rechnung ausdrucken
+  payment_method: Zahlungsart
+  payment_methods:
+    cash: Bar
+    invoice: Rechnung
   date:
     month_names:
     -

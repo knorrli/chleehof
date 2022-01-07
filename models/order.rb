@@ -13,6 +13,14 @@ class Order < ActiveRecord::Base
     order(created_at: :desc)
   end
 
+  def self.paid_by_invoice
+    where(payed_cash: false)
+  end
+
+  def self.paid_by_cash
+    where(payed_cash: true)
+  end
+
   def payed_cash?
     cash_discount < 0
   end

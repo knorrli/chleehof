@@ -9,4 +9,8 @@ Chleehof::Admin.controllers :accounting do
     render 'accounting/index'
   end
 
+  get :monthly_overview, provides: [:pdf] do
+    MonthlyOrderOverviewPdf.new(params[:year], params[:month]).render
+  end
+
 end
