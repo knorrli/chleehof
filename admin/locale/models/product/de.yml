@@ -8,6 +8,8 @@ de:
         name: Name
         price: Preis
         track_stock: Inventar aktiv
+        inventory_threshold_notice: Grenze Gelb
+        inventory_threshold_warn: Grenze Rot
         stock_quantity: Lagerbestand
         created_at: Erstellt Am
         updated_at: Geändert Am

@@ -25,6 +25,10 @@ class Product < ActiveRecord::Base
     name
   end
 
+  def tracks_stock_thresholds?
+    track_stock && inventory_threshold_notice.present? && inventory_threshold_warn.present?
+  end
+
   def price_f(options = {})
     return nil unless price
     options[:currency] ? ("CHF %.2f" % price) : ('%.2f' % price)

@@ -22,13 +22,6 @@
       </div>
     </fieldset>
 
-    <% error = @product.errors.include?(:stock_quantity) %>
-    <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
-      <%= f.label :stock_quantity, :class => 'control-label' %>
-      <div class='controls'>
-        <%= f.number_field :stock_quantity, :class => 'form-control input-xlarge input-with-feedback' %>
-      </div>
-    </fieldset>
 
     <% error = @product.errors.include?(:track_stock) %>
     <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
@@ -37,7 +30,33 @@
         <%= f.check_box :track_stock %>
       </div>
     </fieldset>
-    
+
+    <% error = @product.errors.include?(:stock_quantity) %>
+    <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+      <%= f.label :stock_quantity, :class => 'control-label' %>
+      <div class='controls'>
+        <%= f.number_field :stock_quantity, :class => 'form-control input-xlarge input-with-feedback' %>
+      </div>
+    </fieldset>
+
+    <% error = @product.errors.include?(:inventory_threshold_notice) %>
+    <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+      <%= f.label :inventory_threshold_notice, :class => 'control-label' %>
+      <div class="input-group">
+        <%= f.text_field :inventory_threshold_notice, class: 'form-control text-right' %>
+        <span class="input-group-addon">Stk.</span>
+      </div>
+    </fieldset>
+
+    <% error = @product.errors.include?(:inventory_threshold_warn) %>
+    <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+      <%= f.label :inventory_threshold_warn, :class => 'control-label' %>
+      <div class="input-group">
+        <%= f.text_field :inventory_threshold_warn, class: 'form-control text-right' %>
+        <span class="input-group-addon">Stk.</span>
+      </div>
+    </fieldset>
+
   </div>
 </div>
 

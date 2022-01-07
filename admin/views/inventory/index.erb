@@ -1,7 +1,8 @@
 <h2 class="h2">
   Inventar für Produkte
   <div class="pull-right">
-    <%= link_to "Liste ausdrucken", url_for(:inventory, :index, format: :pdf), class: 'btn btn-primary btn-lg pull-right', target: :blank %>
+    <%= link_to "Excel ausdrucken", url_for(:inventory, :index, format: :csv), class: 'btn btn-primary btn-lg', target: :blank %>
+    <%= link_to "Liste ausdrucken", url_for(:inventory, :index, format: :pdf), class: 'btn btn-primary btn-lg', target: :blank %>
   </div>
 </h2>
 

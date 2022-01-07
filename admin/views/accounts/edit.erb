@@ -62,28 +62,6 @@
       </div>
     </div>
 
-    <h3>Inventar Warnungen</h3>
-    <div class="form-group">
-      <%= f.label :threshold_notice, class: 'col-sm-5 control-label text-warning' %>
-      <div class="col-sm-7">
-        <div class="input-group">
-          <%= f.text_field :threshold_notice, class: 'form-control text-right' %>
-          <span class="input-group-addon">Stk.</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :threshold_warn, class: 'col-sm-5 control-label text-danger' %>
-      <div class="col-sm-7">
-        <div class="input-group">
-          <%= f.text_field :threshold_warn, class: 'form-control text-right' %>
-          <span class="input-group-addon">Stk.</span>
-        </div>
-      </div>
-    </div>
-
-
     <div class="form-group">
       <div class="col-sm-6">
         <%= link_to pat(:cancel), url(:orders, :new), :class => 'btn btn-danger' %>
@@ -97,4 +75,3 @@
     
   </div>
 <% end %>
-

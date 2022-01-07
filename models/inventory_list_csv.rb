@@ -1,21 +1,47 @@
-class InventoryListPdf
-  include Prawn::View
+require 'csv'
 
+class InventoryListCsv
   attr_reader :products
 
   def initialize(products)
     @products = products
   end
 
-  def render
-    render_header
-
-    bounding_box([0, cursor], width: bounds.width) do
-      render_product_table
+  def generate
+    CSV.generate(headers: true) do |csv|
+      csv.to_io.write "\xEF\xBB\xBF"
+      csv << headers
+      products.each_with_index do |product, index|
+        csv << product_row(product, index+2)
+      end
+      csv << [
+        '',
+        '',
+        '',
+        '',
+        "=SUBTOTAL(9,E2:E#{products.count+1})"
+      ]
     end
+  end
 
-    number_pages "<page>/<total>", align: :center, style: :bold, at: [bounds.left, 0]
-    super
+  def headers
+    [
+      "Bestand",
+      "Nummer",
+      "Artikel",
+      "Preis CHF",
+      "Total CHF"
+    ]
+  end
+
+  def product_row(product, index)
+    [
+      product.stock_quantity,
+      product.identifier,
+      product.name,
+      product.price,
+      "=A#{index}*D#{index}",
+    ]
   end
 
   def render_header

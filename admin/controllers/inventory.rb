@@ -1,10 +1,15 @@
 Chleehof::Admin.controllers :inventory do
   
-  get :index, provides: [:pdf, :html] do
+  get :index, provides: [:pdf, :csv, :html] do
     case content_type
     when :pdf
       @products = Product.order(name: :asc)
       InventoryListPdf.new(@products).render
+    when :csv
+      @products = Product.order(name: :asc)
+      content_type 'application/octet-stream'
+      attachment "inventar.csv"
+      response.write InventoryListCsv.new(@products).generate
     when :html
       @products = Product.order(track_stock: :asc, name: :asc)
       render 'inventory/index'
