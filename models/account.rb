@@ -15,6 +15,11 @@ class Account < ActiveRecord::Base
   # Callbacks
   before_save :encrypt_password, :if => :password_required
 
+  # Access settings for default account here
+  def self.default
+    find_by!(email: 'admin@luethi-chleehof.ch')
+  end
+
   ##
   # This method is for authentication purpose.
   #

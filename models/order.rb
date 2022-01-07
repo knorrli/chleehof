@@ -66,15 +66,15 @@ class Order < ActiveRecord::Base
   end
 
   def cash_discount_percentage
-    Account.find_by!(email: 'admin@luethi-chleehof.ch').cash_discount_percentage
+    Account.default.cash_discount_percentage
   end
 
   def bulk_discount_percentage
-    Account.find_by!(email: 'admin@luethi-chleehof.ch').bulk_discount_percentage
+    Account.default.bulk_discount_percentage
   end
 
   def spring_discount_percentage
-    Account.find_by!(email: 'admin@luethi-chleehof.ch').spring_discount_percentage
+    Account.default.spring_discount_percentage
   end
 
   def total_quantity
