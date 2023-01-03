@@ -4,6 +4,8 @@ class Product < ActiveRecord::Base
 
   validates_presence_of :name, :price
 
+  validates_presence_of :stock_quantity, if: :track_stock
+
   def self.ordered
     order(:name)
   end

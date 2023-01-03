@@ -43,7 +43,7 @@
 
   <tbody>
     <% @products.each do |product| %>
-      <tr class="list-row <%= product.tracks_stock_thresholds? && (product.stock_quantity <= product.inventory_threshold_warn ? 'bg-danger' : (product.stock_quantity <= product.inventory_threshold_notice ? 'bg-warning' : '')) %>">
+      <tr class="list-row <%= product.tracks_stock_thresholds? && ((product.stock_quantity || 0) <= product.inventory_threshold_warn ? 'bg-danger' : ((product.stock_quantity || 0) <= product.inventory_threshold_notice ? 'bg-warning' : '')) %>">
         <td class='list-column'><%= product.identifier %></td>
         <td class='list-column'><%= link_to product.name, url_for(:products, :edit, id: product.id) %></td>
         <td class='list-column text-right'><%= product.price_f %></td>
