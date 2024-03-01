@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 25) do
+ActiveRecord::Schema.define(version: 27) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 25) do
     t.decimal "cash_discount_percentage", precision: 8, scale: 2, default: "3.0"
     t.string "vat_number"
     t.string "iban"
+    t.integer "cash_discount_treshold", default: 50
   end
 
   create_table "customers", id: :serial, force: :cascade do |t|
@@ -79,6 +80,7 @@ ActiveRecord::Schema.define(version: 25) do
     t.decimal "cash_discount", precision: 8, scale: 2, default: "0.0"
     t.boolean "payed_cash", default: false
     t.integer "bulk_discount_treshold", default: 300
+    t.integer "cash_discount_treshold", default: 0
   end
 
   create_table "products", id: :serial, force: :cascade do |t|

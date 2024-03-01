@@ -73,7 +73,7 @@ class OrderPdf
     end
 
     table << [{content: "Total exkl. #{@order.vat_percentage}% MwSt.", colspan: 2}, "", "", "CHF #{formatted_price(@order.total_item_price)}"]
-    table << [{content: "Barzahlungsrabatt #{@order.cash_discount_percentage}%", colspan: 2}, "", "", "#{formatted_price(@order.cash_discount)}"]
+    table << [{content: "Barzahlungsrabatt ab CHF #{@order.cash_discount_treshold}: #{@order.cash_discount_percentage}%", colspan: 2}, "", "", "#{formatted_price(@order.cash_discount)}"]
     table << [{ content: "Mengenrabatt ab CHF #{@order.bulk_discount_treshold}: #{@order.bulk_discount_percentage}%", colspan: 2}, "", "", "#{formatted_price(@order.bulk_discount)}"]
     if @order.spring_discount?
       table << [{ content: "Frühlingsrabatt #{@order.spring_discount_percentage}: #{@order.spring_discount}", colspan: 2}, "", "#{formatted_price(@order.spring_discount)}"]

@@ -20,6 +20,7 @@ Chleehof::Admin.controllers :orders do
   post :create do
     @order = Order.new(params[:order])
     @order.bulk_discount_treshold = current_account.bulk_discount_treshold
+    @order.cash_discount_treshold = current_account.cash_discount_treshold
     if @order.save
       flash[:success] = "Rechnung für #{@order.customer_name} wurde gespeichert"
       redirect(url(:orders, :show, id: @order.id))

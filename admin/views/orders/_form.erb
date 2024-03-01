@@ -133,11 +133,11 @@
           <td class="col-md-1 identifier" colspan=3>
             <%= f.check_box :payed_cash, class: 'inline' %>
             <span class="horizontal-spacer"></span>
-            <%= "Barzahlungsrabatt #{current_account.cash_discount_percentage}%" %>
+            <%= "Barzahlungsrabatt ab CHF #{current_account.cash_discount_treshold}: #{current_account.cash_discount_percentage}%" %>
           </td>
           <td class="col-md-1 quantity text-right"></td>
           <td class="col-md-2 price text-right">
-            <%= f.text_field :cash_discount, readonly: true, class: 'form-control text-right', data: { percentage: current_account.cash_discount_percentage } %>
+            <%= f.text_field :cash_discount, readonly: true, class: 'form-control text-right', data: { percentage: current_account.cash_discount_percentage, treshold: current_account.cash_discount_treshold } %>
           </td>
           <td class="col-md-2 total-price text-right">
             <span id="cash_discount">0.00</span>

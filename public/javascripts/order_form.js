@@ -10,6 +10,7 @@
     return Math.ceil(roundedValue*20)/20;
   }
 
+  var cashDiscountTreshold = $("#order_cash_discount").data('treshold');
   var cashDiscountPercentage = $("#order_cash_discount").data('percentage');
   var bulkDiscountTreshold = $("#order_bulk_discount").data('treshold');
   var bulkDiscountPercentage = $("#order_bulk_discount").data('percentage');
@@ -36,9 +37,11 @@
 
     // CASH DISCOUNT
     var cashDiscountActive = $("#order_payed_cash").prop('checked');
-    if (!cashDiscountActive) {
+    console.log("Threshold", cashDiscountTreshold);
+    if (!cashDiscountActive || (totalPriceExclVat < cashDiscountTreshold)) {
       setReadonly("#order_cash_discount", "0.00");
     } else {
+      console.log("Discounting Cash Discount");
       var cashDiscount = calculateCashDiscount(totalPriceExclVat);
       currentTotalPrice += cashDiscount;
       setReadonly("#order_cash_discount", rounded(cashDiscount, 2).toFixed(2));
