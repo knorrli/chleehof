@@ -55,7 +55,7 @@
 
       <tfoot>
         <tr id="total-excl-vat-row">
-          <th class="col-md-1 identifier" colspan=2>TOTAL exkl. MwSt.</th>
+          <th class="col-md-1 identifier" colspan=2>TOTAL exkl. MWST</th>
           <th class="col-md-1 quantity text-right"><%= @order.total_quantity %></th>
           <th class="col-md-2 price text-right"></th>
           <th class="col-md-2 total-price text-right">
@@ -93,7 +93,7 @@
         <% end %>
         </tr>
         <tr id="total-incl-vat-row">
-          <td class="col-md-1 identifier" colspan=2><%= "MwSt. #{@order.vat_percentage}%" %></td>
+          <td class="col-md-1 identifier" colspan=2><%= "MWST #{@order.vat_percentage}%" %></td>
           <td class="col-md-1 quantity text-right"></td>
           <td class="col-md-2 price text-right"></td>
           <td class="col-md-2 total-price text-right"><%= formatted_price @order.vat_amount %></td>

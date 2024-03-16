@@ -121,7 +121,7 @@
 
       <tfoot>
         <tr id="total-excl-vat-row">
-          <th class="col-md-1 identifier" colspan=3>TOTAL exkl. MwSt.</th>
+          <th class="col-md-1 identifier" colspan=3>TOTAL exkl. MWST</th>
           <th class="col-md-1 quantity text-right">0</th>
           <th class="col-md-2 price text-right"></th>
           <th class="col-md-2 total-price text-right">
@@ -166,7 +166,7 @@
           </tr>
         <% end %>
         <tr id="total-incl-vat-row">
-          <td class="col-md-1 identifier" colspan=3><%= "MwSt. #{current_account.vat_percentage}%" %></td>
+          <td class="col-md-1 identifier" colspan=3><%= "MWST #{current_account.vat_percentage}%" %></td>
           <td class="col-md-1 quantity text-right"></td>
           <td class="col-md-2 price text-right">
             <%= f.hidden_field :vat_percentage, value: current_account.vat_percentage %>

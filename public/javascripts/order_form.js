@@ -7,7 +7,7 @@
   // rounds to nearest .05 decimal
   function rounded05(value) {
     var roundedValue = rounded(value, 2);
-    return Math.ceil(roundedValue*20)/20;
+    return Math.round(roundedValue*20)/20;
   }
 
   var cashDiscountTreshold = $("#order_cash_discount").data('treshold');

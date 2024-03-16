@@ -16,6 +16,8 @@ gem 'pry'
 
 gem 'padrino', '~> 0.15.0'
 
+gem 'puma'
+
 # DEPLOYMENT
 gem 'capistrano', '~> 3.9'
 gem 'capistrano-rbenv', '~> 2.1'

@@ -8,7 +8,7 @@ de:
         surname: Surname
         email: Email
         iban: IBAN
-        vat_number: MwSt Nummer
+        vat_number: MWST Nummer
         crypted_password: Crypted password
         role: Role
         cash_discount_percentage: Prozentsatz

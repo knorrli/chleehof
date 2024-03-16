@@ -22,7 +22,7 @@ class Order < ActiveRecord::Base
   end
 
   def payed_cash?
-    cash_discount < 0
+    cash_discount.negative?
   end
 
   def to_s
@@ -57,7 +57,7 @@ class Order < ActiveRecord::Base
 
   def mark_items_for_destruction
     order_items.each do |item|
-      item.mark_for_destruction if item.quantity == 0
+      item.mark_for_destruction if item.quantity.zero?
     end
   end
 
@@ -86,25 +86,35 @@ class Order < ActiveRecord::Base
   end
 
   def total_quantity
-    order_items.sum &:quantity
+    order_items.sum(&:quantity)
   end
 
   def total_item_price
-    order_items.sum &:total_price
+    order_items.sum(&:total_price)
   end
 
-  def total_price_excl_vat
-    total_item_price
+  def cash_discounted_price
+    total_item_price + cash_discount
+  end
+
+  def bulk_discounted_price
+    cash_discounted_price + bulk_discount
+  end
+
+  def spring_discounted_price
+    bulk_discounted_price + spring_discount
+  end
+
+  def price_with_vat
+    spring_discounted_price + vat_amount
+  end
+
+  def price_with_shipping_cost
+    price_with_vat + shipping_cost
   end
 
   def total_price
-    current_total = total_item_price
-    current_total += cash_discount
-    current_total += bulk_discount
-    current_total += spring_discount
-    current_total += shipping_cost
-    current_total += vat_amount
-    (current_total*20.0).ceil/20.0
+    (price_with_shipping_cost * 20.0).round / 20.0
   end
 
   def total_price_f
