@@ -7,7 +7,7 @@
   // rounds to nearest .05 decimal
   function rounded05(value) {
     var roundedValue = rounded(value, 2);
-    return Math.ceil(roundedValue*20)/20;
+    return Math.round(roundedValue*20)/20;
   }
 
   var cashDiscountTreshold = $("#order_cash_discount").data('treshold');
@@ -34,6 +34,20 @@
     $("#total-excl-vat-row .price_value").html(rounded(totalPriceExclVat, 2).toFixed(2));
 
     var currentTotalPrice = totalPriceExclVat;
+    var totalInclItemDiscount = totalPriceExclVat;
+
+    // SPRING DISCOUNT
+    if ($('#spring-discount-row').length > 0) {
+      $("#spring-discount-row .discounted_total").html(rounded(totalPriceExclVat, 2).toFixed(2));
+      var springDiscount = calculateSpringDiscount(totalPriceExclVat);
+      currentTotalPrice += springDiscount;
+      totalInclItemDiscount = currentTotalPrice;
+      setReadonly("#order_spring_discount", rounded(springDiscount, 2).toFixed(2));
+    }
+    $("#spring_discount").html(rounded(currentTotalPrice, 2).toFixed(2));
+    $("#cash-discount-row .discounted_total").html(rounded(totalInclItemDiscount, 2).toFixed(2));
+    $("#bulk-discount-row .discounted_total").html(rounded(totalInclItemDiscount, 2).toFixed(2));
+
 
     // CASH DISCOUNT
     var cashDiscountActive = $("#order_payed_cash").prop('checked');
@@ -42,7 +56,7 @@
       setReadonly("#order_cash_discount", "0.00");
     } else {
       console.log("Discounting Cash Discount");
-      var cashDiscount = calculateCashDiscount(totalPriceExclVat);
+      var cashDiscount = calculateCashDiscount(totalInclItemDiscount);
       currentTotalPrice += cashDiscount;
       setReadonly("#order_cash_discount", rounded(cashDiscount, 2).toFixed(2));
     }
@@ -55,34 +69,41 @@
       setReadonly('#order_bulk_discount', "0.00");
     } else {
       $("#bulk-discount-row").removeClass('hidden');
-      var bulkDiscount = calculateBulkDiscount(totalPriceExclVat);
+      var bulkDiscount = calculateBulkDiscount(totalInclItemDiscount);
       currentTotalPrice += bulkDiscount;
       setReadonly("#order_bulk_discount", rounded(bulkDiscount, 2).toFixed(2));
     }
     $("#bulk_discount").html(rounded(currentTotalPrice, 2).toFixed(2));
 
-    // SPRING DISCOUNT
-    if ($('#spring-discount-row').length > 0) {
-      var springDiscount = calculateSpringDiscount(totalPriceExclVat);
-      currentTotalPrice += springDiscount;
-      setReadonly("#order_spring_discount", rounded(springDiscount, 2).toFixed(2));
-    }
-    $("#spring_discount").html(rounded(currentTotalPrice, 2).toFixed(2));
-
     // VAT
+    $("#total-vat-row .vat_basis").html(rounded(currentTotalPrice, 2).toFixed(2));
     var vatAmount = calculateVatAmount(currentTotalPrice);
     setReadonly('#order_vat_amount', rounded(vatAmount, 2).toFixed(2));
     currentTotalPrice += vatAmount;
+    $("#total-vat-row .total-price").html(rounded(currentTotalPrice, 2).toFixed(2));
+
+    // TOTAL INCL VAT
     $("#total-incl-vat-row .total-price").html(rounded(currentTotalPrice, 2).toFixed(2));
 
+    
     // SHIPPING COST
     var shippingCost = Number($("#order_shipping_cost").val());
+    if (!shippingCost) {
+      shippingCost = 0;
+      $("#order_shipping_cost").val(shippingCost.toFixed(2));
+    }
     currentTotalPrice += shippingCost;
     $("#shipping-cost-row .total-price").html(rounded(currentTotalPrice, 2).toFixed(2));
 
+    const totalPrice = rounded05(currentTotalPrice);
+    const roundingDifference = (totalPrice - currentTotalPrice).toFixed(2);
+
+    // ROUNDING DIFFERENCE
+    $("#rounding-difference-row .rounding-difference").html(roundingDifference);
+
     // TOTAL PRICE
     $("#total-price-row .quantity").html(totalQuantity);
-    $("#total-price-row .price_value").html(rounded05(currentTotalPrice).toFixed(2));
+    $("#total-price-row .price_value").html(totalPrice.toFixed(2));
   }
 
   var calculateCashDiscount = function(totalPriceExclVat) {

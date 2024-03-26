@@ -55,7 +55,7 @@
 
       <tfoot>
         <tr id="total-excl-vat-row">
-          <th class="col-md-1 identifier" colspan=2>TOTAL exkl. MwSt.</th>
+          <th class="col-md-1 identifier" colspan=2><%= "Total exkl. #{@order.vat_percentage}% MwSt." %></th>
           <th class="col-md-1 quantity text-right"><%= @order.total_quantity %></th>
           <th class="col-md-2 price text-right"></th>
           <th class="col-md-2 total-price text-right">
@@ -63,47 +63,65 @@
             <span class="price_value"><%= formatted_price @order.total_item_price %></span>
           </th>
         </tr>
-        <tr id="cash-discount-row">
-          <td class="col-md-1 identifier" colspan=2>
-            <%= "Barzahlungsrabatt ab CHF #{current_account.cash_discount_treshold}: #{current_account.cash_discount_percentage}%" %>
-          </td>
-          <td class="col-md-1 quantity text-right"></td>
-          <td class="col-md-2 price text-right"></td>
-          <td class="col-md-2 total-price text-right">
-            <span id="cash_discount"><%= formatted_price @order.cash_discount %></span>
-          </td>
-        </tr>
-        <tr id="bulk-discount-row">
-          <td class="col-md-1 identifier" colspan=2><%= "Mengenrabatt ab CHF #{current_account.bulk_discount_treshold}: #{current_account.bulk_discount_percentage}%" %></td>
-          <td class="col-md-1 quantity text-right"></td>
-          <td class="col-md-2 price text-right"></td>
-          <td class="col-md-2 total-price text-right">
-            <span id="bulk_discount"><%= formatted_price @order.bulk_discount %></span>
-          </td>
-        </tr>
         <% if current_account.spring_discount_active? %>
           <tr id="spring-discount-row">
-            <td class="col-md-1 identifier" colspan=2><%= "Frühlingsrabatt: #{current_account.spring_discount_percentage}%" %></td>
-            <td class="col-md-1 quantity text-right"></td>
-            <td class="col-md-2 price text-right"></td>
+            <td class="col-md-1 identifier" colspan=3><%= "Frühlingsrabatt: #{@order.spring_discount_percentage}% von CHF #{formatted_price(@order.total_item_price)}" %></td>
+            <td class="col-md-2 price text-right">
+              <%= formatted_price @order.spring_discount %>
+            </td>
             <td class="col-md-2 total-price text-right">
-              <span id="spring_discount"><%= formatted_price @order.spring_discount %></span>
+              <%= formatted_price @order.item_total_incl_discounts %>
             </td>
           </tr>
         <% end %>
+        <tr id="cash-discount-row">
+          <td class="col-md-1 identifier" colspan=3>
+            <%= "Barzahlungsrabatt ab CHF #{@order.cash_discount_treshold}: #{current_account.cash_discount_percentage}% von CHF #{formatted_price(@order.item_total_incl_discounts)}" %>
+          </td>
+          <td class="col-md-2 price text-right"><%= formatted_price @order.cash_discount %></td>
+          <td class="col-md-2 total-price text-right">
+            <%= formatted_price @order.total_price_incl_cash_discount %>
+          </td>
+        </tr>
+        <tr id="bulk-discount-row">
+          <td class="col-md-1 identifier" colspan=3><%= "Mengenrabatt ab CHF #{current_account.bulk_discount_treshold}: #{current_account.bulk_discount_percentage}% von CHF #{formatted_price(@order.item_total_incl_discounts)}" %></td>
+          <td class="col-md-2 price text-right">
+            <%= formatted_price @order.bulk_discount %>
+          </td>
+          <td class="col-md-2 total-price text-right">
+            <%= formatted_price @order.total_price_incl_cash_and_bulk_discounts %>
+          </td>
+        </tr>
+        </tr>
+        <tr id="total-vat-row">
+          <td class="col-md-1 identifier" colspan=2><%= "MwSt. #{@order.vat_percentage}% von CHF #{formatted_price(@order.total_price_incl_cash_and_bulk_discounts)}" %></td>
+          <td class="col-md-1 quantity text-right"></td>
+          <td class="col-md-2 price text-right"><%= formatted_price @order.vat_amount %></td>
+          <td class="col-md-2 total-price text-right"><%= formatted_price @order.total_price_incl_vat %></td>
         </tr>
         <tr id="total-incl-vat-row">
-          <td class="col-md-1 identifier" colspan=2><%= "MwSt. #{@order.vat_percentage}%" %></td>
+          <th class="col-md-1 identifier" colspan=2><%= "Total inkl. #{@order.vat_percentage}% MwSt." %></th>
+          <th class="col-md-1 quantity text-right"><%= @order.total_quantity %></th>
+          <th class="col-md-2 price text-right"></th>
+          <th class="col-md-2 total-price text-right"><%= formatted_price @order.total_price_incl_vat %></th>
+        </tr>
+        <% if @order.shipping_cost? %>
+          <tr id="shipping-cost-row">
+            <td class="col-md-1 identifier" colspan=2>Versandkosten</td>
+            <td class="col-md-1 quantity text-right"></td>
+            <td class="col-md-2 price text-right">
+            </td>
+            <td class="col-md-2 total-price text-right"><%= formatted_price @order.shipping_cost %></td>
+          </tr>
+        <% end %>
+        <tr id="rounding-difference-row">
+          <td class="col-md-1 identifier" colspan=2><%= "Rundungsdifferenz:" %></td>
           <td class="col-md-1 quantity text-right"></td>
           <td class="col-md-2 price text-right"></td>
-          <td class="col-md-2 total-price text-right"><%= formatted_price @order.vat_amount %></td>
-        </tr>
-        <tr id="shipping-cost-row">
-          <td class="col-md-1 identifier" colspan=2>Versandkosten</td>
-          <td class="col-md-1 quantity text-right"></td>
-          <td class="col-md-2 price text-right">
+          <td class="col-md-2 total-price text-right">
+            <span class="price_currency"></span>
+            <span class="price_value"><%= formatted_price(@order.rounding_difference) %></span>
           </td>
-          <td class="col-md-2 total-price text-right"><%= formatted_price @order.shipping_cost %></td>
         </tr>
         <tr id="total-price-row">
           <th class="col-md-1 identifier" colspan=2><%= "GESAMTTOTAL:" %></th>
@@ -114,7 +132,6 @@
             <span class="price_currency">CHF</span>
             <span class="price_value"><%= @order.total_price_f %></span>
           </th>
-        </tr>
         </tr>
       </tfoot>
     </table>

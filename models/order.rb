@@ -5,7 +5,7 @@ class Order < ActiveRecord::Base
 
   accepts_nested_attributes_for :order_items, reject_if: proc { |attr| attr[:quantity].blank? }, allow_destroy: true
 
-  validates_presence_of :first_name, :last_name, :address_1, :zip_code, :city
+  validates_presence_of :first_name, :last_name, :address_1, :zip_code, :city, :shipping_cost
 
   before_save :mark_items_for_destruction
 
@@ -55,6 +55,10 @@ class Order < ActiveRecord::Base
     )
   end
 
+  def set_default_shipping_cost
+    self.shipping_cost = 0.0 if shipping_cost.blank?
+  end
+
   def mark_items_for_destruction
     order_items.each do |item|
       item.mark_for_destruction if item.quantity == 0
@@ -86,28 +90,46 @@ class Order < ActiveRecord::Base
   end
 
   def total_quantity
-    order_items.sum &:quantity
+    order_items.sum(&:quantity)
   end
 
   def total_item_price
-    order_items.sum &:total_price
+    order_items.sum(&:total_price)
   end
 
-  def total_price_excl_vat
-    total_item_price
+  def item_total_incl_discounts
+    total_item_price + spring_discount
   end
 
-  def total_price
-    current_total = total_item_price
-    current_total += cash_discount
-    current_total += bulk_discount
-    current_total += spring_discount
-    current_total += shipping_cost
-    current_total += vat_amount
-    (current_total*20.0).ceil/20.0
+  def total_price_incl_cash_discount
+    item_total_incl_discounts + cash_discount
+  end
+
+  def total_price_incl_cash_and_bulk_discounts
+    item_total_incl_discounts + bulk_discount + cash_discount
+  end
+
+  def total_price_incl_vat
+    total_price_incl_cash_and_bulk_discounts + vat_amount
+  end
+
+  def price_incl_shipping_cost
+    total_price_incl_vat + shipping_cost
+  end
+
+  def total_price(rounded: true)
+    if rounded
+      (price_incl_shipping_cost * 20.0).round / 20.0
+    else
+      price_incl_shipping_cost
+    end
+  end
+
+  def rounding_difference
+    total_price - total_price(rounded: false)
   end
 
   def total_price_f
-    '%.2f' % total_price
+    '%.2f' % total_price(rounded: true)
   end
 end

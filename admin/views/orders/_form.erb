@@ -121,7 +121,7 @@
 
       <tfoot>
         <tr id="total-excl-vat-row">
-          <th class="col-md-1 identifier" colspan=3>TOTAL exkl. MwSt.</th>
+          <th class="col-md-1 identifier" colspan=3><%= "Total exkl. #{current_account.vat_percentage}% MwSt." %></th>
           <th class="col-md-1 quantity text-right">0</th>
           <th class="col-md-2 price text-right"></th>
           <th class="col-md-2 total-price text-right">
@@ -129,33 +129,12 @@
             <span class="price_value">0.00</span>
           </th>
         </tr>
-        <tr id="cash-discount-row">
-          <td class="col-md-1 identifier" colspan=3>
-            <%= f.check_box :payed_cash, class: 'inline' %>
-            <span class="horizontal-spacer"></span>
-            <%= "Barzahlungsrabatt ab CHF #{current_account.cash_discount_treshold}: #{current_account.cash_discount_percentage}%" %>
-          </td>
-          <td class="col-md-1 quantity text-right"></td>
-          <td class="col-md-2 price text-right">
-            <%= f.text_field :cash_discount, readonly: true, class: 'form-control text-right', data: { percentage: current_account.cash_discount_percentage, treshold: current_account.cash_discount_treshold } %>
-          </td>
-          <td class="col-md-2 total-price text-right">
-            <span id="cash_discount">0.00</span>
-          </td>
-        </tr>
-        <tr id="bulk-discount-row">
-          <td class="col-md-1 identifier" colspan=3><%= "Mengenrabatt ab CHF #{current_account.bulk_discount_treshold}: #{current_account.bulk_discount_percentage}%" %></td>
-          <td class="col-md-1 quantity text-right"></td>
-          <td class="col-md-2 price text-right">
-            <%= f.text_field :bulk_discount, readonly: true, class: 'form-control text-right', data: { percentage: current_account.bulk_discount_percentage, treshold: current_account.bulk_discount_treshold } %>
-          </td>
-          <td class="col-md-2 total-price text-right">
-            <span id="bulk_discount">0.00</span>
-          </td>
-        </tr>
         <% if current_account.spring_discount_active? %>
           <tr id="spring-discount-row">
-            <td class="col-md-1 identifier" colspan=3><%= "Frühlingsrabatt: #{current_account.spring_discount_percentage}%" %></td>
+            <td class="col-md-1 identifier" colspan=3>
+              <span><%= "Frühlingsrabatt: #{current_account.spring_discount_percentage}%" %></span>
+              von CHF <span class="discounted_total"></span>
+            </td>
             <td class="col-md-1 quantity text-right"></td>
             <td class="col-md-2 price text-right">
               <%= f.text_field :spring_discount, readonly: true, class: 'form-control text-right', data: { percentage: current_account.spring_discount_percentage } %>
@@ -164,9 +143,40 @@
               <span id="spring_discount">0.00</span>
             </td>
           </tr>
+        <% else %>
+          <%= f.hidden_field :spring_discount, value: 0 %>
         <% end %>
-        <tr id="total-incl-vat-row">
-          <td class="col-md-1 identifier" colspan=3><%= "MwSt. #{current_account.vat_percentage}%" %></td>
+        <tr id="cash-discount-row">
+          <td class="col-md-1 identifier" colspan=4>
+            <%= f.check_box :payed_cash, class: 'inline' %>
+            <span class="horizontal-spacer"></span>
+            <span><%= "Barzahlungsrabatt ab CHF #{current_account.cash_discount_treshold}: #{current_account.cash_discount_percentage}%" %></span>
+            von CHF <span class="discounted_total"></span>
+          </td>
+          <td class="col-md-2 price text-right">
+            <%= f.text_field :cash_discount, readonly: true, class: 'form-control text-right', data: { percentage: current_account.cash_discount_percentage, treshold: current_account.cash_discount_treshold } %>
+          </td>
+          <td class="col-md-2 total-price text-right">
+            <span id="cash_discount">0.00</span>
+          </td>
+        </tr>
+        <tr id="bulk-discount-row">
+          <td class="col-md-1 identifier" colspan=4>
+            <span><%= "Mengenrabatt ab CHF #{current_account.bulk_discount_treshold}: #{current_account.bulk_discount_percentage}%" %></span>
+            von CHF <span class="discounted_total"></span>
+          </td>
+          <td class="col-md-2 price text-right">
+            <%= f.text_field :bulk_discount, readonly: true, class: 'form-control text-right', data: { percentage: current_account.bulk_discount_percentage, treshold: current_account.bulk_discount_treshold } %>
+          </td>
+          <td class="col-md-2 total-price text-right">
+            <span id="bulk_discount">0.00</span>
+          </td>
+        </tr>
+        <tr id="total-vat-row">
+          <td class="col-md-1 identifier" colspan=3>
+            <span><%= "MwSt. #{current_account.vat_percentage}%" %></span>
+            von CHF <span class="vat_basis"></span>
+          </td>
           <td class="col-md-1 quantity text-right"></td>
           <td class="col-md-2 price text-right">
             <%= f.hidden_field :vat_percentage, value: current_account.vat_percentage %>
@@ -174,13 +184,30 @@
           </td>
           <td class="col-md-2 total-price text-right">0.00</td>
         </tr>
+        <tr id="total-incl-vat-row">
+          <th class="col-md-1 identifier" colspan=3><%= "Total inkl. #{current_account.vat_percentage}% MwSt." %></th>
+          <th class="col-md-1 quantity text-right"></th>
+          <th class="col-md-2 price text-right"></th>
+          <th class="col-md-2 total-price text-right">
+            <span class="price_currency">CHF</span>
+            <span class="price_value">0.00</span>
+          </th>
+        </tr>
         <tr id="shipping-cost-row">
           <td class="col-md-1 identifier" colspan=3>Versandkosten</td>
           <td class="col-md-1 quantity text-right"></td>
           <td class="col-md-2 price text-right">
-            <%= f.text_field :shipping_cost, value: formatted_price(f.object.shipping_cost), class: 'form-control text-right' %>
+
+            <% error = @order.errors.include?(:shipping_cost) %>
+            <%= f.text_field :shipping_cost, value: formatted_price(f.object.shipping_cost), class: "form-control text-right" %>
           </td>
           <td class="col-md-2 total-price text-right">0.00</td>
+        </tr>
+        <tr id="rounding-difference-row">
+          <td class="col-md-1 identifier" colspan=3>Rundungsdifferenz</td>
+          <td class="col-md-1 quantity text-right"></td>
+          <td class="col-md-2 price text-right"></td>
+          <td class="col-md-2 rounding-difference text-right">0.00</td>
         </tr>
         <tr id="total-price-row">
           <th class="col-md-1 identifier" colspan=3><%= "GESAMTTOTAL" %></th>

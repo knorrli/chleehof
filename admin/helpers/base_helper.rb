@@ -4,6 +4,8 @@ module Chleehof
   class Admin
     module BaseHelper
       def formatted_price(price, options = {})
+        return if price.blank?
+
         options[:currency] ? ("CHF %.2f" % price) : ('%.2f' % price)
       end
     end

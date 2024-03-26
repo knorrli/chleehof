@@ -55,3 +55,7 @@ td.spacer {
 .footer {
   height: 50px;
 }
+
+.form-control.invalid {
+  border: 1px solid $brand-danger;
+}
