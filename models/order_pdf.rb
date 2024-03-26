@@ -72,7 +72,7 @@ class OrderPdf
       table << [item.identifier, item.name, "#{item.quantity} Stk.", formatted_price(item.price), item.total_price_f]
     end
 
-    table << [{content: "Total exkl. #{@order.vat_percentage}% MwSt.", colspan: 4}, formatted_price(@order.total_item_price, currency: true)]
+    table << [{content: "Total Artikel", colspan: 4}, formatted_price(@order.total_item_price, currency: true)]
     if @order.spring_discount?
       table << [{ content: "Frühlingsrabatt: #{@order.spring_discount_percentage}% von #{formatted_price(@order.total_item_price, currency: true)}", colspan: 3}, formatted_price(@order.spring_discount), formatted_price(@order.item_total_incl_discounts)]
     end
